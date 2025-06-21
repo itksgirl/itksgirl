@@ -1,4 +1,5 @@
-<<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,43 +11,54 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-    }.bonequinha {
-  width: 40px;
-  height: auto;
-}
+    }
 
-header.topo {
-  background-color: #ff69b4;
-  padding: 1.5rem;
-  text-align: center;
-}
+    .bonequinha {
+      width: 40px;
+      height: auto;
+    }
 
-header.topo h1 {
-  font-size: 2.5rem;
-  color: white;
-  margin: 0;
-}
+    header.topo {
+      background-color: #ff69b4;
+      padding: 1.5rem;
+      text-align: center;
+    }
 
-.slogan {
-  font-style: italic;
-  color: #fff0f5;
-  margin-top: 0.5rem;
-  font-size: 1.1rem;
-}
+    header.topo h1 {
+      font-size: 2.5rem;
+      color: white;
+      margin: 0;
+    }
 
+    .slogan {
+      font-style: italic;
+      color: #fff0f5;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
   </style>
-</head><body>  <!-- Cabeçalho com logo e título -->  <header class="topo">
+</head>
+<body>
+
+  <!-- Cabeçalho com logo e título -->
+  <header class="topo">
     <div class="logo-area">
       <img src="bonequinha.png" alt="Bonequinha" class="bonequinha" />
       <h1>ITKS Girl</h1>
     </div>
     <p class="slogan">Moda • Estilo • Arte • Makes • Fé</p>
-  </header>  <!-- Navegação -->  <nav class="nav-secundaria">
+  </header>
+
+  <!-- Navegação -->
+  <nav class="nav-secundaria">
     <ul>
       <li><a href="index.html">Início</a></li>
       <li><a href="sobre.html">Sobre Mim</a></li>
     </ul>
-  </nav>  <!-- Redes sociais -->  <div class="social">
+  </nav>
+
+  <!-- Redes sociais -->
+  <div class="social">
     <a href="https://www.instagram.com/itksgirl?igsh=cDEzYW5taWcwczN3" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
     </a>
@@ -59,27 +71,56 @@ header.topo h1 {
     <a href="https://www.youtube.com/@itksgirl" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
     </a>
-  </div>  <!-- Apresentação -->  <section class="apresentacao"></section>  <!-- Versículo do Dia -->  <section id="versiculo">
+  </div>
+
+  <!-- Apresentação -->
+  <section class="apresentacao">
+    <h2>💁‍♀️ Sobre Mim</h2>
+    <p>
+      Olá! Me chamo Débora, sou apaixonada por moda, feminilidade e fé. Criei este espaço para inspirar mulheres a se cuidarem por dentro e por fora — com estilo, elegância e propósito.
+    </p>
+    <p>
+      Me inspiro em movimentos como o <strong>Godllywood</strong>, que valoriza a mulher virtuosa, forte e transformada por Deus, e também no livro <strong>Madame Charme</strong>, que mostra como a beleza está nos detalhes simples, no autocuidado e na leveza da vida com propósito. Essas influências me ensinaram que ser elegante vai muito além da aparência — é uma atitude de dentro pra fora.
+    </p>
+    <p>
+      Neste site, quero compartilhar mensagens de fé, looks inspiradores, reflexões e conteúdos que elevem a autoestima e a alma. Que aqui você se sinta acolhida, motivada e lembrada todos os dias: <em><strong>você é preciosa aos olhos de Deus.</strong></em>
+    </p>
+  </section>
+
+  <!-- Versículo do Dia -->
+  <section id="versiculo">
     <h2>📖 Versículo do Dia</h2>
     <p id="verso"></p>
-  </section>  <!-- Inspiração -->  <section class="destaque">
+  </section>
+
+  <!-- Inspiração -->
+  <section class="destaque">
     <h2>Inspiração da Semana 💫</h2>
     <p>"Estilo é quando a alma se veste de coragem e a maquiagem de luz."</p>
-  </section>  <!-- Artigos -->  <section>
+  </section>
+
+  <!-- Artigos -->
+  <section>
     <h2>Últimos Artigos</h2>
     <ul>
       <li><strong>Looks de rua com alma</strong> – Como misturar peças básicas com atitude</li>
       <li><strong>Fé e beleza</strong> – A maquiagem como expressão de autoconfiança</li>
       <li><strong>Arte nas unhas</strong> – Estilos que falam por você</li>
     </ul>
-  </section>  <!-- Rodapé -->  <footer class="rodape">
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
     <div class="links">
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
       <a href="#politica">Política de Privacidade</a>
     </div>
     <p>© 2025 Débora | Todos os direitos reservados</p>
-  </footer>  <!-- Script do Versículo -->  <script>
+  </footer>
+
+  <!-- Script do Versículo -->
+  <script>
     const versiculos = [
       "Salmo 91:1 – Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.",
       "Isaías 41:10 – Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.",
@@ -91,102 +132,7 @@ header.topo h1 {
     ];
     const versoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
     document.getElementById("verso").textContent = versoAleatorio;
-  </script></body>
-</html>
- <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ITKS Girl • Moda, Fé e Estilo</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  </script>
 
-  <header>
-    <h1>IT KS Girl</h1>
-    <p>Moda • Estilo • Arte • Makes • Fé</p>
-  </header> 
-  <div class="social">
-  <a href="https://www.instagram.com/itksgirl?igsh=cDEzYW5taWcwczN3" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-  </a>
-  <a href="https://www.tiktok.com/@itksgirl" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok">
-  </a>
-  <a href="https://www.pinterest.com/itksgirl" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/1458/1458080.png" alt="Pinterest">
-  </a>
-  <a href="https://www.youtube.com/@itksgirl" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
-  </a>
-</div> 
-<section class="apresentacao">
-  <h2>💁‍♀️ Sobre Mim</h2>
-  <p>
-    Olá! Me chamo Débora, sou apaixonada por moda, feminilidade e fé. Criei este espaço para inspirar mulheres a se cuidarem por dentro e por fora — com estilo, elegância e propósito.
-  </p>
-  <p>
-    Me inspiro em movimentos como o <strong>Godllywood</strong>, que valoriza a mulher virtuosa, forte e transformada por Deus, e também no livro <strong>Madame Charme</strong>, que mostra como a beleza está nos detalhes simples, no autocuidado e na leveza da vida com propósito. Essas influências me ensinaram que ser elegante vai muito além da aparência — é uma atitude de dentro pra fora.
-  </p>
-  <p>
-    Neste site, quero compartilhar mensagens de fé, looks inspiradores, reflexões e conteúdos que elevem a autoestima e a alma. Que aqui você se sinta acolhida, motivada e lembrada todos os dias: <em><strong>você é preciosa aos olhos de Deus.</strong></em>
-  </p>
-  <h3>Inspirações</h3>
-  <p>
-    <strong>Madame Charme (Jennifer L. Scott):</strong> Um livro que mostra como as mulheres francesas vivem com mais elegância, simplicidade e confiança. Encoraja hábitos como vestir-se bem mesmo em casa, cuidar da postura, falar com suavidade e manter a casa (e a mente) em ordem — tudo com graça e moderação.
-  </p>
-  <p>
-    <strong>Godllywood (Projeto da Igreja Universal):</strong> Um movimento que incentiva mulheres a se desenvolverem emocionalmente, espiritualmente e socialmente, promovendo valores como fé, caráter, pureza, autoestima e disciplina. Um chamado para mulheres que querem ser transformadas e se tornarem referência.
-  </p>
-  <h3>Objetivo do Site</h3>
-  <p>
-    O objetivo deste site é levar uma mensagem de fé e moda, mostrando que a verdadeira beleza vem de dentro e pode ser expressada com estilo e confiança. Quero que cada visitante se sinta fortalecida, inspirada e com a autoestima elevada para enfrentar o dia a dia com graça e propósito.
-  </p>
-</section>
-
-  </main> 
-  <section id="versiculo">
-  <h2>📖 Versículo do Dia</h2>
-  <p id="verso"></p>
-</section>
-    <section class="destaque">
-      <h2>Inspiração da Semana 💫</h2>
-      <p>"Estilo é quando a alma se veste de coragem e a maquiagem de luz."</p>
-    </section>
-
-    <section>
-      <h2>Últimos Artigos</h2>
-      <ul>
-        <li><strong>Looks de rua com alma</strong> – Como misturar peças básicas com atitude</li>
-        <li><strong>Fé e beleza</strong> – A maquiagem como expressão de autoconfiança</li>
-        <li><strong>Arte nas unhas</strong> – Estilos que falam por você</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-
-<script>
-  const versiculos = [
-    "Salmo 91:1 – Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.",
-    "Isaías 41:10 – Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.",
-    "Provérbios 3:5 – Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.",
-    "Filipenses 4:13 – Posso todas as coisas naquele que me fortalece.",
-    "Romanos 8:28 – Sabemos que todas as coisas cooperam para o bem daqueles que amam a Deus.",
-    "Jeremias 29:11 – Eu é que sei os planos que tenho para vocês, diz o Senhor.",
-    "Salmo 46:1 – Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia."
-  ];
-
-  const versoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
-  document.getElementById("verso").textContent = versoAleatorio;
-</script>
 </body>
-<footer class="rodape">
-  <div class="links">
-    <a href="#sobre">Sobre</a>
-    <a href="#contato">Contato</a>
-    <a href="#politica">Política de Privacidade</a>
-  </div>
-  <p>© 2025 Débora | Todos os direitos reservados</p>
-</footer>
-
 </html>
->>>>>>> 2429eecc5895de86482535d75c8dc482fa8cf993
