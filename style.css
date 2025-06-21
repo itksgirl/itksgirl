@@ -176,6 +176,7 @@ footer {
 .rodape a:hover {
   text-decoration: underline;
 }
+<<<<<<< HEAD
 
 .decorativo {
   position: absolute;
@@ -348,3 +349,5 @@ body.kimks-body {
   z-index: -10;          /* fica atrás de todo o conteúdo */
   pointer-events: none;  /* permite clicar normalmente sobre conteúdo */
 }
+=======
+>>>>>>> 22dade9e1ec593744e86b0551d85f1b6e49466b2
