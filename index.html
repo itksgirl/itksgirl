@@ -1,0 +1,95 @@
+<<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITKS Girl • Moda e Fé</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }.bonequinha {
+  width: 40px;
+  height: auto;
+}
+
+header.topo {
+  background-color: #ff69b4;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+header.topo h1 {
+  font-size: 2.5rem;
+  color: white;
+  margin: 0;
+}
+
+.slogan {
+  font-style: italic;
+  color: #fff0f5;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+  </style>
+</head><body>  <!-- Cabeçalho com logo e título -->  <header class="topo">
+    <div class="logo-area">
+      <img src="bonequinha.png" alt="Bonequinha" class="bonequinha" />
+      <h1>ITKS Girl</h1>
+    </div>
+    <p class="slogan">Moda • Estilo • Arte • Makes • Fé</p>
+  </header>  <!-- Navegação -->  <nav class="nav-secundaria">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="sobre.html">Sobre Mim</a></li>
+    </ul>
+  </nav>  <!-- Redes sociais -->  <div class="social">
+    <a href="https://www.instagram.com/itksgirl?igsh=cDEzYW5taWcwczN3" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+    <a href="https://www.tiktok.com/@itksgirl" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046122.png" alt="TikTok">
+    </a>
+    <a href="https://www.pinterest.com/itksgirl" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/1458/1458080.png" alt="Pinterest">
+    </a>
+    <a href="https://www.youtube.com/@itksgirl" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+    </a>
+  </div>  <!-- Apresentação -->  <section class="apresentacao"></section>  <!-- Versículo do Dia -->  <section id="versiculo">
+    <h2>📖 Versículo do Dia</h2>
+    <p id="verso"></p>
+  </section>  <!-- Inspiração -->  <section class="destaque">
+    <h2>Inspiração da Semana 💫</h2>
+    <p>"Estilo é quando a alma se veste de coragem e a maquiagem de luz."</p>
+  </section>  <!-- Artigos -->  <section>
+    <h2>Últimos Artigos</h2>
+    <ul>
+      <li><strong>Looks de rua com alma</strong> – Como misturar peças básicas com atitude</li>
+      <li><strong>Fé e beleza</strong> – A maquiagem como expressão de autoconfiança</li>
+      <li><strong>Arte nas unhas</strong> – Estilos que falam por você</li>
+    </ul>
+  </section>  <!-- Rodapé -->  <footer class="rodape">
+    <div class="links">
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+      <a href="#politica">Política de Privacidade</a>
+    </div>
+    <p>© 2025 Débora | Todos os direitos reservados</p>
+  </footer>  <!-- Script do Versículo -->  <script>
+    const versiculos = [
+      "Salmo 91:1 – Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.",
+      "Isaías 41:10 – Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.",
+      "Provérbios 3:5 – Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.",
+      "Filipenses 4:13 – Posso todas as coisas naquele que me fortalece.",
+      "Romanos 8:28 – Sabemos que todas as coisas cooperam para o bem daqueles que amam a Deus.",
+      "Jeremias 29:11 – Eu é que sei os planos que tenho para vocês, diz o Senhor.",
+      "Salmo 46:1 – Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia."
+    ];
+    const versoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
+    document.getElementById("verso").textContent = versoAleatorio;
+  </script></body>
+</html>

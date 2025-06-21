@@ -1,0 +1,178 @@
+/* Estilo base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff0f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Cabeçalho */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background-color: #ff69b4;
+  color: white;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+header p {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #fff0f5;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Imagem da bonequinha */
+.bonequinha {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Menu secundário */
+.nav-secundaria {
+  background-color: #ffe4e1;
+  padding: 1rem;
+  text-align: center;
+}
+
+.nav-secundaria ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.nav-secundaria a {
+  text-decoration: none;
+  color: #c71585;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.nav-secundaria a:hover {
+  color: #8b008b;
+  text-decoration: underline;
+}
+
+/* Redes sociais */
+.social {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.social a {
+  display: inline-block;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social img {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.2s;
+  border-radius: 6px;
+}
+
+.social img:hover {
+  transform: scale(1.1);
+}
+
+/* Conteúdo principal */
+main {
+  padding: 2rem;
+}
+
+/* Seção de destaque */
+section.destaque {
+  background-color: #fffafa;
+  border-left: 4px solid #ff69b4;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  color: #d63384;
+}
+
+/* Apresentação */
+.apresentacao {
+  background-color: #fff0f5;
+  padding: 30px;
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(255, 192, 203, 0.3);
+  font-family: 'Georgia', serif;
+  color: #444;
+}
+
+.apresentacao h2 {
+  font-size: 28px;
+  color: #d63384;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.apresentacao p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.apresentacao strong {
+  color: #c71585;
+}
+
+.apresentacao em {
+  color: #8b008b;
+  font-style: italic;
+}
+
+/* Rodapé */
+footer {
+  background-color: #ffc0cb;
+  color: #444;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.rodape {
+  background-color: #ffe6f0;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #444;
+  margin-top: 40px;
+  border-top: 2px solid #f8c1d8;
+}
+
+.rodape .links {
+  margin-bottom: 10px;
+}
+
+.rodape a {
+  color: #d63384;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.rodape a:hover {
+  text-decoration: underline;
+}
