@@ -12,6 +12,7 @@
       justify-content: center;
       gap: 12px;
     }
+
     .bonequinha {
       width: 40px;
       height: auto;
@@ -35,6 +36,28 @@
       margin-top: 0.5rem;
       font-size: 1.1rem;
     }
+
+    /* Botão Kim KS */
+    @keyframes fogo {
+      0% { text-shadow: 0 0 5px orange, 0 0 10px red; transform: scale(1); }
+      50% { text-shadow: 0 0 25px yellow, 0 0 35px red; transform: scale(1.05); }
+      100% { text-shadow: 0 0 5px orange, 0 0 10px red; transform: scale(1); }
+    }
+
+    .btn-kimks {
+      display: inline-block;
+      color: #fff;
+      background-color: #111;
+      padding: 0.6rem 1rem;
+      margin-top: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      animation: fogo 1.2s infinite alternate;
+      border: 2px solid red;
+      box-shadow: 0 0 10px red;
+    }
   </style>
 </head>
 <body>
@@ -45,6 +68,10 @@
       <img src="bonequinha.png" alt="Bonequinha" class="bonequinha" />
       <h1>ITKS Girl</h1>
     </div>
+
+    <!-- Botão Kim KS -->
+    <a href="kimks.html" class="btn-kimks">Kim KS ❤️‍🔥</a>
+
     <p class="slogan">Moda • Estilo • Arte • Makes • Fé</p>
   </header>
 
@@ -72,20 +99,6 @@
     </a>
   </div>
 
-  <!-- Apresentação -->
-  <section class="apresentacao">
-    <h2>💁‍♀️ Sobre Mim</h2>
-    <p>
-      Olá! Me chamo Débora, sou apaixonada por moda, feminilidade e fé. Criei este espaço para inspirar mulheres a se cuidarem por dentro e por fora — com estilo, elegância e propósito.
-    </p>
-    <p>
-      Me inspiro em movimentos como o <strong>Godllywood</strong>, que valoriza a mulher virtuosa, forte e transformada por Deus, e também no livro <strong>Madame Charme</strong>, que mostra como a beleza está nos detalhes simples, no autocuidado e na leveza da vida com propósito. Essas influências me ensinaram que ser elegante vai muito além da aparência — é uma atitude de dentro pra fora.
-    </p>
-    <p>
-      Neste site, quero compartilhar mensagens de fé, looks inspiradores, reflexões e conteúdos que elevem a autoestima e a alma. Que aqui você se sinta acolhida, motivada e lembrada todos os dias: <em><strong>você é preciosa aos olhos de Deus.</strong></em>
-    </p>
-  </section>
-
   <!-- Versículo do Dia -->
   <section id="versiculo">
     <h2>📖 Versículo do Dia</h2>
@@ -111,9 +124,9 @@
   <!-- Rodapé -->
   <footer class="rodape">
     <div class="links">
-      <a href="#sobre">Sobre</a>
-      <a href="#contato">Contato</a>
-      <a href="#politica">Política de Privacidade</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="#">Contato</a>
+      <a href="#">Política de Privacidade</a>
     </div>
     <p>© 2025 Débora | Todos os direitos reservados</p>
   </footer>
@@ -132,6 +145,12 @@
     const versoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
     document.getElementById("verso").textContent = versoAleatorio;
   </script>
+
+  <!-- Figurinhas do KS no fundo -->
+  <img src="imagens/chapeuks.png" class="decorativo" id="chapeu">
+  <img src="imagens/ksnoskate.png" class="decorativo" id="skate">
+  <img src="imagens/radioks.png" class="decorativo" id="radio">
+  <img src="imagens/siglaks.png" class="decorativo" id="sigla">
 
 </body>
 </html>

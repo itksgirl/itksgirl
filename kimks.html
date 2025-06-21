@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kim KS • Surf & Skate Jornal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Estilo para o vídeo de fundo */
+    .video-fundo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1; /* Fica atrás de todo conteúdo */
+      object-fit: cover; /* Cobre toda a tela, mantendo proporção */
+      pointer-events: none; /* Evita interferir em cliques */
+    }
+
+    /* Remove margens e padding para o vídeo cobrir tudo */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body class="kimks-body">
+
+  <!-- Vídeo de fundo -->
+  <video class="video-fundo" autoplay muted loop playsinline>
+    <source src="agua.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeos HTML5.
+  </video>
+
+  <header class="ks-header">
+    <h1 class="ks-logo">KIM KS</h1>
+    <nav class="ks-nav">
+      <a href="#historia">História</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#materias">Matérias</a>
+      <a href="#entrevistas">Entrevistas</a>
+    </nav>
+  </header>
+
+  <section class="ks-banner">
+    <div class="ks-banner-text">
+      <h2>Underground. Surf. Skate.</h2>
+      <p>Bem-vindo ao portal oficial de Kim KS, onde a rua encontra o mar.</p>
+    </div>
+  </section>
+
+  <section id="historia" class="ks-section">
+    <h2>✨ Origem de Kim KS</h2>
+    <p>Kim KS nasceu no asfalto e foi moldado pelas ondas. Sua trajetória é marcada por atitude, resiliência e criatividade crua. Descubra a história por trás do nome que virou lenda.</p>
+  </section>
+
+  <section id="videos" class="ks-section">
+    <h2>🎥 Vídeos em Destaque</h2>
+    <div class="ks-videos">
+      <div class="ks-video-card">[Video embed futuramente]</div>
+      <div class="ks-video-card">[Video embed futuramente]</div>
+    </div>
+  </section>
+
+  <section id="materias" class="ks-section">
+    <h2>📄 Matérias Recentes</h2>
+    <ul>
+      <li><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</li>
+      <li><strong>Surf de Rua</strong> — A filosofia por trás do estilo dele.</li>
+    </ul>
+  </section>
+
+  <section id="entrevistas" class="ks-section">
+    <h2>🎙️ Entrevistas Exclusivas</h2>
+    <p>Em breve: conversas reais com quem vive o underground e a cena.</p>
+  </section>
+
+  <footer class="ks-footer">
+    <p>Portal Kim KS &copy; 2025 — Desenvolvido por ITKS Girl</p>
+  </footer>
+
+</body>
+</html>

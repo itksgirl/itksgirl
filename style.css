@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* Estilo base */
 body {
   font-family: 'Segoe UI', sans-serif;
@@ -177,182 +176,175 @@ footer {
 .rodape a:hover {
   text-decoration: underline;
 }
-=======
-/* Estilo base */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fff0f5;
+
+.decorativo {
+  position: absolute;
+  opacity: 1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#chapeu {
+  top: 40px;
+  left: 20px;
+  width: 100px;
+}
+
+#skate {
+  bottom: 60px;
+  right: 30px;
+  width: 120px;
+}
+
+#radio {
+  top: 200px;
+  right: 100px;
+  width: 90px;
+}
+
+#sigla {
+  bottom: 150px;
+  left: 60px;
+  width: 90px;
+}
+
+/* RESET */
+* {
   margin: 0;
   padding: 0;
-  color: #333;
+  box-sizing: border-box;
 }
 
-/* Cabeçalho */
-header {
-  background-color: #ff69b4;
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
+/* Ajustes para a página kimks.html */
+body.kimks-body {
+  font-family: 'Orbitron', sans-serif;
+  /* Mudança aqui para fundo transparente, para vídeo aparecer */
+  background: transparent;
+  color: #f2f2f2;
+  line-height: 1.6;
 }
 
-header h1 {
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-header p {
-  margin-top: 0.5rem;
-  font-style: italic;
-}
-
-/* Menu de navegação */
-nav {
-  background-color: #ffe4e1;
-  padding: 1rem;
-  text-align: center;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  display: inline;
-  margin: 0 1rem;
-}
-
-nav a {
-  text-decoration: none;
-  color: #c71585;
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-/* Conteúdo principal */
-main {
-  padding: 2rem;
-}
-
-/* Seção de destaque */
-section.destaque {
-  background-color: #fffafa;
-  border-left: 4px solid #ff69b4;
-  padding: 1rem;
-  margin-bottom: 2rem;
-}
-
-section h2 {
-  color: #d63384;
-}
-
-/* Rodapé */
-footer {
-  background-color: #ffc0cb;
-  color: #444;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-.social {
-  text-align: center;
-  margin-top: -1rem;
-  margin-bottom: 1.5rem;
-}
-
-.social img {
-  width: 28px;
-  height: 28px;
-  margin: 0 8px;
-  transition: transform 0.2s;
-  border-radius: 6px;
-  object-fit: contain;
-}
-
-.social img:hover {
-  transform: scale(1.1);
-}
-.rodape {
-  background-color: #ffe6f0;
-  text-align: center;
+/* Cabeçalho específico */
+.ks-header {
+  background-color: #000;
   padding: 20px;
-  font-size: 14px;
-  color: #444;
-  margin-top: 40px;
-  border-top: 2px solid #f8c1d8;
+  text-align: center;
+  border-bottom: 3px solid #00ffff;
 }
 
-.rodape .links {
-  margin-bottom: 10px;
+/* Logo */
+.ks-logo {
+  font-family: 'Rubik Mono One', sans-serif;
+  font-size: 3rem;
+  color: #00ffff;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px #005a5a;
 }
 
-.rodape a {
-  color: #d63384;
+/* Navegação */
+.ks-nav {
+  margin-top: 15px;
+}
+
+.ks-nav a {
+  color: #fff;
   text-decoration: none;
   margin: 0 10px;
   font-weight: bold;
+  border: 2px solid transparent;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.rodape a:hover {
-  text-decoration: underline;
+.ks-nav a:hover {
+  background-color: #00ffff;
+  color: #000;
 }
-/* Estilo para as redes sociais */
-.redes-sociais {
+
+/* Banner */
+.ks-banner {
+  /* Tirando imagem de fundo para não esconder vídeo */
+  background: rgba(0, 0, 0, 0.5);
+  height: 300px;
   display: flex;
-  justify-content: center; /* centraliza os ícones na horizontal */
-  gap: 20px; /* espaço entre os ícones */
-  margin: 30px 0 20px 0; /* espaço acima e abaixo */
-}
-
-.redes-sociais a {
-  text-decoration: none;
-  color: #d63384; /* rosa forte */
-  font-weight: bold;
-  font-size: 18px;
-  transition: color 0.3s ease;
-}
-
-.redes-sociais a:hover {
-  color: #c71585; /* rosa mais escuro no hover */
-}
-
-/* Estilo para a seção de apresentação */
-.apresentacao {
-  background-color: #fff0f5; /* rosa clarinho */
-  padding: 30px;
-  max-width: 700px;
-  margin: 0 auto 50px auto; /* centralizado horizontalmente, com margem abaixo */
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(255, 192, 203, 0.3);
-  font-family: 'Georgia', serif;
-  color: #444;
-}
-
-.apresentacao h2 {
-  font-size: 28px;
-  color: #d63384;
-  margin-bottom: 20px;
-  font-weight: bold;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 8px #000;
+  border-radius: 12px;
+  margin-bottom: 30px;
 }
 
-.apresentacao p {
-  font-size: 16px;
-  line-height: 1.8;
-  margin-bottom: 15px;
-  text-align: justify;
+/* Texto no banner */
+.ks-banner-text h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #00ffff;
 }
 
-.apresentacao strong {
-  color: #c71585;
+/* Seções */
+.ks-section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+  /* Fundo semitransparente para deixar vídeo aparecer */
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  margin-bottom: 30px;
 }
 
-.apresentacao em {
-  color: #8b008b;
+/* Títulos das seções */
+.ks-section h2 {
+  color: #00ffff;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 10px;
+}
+
+/* Cards dos vídeos */
+.ks-videos {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ks-video-card {
+  background-color: #111;
+  flex: 1 1 250px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #00ffff;
+  color: #888;
   font-style: italic;
+  border-radius: 8px;
 }
->>>>>>> 2429eecc5895de86482535d75c8dc482fa8cf993
+
+/* Rodapé */
+.ks-footer {
+  background-color: #000;
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid #00ffff;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* NOVO: Estilo para o vídeo de fundo */
+.video-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;          /* largura total da viewport */
+  height: 100vh;         /* altura total da viewport */
+  object-fit: cover;     /* cobre toda área sem distorcer */
+  filter: brightness(0.7) saturate(1.1); /* escurece e destaca cores */
+  z-index: -10;          /* fica atrás de todo o conteúdo */
+  pointer-events: none;  /* permite clicar normalmente sobre conteúdo */
+}
