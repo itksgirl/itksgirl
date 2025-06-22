@@ -176,7 +176,7 @@ footer {
 .rodape a:hover {
   text-decoration: underline;
 }
-<<<<<<< HEAD
+
 
 .decorativo {
   position: absolute;
@@ -230,14 +230,14 @@ body.kimks-body {
   background-color: #000;
   padding: 20px;
   text-align: center;
-  border-bottom: 3px solid #00ffff;
+  border-bottom: 3px solid #5e9e7e;
 }
 
 /* Logo */
 .ks-logo {
   font-family: 'Rubik Mono One', sans-serif;
   font-size: 3rem;
-  color: #00ffff;
+  color: #53ac66;
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px #005a5a;
 }
@@ -259,7 +259,7 @@ body.kimks-body {
 }
 
 .ks-nav a:hover {
-  background-color: #00ffff;
+  background-color: #2c8843;
   color: #000;
 }
 
@@ -349,5 +349,97 @@ body.kimks-body {
   z-index: -10;          /* fica atrás de todo o conteúdo */
   pointer-events: none;  /* permite clicar normalmente sobre conteúdo */
 }
-=======
->>>>>>> 22dade9e1ec593744e86b0551d85f1b6e49466b2
+/* NOVO VISUAL CLEAN GIRL SURF PARA ITKS GIRL (2025) */
+
+/* Logo e cabeçalho mais leve */
+.logo-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+header.topo {
+  background-color: #f7d6e0; /* rosa mais claro */
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+header.topo h1 {
+  font-size: 3rem;
+  color: #b14469;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+}
+
+/* Cards para Versículo, Inspiração e Artigos */
+.card {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  font-size: 1rem;
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #b14469;
+  font-size: 1.4rem;
+}
+
+/* Redes sociais discretas no canto inferior direito */
+.social {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0.7;
+  z-index: 999;
+}
+
+.social img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  transition: transform 0.2s;
+}
+
+.social img:hover {
+  transform: scale(1.1);
+}
+
+/* Rodapé atualizado para visual moderno */
+footer.rodape {
+  background-color: #f7d6e0;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: 2rem;
+  border-top: 2px solid #f8c1d8;
+}
+
+.rodape .links {
+  margin-bottom: 1rem;
+}
+
+.rodape .links a {
+  color: #b14469;
+  font-weight: 500;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.rodape .links a:hover {
+  text-decoration: underline;
+}
+body {
+  background-image: url('areia.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

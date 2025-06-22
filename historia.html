@@ -1,42 +1,128 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Minha História — Kim KS</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Minha História — Kim KS</title>
+<style>
+  /* Reset simples */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Georgia, serif;
+    background-color: #fff;
+    color: #222;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 20px 60px;
+    line-height: 1.7;
+  }
+
+  header {
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    color: #111;
+  }
+
+  header h1 {
+    font-size: 2.8rem;
+    font-weight: normal;
+    letter-spacing: 2px;
+  }
+
+  header p.sub {
+    margin-top: 8px;
+    font-style: italic;
+    color: #555;
+    font-size: 1.2rem;
+  }
+
+  section.painel p.frase {
+    margin-bottom: 24px;
+    text-align: justify;
+    font-size: 1.15rem;
+  }
+
+  footer.botoes-ks {
+    margin-top: 40px;
+    text-align: left;
+  }
+
+  footer.botoes-ks a.botao {
+    display: inline-block;
+    background-color: #444;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-family: Georgia, serif;
+    transition: background-color 0.3s ease;
+  }
+
+  footer.botoes-ks a.botao:hover {
+    background-color: #666;
+  }
+
+  /* Responsividade */
+  @media (max-width: 600px) {
+    body {
+      margin: 30px auto;
+      padding: 0 15px 40px;
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    header p.sub {
+      font-size: 1rem;
+    }
+    section.painel p.frase {
+      font-size: 1rem;
+    }
+    footer.botoes-ks a.botao {
+      padding: 10px 16px;
+    }
+  }
+</style>
 </head>
-<body class="kimks-bg">
+<body>
 
-  <header class="header-ks">
-    <h1>🛹 Minha História</h1>
-    <p class="sub">O início de tudo.</p>
-  </header>
+<header>
+  <h1>🛹 Minha História</h1>
+  <p class="sub">O início de tudo.</p>
+</header>
 
-  <section class="painel">
-    <p class="frase">
-      Entre as ruas da Zona Norte do Rio de Janeiro e as lembranças de uma infância simples, nasceu uma paixão que atravessaria décadas.
-      Kim KS — nome adotado por Julio Cesar, skatista com alma de rua — teve seu primeiro encontro com o skate de forma inesperada, quase cinematográfica.
-    </p>
-    <p class="frase">
-      Foi em uma feira de objetos usados no bairro de São Cristóvão que tudo começou. Ele tinha por volta de oito anos quando viu, entre tantas quinquilharias, um pequeno skate. Bastou um olhar. Era diferente de tudo que ele já tinha visto.
-    </p>
-    <p class="frase">
-      Sentiu ali algo que nem sabia explicar — e quando tentou comprar, não conseguiu. O skate havia sido vendido. Mas aquela cena, aquele instante, foi suficiente para despertar algo profundo.
-    </p>
-    <p class="frase">
-      Anos depois, já no interior do estado, conheceu dois irmãos que mudariam sua história. Eles moravam em uma fazenda e apresentaram a Kim um verdadeiro skate de manobras. Era robusto, real, pronto pra rua.
-    </p>
-    <p class="frase">
-      A amizade com os irmãos cresceu, e com ela, o amor pelo skate. Era o ano de 1999. Desde então, Kim nunca mais parou.
-    </p>
-    <p class="frase">
-      Mais do que um skatista, Kim KS é símbolo de resistência, autenticidade e cultura urbana. Cada queda virou lição, cada pista, um palco. E o garoto que um dia perdeu um skate em São Cristóvão, encontrou nele o sentido da liberdade.
-    </p>
-  </section>
+<section class="painel">
+  <p class="frase">
+    Entre as ruas da Zona Norte do Rio de Janeiro e as lembranças de uma infância simples, nasceu uma paixão que atravessaria décadas.
+    Kim KS — nome adotado por Julio Cesar, skatista com alma de rua — teve seu primeiro encontro com o skate de forma inesperada, quase cinematográfica.
+  </p>
+  <p class="frase">
+    Foi em uma feira de objetos usados no bairro de São Cristóvão que tudo começou. Ele tinha por volta de oito anos quando viu, entre tantas quinquilharias, um pequeno skate. Bastou um olhar. Era diferente de tudo que ele já tinha visto.
+  </p>
+  <p class="frase">
+    Sentiu ali algo que nem sabia explicar — e quando tentou comprar, não conseguiu. O skate havia sido vendido. Mas aquela cena, aquele instante, foi suficiente para despertar algo profundo.
+  </p>
+  <p class="frase">
+    Anos depois, já no interior do estado, conheceu dois irmãos que mudariam sua história. Eles moravam em uma fazenda e apresentaram a Kim um verdadeiro skate de manobras. Era robusto, real, pronto pra rua.
+  </p>
+  <p class="frase">
+    A amizade com os irmãos cresceu, e com ela, o amor pelo skate. Era o ano de 1999. Desde então, Kim nunca mais parou.
+  </p>
+  <p class="frase">
+    Mais do que um skatista, Kim KS é símbolo de resistência, autenticidade e cultura urbana. Cada queda virou lição, cada pista, um palco. E o garoto que um dia perdeu um skate em São Cristóvão, encontrou nele o sentido da liberdade.
+  </p>
+</section>
 
-  <footer class="botoes-ks">
-    <a href="kimks.html" class="botao">← Voltar</a>
-  </footer>
+<footer class="botoes-ks">
+  <a href="kimks.html" class="botao">← Voltar</a>
+</footer>
 
 </body>
 </html>
