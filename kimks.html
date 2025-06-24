@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kim KS • Surf & Skate Jornal</title>
+  <title>Kim KS • Skate Jornal</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   
@@ -55,8 +55,34 @@
   </section>
 
   <section class="ks-section">
-    <h2>✨ Origem de Kim KS</h2>
-    <p>Kim KS nasceu no asfalto e foi moldado pelas ondas. Sua trajetória é marcada por atitude, resiliência e criatividade crua. Descubra a história por trás do nome que virou lenda.</p>
+    <h2>✨ Origem de Kim KS</h2> 
+   <section class="ks-section">
+  <h2>📚 Histórias</h2>
+  <div class="carousel-container">
+    <div class="carousel-slide active">
+      <img src="img1.jpg" alt="Imagem 1">
+      <p class="carousel-caption">Início de Tudo</p>
+    </div>
+    <div class="carousel-slide">
+      <img src="img2.jpg" alt="Imagem 2">
+      <p class="carousel-caption">A Rua Ensina</p>
+    </div>
+    <div class="carousel-slide">
+      <img src="img3.jpg" alt="Imagem 3">
+      <p class="carousel-caption">Do Asfalto ao Mar</p>
+    </div>
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
+  </div>
+</section>
+
+   <p>Kim KS nasceu no asfalto e foi moldado pelas ruase marcada por atitude, resiliência e criatividade crua. Descubra a história por trás do nome que virou lenda.</p>
   </section>
 
   <section id="videos" class="ks-section">
@@ -84,5 +110,24 @@
     <p>Portal Kim KS &copy; 2025 — Desenvolvido por ITKS Girl</p>
   </footer>
 
-</body>
+</body> <script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+      dots[i].classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  setInterval(nextSlide, 4000); // troca automática a cada 4 segundos
+</script>
+
 </html>
