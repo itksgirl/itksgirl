@@ -8,19 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   
   <style>
-    /* Estilo para o vídeo de fundo */
     .video-fundo {
       position: fixed;
       top: 0;
       left: 0;
       min-width: 100%;
       min-height: 100%;
-      z-index: -1; /* Fica atrás de todo conteúdo */
-      object-fit: cover; /* Cobre toda a tela, mantendo proporção */
-      pointer-events: none; /* Evita interferir em cliques */
+      z-index: -1;
+      object-fit: cover;
+      pointer-events: none;
     }
-
-    /* Remove margens e padding para o vídeo cobrir tudo */
     body, html {
       margin: 0;
       padding: 0;
@@ -31,7 +28,6 @@
 </head>
 <body class="kimks-body">
 
-  <!-- Vídeo de fundo -->
   <video class="video-fundo" autoplay muted loop playsinline>
     <source src="agua.mp4" type="video/mp4" />
     Seu navegador não suporta vídeos HTML5.
@@ -56,43 +52,23 @@
 
   <section class="ks-section">
     <h2>✨ Origem de Kim KS</h2> 
-  <section class="carrossel-historias">
-  <<section class="carrossel-historias">
-  <div class="carrossel-container">
-    <a href="historia.html">
-      <img src="imagens/kimks.jpg" alt="Início de Tudo" class="carrossel-img">
-      <div class="carrossel-titulo">Início de Tudo</div>
-    </a>
-  </div>
-  <div class="carrossel-indicadores">
-    <span class="dot active"></span>
-    <!-- futuras bolinhas -->
-  </div>
-</section>
-
-    </a>
-  </div>
-  <div class="carrossel-indicadores">
-    <span class="dot active"></span>
-    <!-- futuras bolinhas -->
-  </div>
-</section>
-
+    <div class="carrossel-container">
+      <a href="historia.html">
+        <img src="imagens/kimks.jpg" alt="Início de Tudo" class="carrossel-img">
+        <div class="carrossel-titulo">Início de Tudo</div>
+      </a>
+      <div class="carrossel-indicadores">
+        <span class="dot active"></span>
+      </div>
     </div>
-  </div>
-</section>
-
-  </div>
-</section>
-
-   <p>Kim KS nasceu no asfalto e foi moldado pelas ruase marcada por atitude, resiliência e criatividade crua. Descubra a história por trás do nome que virou lenda.</p>
+    <p>Kim KS nasceu no asfalto e foi moldado pelas ruas, marcado por atitude, resiliência e criatividade crua. Descubra a história por trás do nome que virou lenda.</p>
   </section>
 
   <section id="videos" class="ks-section">
     <h2>🎥 Vídeos em Destaque</h2>
     <div class="ks-videos">
-      <div class="ks-video-card">[Video embed futuramente]</div>
-      <div class="ks-video-card">[Video embed futuramente]</div>
+      <div class="ks-video-card">[Vídeo embed futuramente]</div>
+      <div class="ks-video-card">[Vídeo embed futuramente]</div>
     </div>
   </section>
 
@@ -113,24 +89,24 @@
     <p>Portal Kim KS &copy; 2025 — Desenvolvido por ITKS Girl</p>
   </footer>
 
-</body> <script>
   <script>
-  // Slide automático — pronto pra quando tiver mais imagens
-  let slideIndex = 0;
-  const slides = document.querySelectorAll('.carrossel-img');
-  const dots = document.querySelectorAll('.dot');
+    // Slide automático
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.carrossel-img');
+    const dots = document.querySelectorAll('.dot');
 
-  function showSlides() {
-    slides.forEach((slide, i) => {
-      slide.style.transform = `translateX(-${slideIndex * 100}%)`;
-      dots[i].classList.remove('active');
-    });
+    function showSlides() {
+      slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+        dots[i]?.classList.remove('active');
+      });
 
-    dots[slideIndex].classList.add('active');
-    slideIndex = (slideIndex + 1) % slides.length;
-  }
+      if (dots[slideIndex]) dots[slideIndex].classList.add('active');
+      slideIndex = (slideIndex + 1) % slides.length;
+    }
 
-  setInterval(showSlides, 4000);
-</script>
+    setInterval(showSlides, 4000);
+  </script>
 
+</body>
 </html>
