@@ -1,214 +1,3 @@
-/* Estilo base */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fff0f5;
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-
-/* Cabeçalho */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  background-color: #ff69b4;
-  color: white;
-  padding: 2rem 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-header p {
-  margin-top: 0.5rem;
-  font-style: italic;
-  color: #fff0f5;
-  font-size: 1.1rem;
-  text-align: center;
-}
-
-/* Imagem da bonequinha */
-.bonequinha {
-  width: 40px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Menu secundário */
-.nav-secundaria {
-  background-color: #ffe4e1;
-  padding: 1rem;
-  text-align: center;
-}
-
-.nav-secundaria ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-}
-
-.nav-secundaria a {
-  text-decoration: none;
-  color: #c71585;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.nav-secundaria a:hover {
-  color: #8b008b;
-  text-decoration: underline;
-}
-
-/* Redes sociais */
-.social {
-  text-align: center;
-  margin: 1.5rem 0;
-}
-
-.social a {
-  display: inline-block;
-  margin: 0 10px;
-  text-decoration: none;
-}
-
-.social img {
-  width: 28px;
-  height: 28px;
-  transition: transform 0.2s;
-  border-radius: 6px;
-}
-
-.social img:hover {
-  transform: scale(1.1);
-}
-
-/* Conteúdo principal */
-main {
-  padding: 2rem;
-}
-
-/* Seção de destaque */
-section.destaque {
-  background-color: #fffafa;
-  border-left: 4px solid #ff69b4;
-  padding: 1rem;
-  margin-bottom: 2rem;
-}
-
-section h2 {
-  color: #d63384;
-}
-
-/* Apresentação */
-.apresentacao {
-  background-color: #fff0f5;
-  padding: 30px;
-  max-width: 700px;
-  margin: 0 auto 50px auto;
-  border-radius: 20px;
-  box-shadow: 0 4px 12px rgba(255, 192, 203, 0.3);
-  font-family: 'Georgia', serif;
-  color: #444;
-}
-
-.apresentacao h2 {
-  font-size: 28px;
-  color: #d63384;
-  margin-bottom: 20px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.apresentacao p {
-  font-size: 16px;
-  line-height: 1.8;
-  margin-bottom: 15px;
-  text-align: justify;
-}
-
-.apresentacao strong {
-  color: #c71585;
-}
-
-.apresentacao em {
-  color: #8b008b;
-  font-style: italic;
-}
-
-/* Rodapé */
-footer {
-  background-color: #ffc0cb;
-  color: #444;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-.rodape {
-  background-color: #ffe6f0;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-  color: #444;
-  margin-top: 40px;
-  border-top: 2px solid #f8c1d8;
-}
-
-.rodape .links {
-  margin-bottom: 10px;
-}
-
-.rodape a {
-  color: #d63384;
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: bold;
-}
-
-.rodape a:hover {
-  text-decoration: underline;
-}
-
-
-.decorativo {
-  position: absolute;
-  opacity: 1;
-  z-index: -1;
-  pointer-events: none;
-}
-
-#chapeu {
-  top: 40px;
-  left: 20px;
-  width: 100px;
-}
-
-#skate {
-  bottom: 60px;
-  right: 30px;
-  width: 120px;
-}
-
-#radio {
-  top: 200px;
-  right: 100px;
-  width: 90px;
-}
-
-#sigla {
-  bottom: 150px;
-  left: 60px;
-  width: 90px;
-}
-
 /* RESET */
 * {
   margin: 0;
@@ -216,16 +5,137 @@ footer {
   box-sizing: border-box;
 }
 
-/* Ajustes para a página kimks.html */
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: transparent;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.video-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  filter: brightness(0.4) saturate(1.2);
+  z-index: -1;
+  pointer-events: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bonequinha {
+  width: 40px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #ff99cc;
+  font-family: 'Playfair Display', serif;
+}
+
+.btn-kimks {
+  background: linear-gradient(135deg, #ff0080, #7928ca);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-left: 1rem;
+}
+
+.btn-kimks:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 128, 0.8);
+}
+
+.slogan {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  animation: digita 4s steps(40, end) infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #fff;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes digita {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+main {
+  display: grid;
+  gap: 2rem;
+  padding: 4rem 2rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.card h2 {
+  color: #ffccff;
+  margin-top: 0;
+}
+
+.versiculo-canto {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 300px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(8px);
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  margin-top: 4rem;
+}
+
+/* KIM KS page */
 body.kimks-body {
   font-family: 'Orbitron', sans-serif;
-  /* Mudança aqui para fundo transparente, para vídeo aparecer */
   background: transparent;
   color: #f2f2f2;
   line-height: 1.6;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Cabeçalho específico */
 .ks-header {
   background-color: #000;
   padding: 20px;
@@ -233,7 +143,6 @@ body.kimks-body {
   border-bottom: 3px solid #5e9e7e;
 }
 
-/* Logo */
 .ks-logo {
   font-family: 'Rubik Mono One', sans-serif;
   font-size: 3rem;
@@ -242,7 +151,6 @@ body.kimks-body {
   text-shadow: 2px 2px 8px #005a5a;
 }
 
-/* Navegação */
 .ks-nav {
   margin-top: 15px;
 }
@@ -263,9 +171,7 @@ body.kimks-body {
   color: #000;
 }
 
-/* Banner */
 .ks-banner {
-  /* Tirando imagem de fundo para não esconder vídeo */
   background: rgba(0, 0, 0, 0.5);
   height: 300px;
   display: flex;
@@ -279,25 +185,21 @@ body.kimks-body {
   margin-bottom: 30px;
 }
 
-/* Texto no banner */
 .ks-banner-text h2 {
   font-size: 2rem;
   margin-bottom: 10px;
   color: #00ffff;
 }
 
-/* Seções */
 .ks-section {
   padding: 40px 20px;
   max-width: 900px;
   margin: auto;
-  /* Fundo semitransparente para deixar vídeo aparecer */
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 12px;
   margin-bottom: 30px;
 }
 
-/* Títulos das seções */
 .ks-section h2 {
   color: #00ffff;
   font-size: 1.8rem;
@@ -306,7 +208,6 @@ body.kimks-body {
   padding-bottom: 10px;
 }
 
-/* Cards dos vídeos */
 .ks-videos {
   display: flex;
   gap: 20px;
@@ -326,7 +227,6 @@ body.kimks-body {
   border-radius: 8px;
 }
 
-/* Rodapé */
 .ks-footer {
   background-color: #000;
   padding: 20px;
@@ -337,168 +237,7 @@ body.kimks-body {
   color: #888;
 }
 
-/* NOVO: Estilo para o vídeo de fundo */
-.video-fundo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;          /* largura total da viewport */
-  height: 100vh;         /* altura total da viewport */
-  object-fit: cover;     /* cobre toda área sem distorcer */
-  filter: brightness(0.7) saturate(1.1); /* escurece e destaca cores */
-  z-index: -10;          /* fica atrás de todo o conteúdo */
-  pointer-events: none;  /* permite clicar normalmente sobre conteúdo */
-}
-/* NOVO VISUAL CLEAN GIRL SURF PARA ITKS GIRL (2025) */
-
-/* Logo e cabeçalho mais leve */
-.logo-area {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-header.topo {
-  background-color: #f7d6e0; /* rosa mais claro */
-  padding: 2rem 1rem;
-  text-align: center;
-}
-
-header.topo h1 {
-  font-size: 3rem;
-  color: #b14469;
-  font-family: 'Playfair Display', serif;
-  margin: 0;
-}
-
-/* Cards para Versículo, Inspiração e Artigos */
-.card {
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin: 2rem auto;
-  max-width: 600px;
-  font-size: 1rem;
-}
-
-.card h2 {
-  margin-top: 0;
-  color: #b14469;
-  font-size: 1.4rem;
-}
-
-/* Redes sociais discretas no canto inferior direito */
-.social {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  opacity: 0.7;
-  z-index: 999;
-}
-
-.social img {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  transition: transform 0.2s;
-}
-
-.social img:hover {
-  transform: scale(1.1);
-}
-
-/* Rodapé atualizado para visual moderno */
-footer.rodape {
-  background-color: #f7d6e0;
-  text-align: center;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
-  color: #333;
-  margin-top: 2rem;
-  border-top: 2px solid #f8c1d8;
-}
-
-.rodape .links {
-  margin-bottom: 1rem;
-}
-
-.rodape .links a {
-  color: #b14469;
-  font-weight: 500;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-.rodape .links a:hover {
-  text-decoration: underline;
-}
-body {
-  background-image: url('areia.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.carousel-container {
-  position: relative;
-  max-width: 600px;
-  margin: 30px auto;
-  overflow: hidden;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.carousel-slide {
-  display: none;
-  text-align: center;
-  transition: opacity 0.6s ease;
-}
-
-.carousel-slide.active {
-  display: block;
-}
-
-.carrossel-img {
-  width: 280px;         /* define uma largura fixa e menor */
-  height: auto;
-  display: block;       /* garante que a margem funcione */
-  margin: 0 auto;       /* centraliza a imagem */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-caption {
-  margin-top: 8px;
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px #000;
-}
-
-.carousel-dots {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.carousel-dots .dot {
-  display: inline-block;
-  height: 10px;
-  width: 10px;
-  margin: 0 4px;
-  background-color: #888;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-dots .dot.active {
-  background-color: #00ffff;
-}
-.carrossel-historia {
+.carrossel-historias {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -508,6 +247,15 @@ body {
 .carrossel-container {
   position: relative;
   text-align: center;
+}
+
+.carrossel-img {
+  width: 280px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carrossel-titulo {
@@ -526,47 +274,3 @@ body {
   width: 10px;
   margin: 0 4px;
   background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-}
-
-.carrossel-indicadores .active {
-  background-color: #00ffff;
-}
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.video-fundo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw; /* forçar largura */
-  height: 100vh; /* forçar altura */
-  object-fit: cover;
-  z-index: -1;
-  filter: brightness(0.7);
-}
-.video-fundo {
-  border: 3px solid red;
-}
-.btn-kimks {
-  background: linear-gradient(135deg, #ff0080, #7928ca);
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
-  transition: transform 0.3s, box-shadow 0.3s;
-  margin-left: 1rem;
-}
-
-.btn-kimks:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255, 0, 128, 0.8);
-}
