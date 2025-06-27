@@ -462,10 +462,13 @@ body {
   display: block;
 }
 
-.carousel-slide img {
-  width: 100%;
+.carrossel-img {
+  width: 280px;         /* define uma largura fixa e menor */
   height: auto;
-  border-radius: 8px;
+  display: block;       /* garante que a margem funcione */
+  margin: 0 auto;       /* centraliza a imagem */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-caption {
@@ -494,4 +497,76 @@ body {
 
 .carousel-dots .dot.active {
   background-color: #00ffff;
+}
+.carrossel-historia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.carrossel-container {
+  position: relative;
+  text-align: center;
+}
+
+.carrossel-titulo {
+  margin-top: 10px;
+  color: #00ffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.carrossel-indicadores {
+  margin-top: 10px;
+}
+
+.carrossel-indicadores .dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.carrossel-indicadores .active {
+  background-color: #00ffff;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.video-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* forçar largura */
+  height: 100vh; /* forçar altura */
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.7);
+}
+.video-fundo {
+  border: 3px solid red;
+}
+.btn-kimks {
+  background: linear-gradient(135deg, #ff0080, #7928ca);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-left: 1rem;
+}
+
+.btn-kimks:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 128, 0.8);
 }

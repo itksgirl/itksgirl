@@ -56,25 +56,28 @@
 
   <section class="ks-section">
     <h2>✨ Origem de Kim KS</h2> 
-   <section class="ks-section">
-  <h2>📚 Histórias</h2>
-  <div class="carousel-container">
-    <div class="carousel-slide active">
-      <img src="img1.jpg" alt="Imagem 1">
-      <p class="carousel-caption">Início de Tudo</p>
-    </div>
-    <div class="carousel-slide">
-      <img src="img2.jpg" alt="Imagem 2">
-      <p class="carousel-caption">A Rua Ensina</p>
-    </div>
-    <div class="carousel-slide">
-      <img src="img3.jpg" alt="Imagem 3">
-      <p class="carousel-caption">Do Asfalto ao Mar</p>
-    </div>
-    <div class="carousel-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+  <section class="carrossel-historias">
+  <<section class="carrossel-historias">
+  <div class="carrossel-container">
+    <a href="historia.html">
+      <img src="imagens/kimks.jpg" alt="Início de Tudo" class="carrossel-img">
+      <div class="carrossel-titulo">Início de Tudo</div>
+    </a>
+  </div>
+  <div class="carrossel-indicadores">
+    <span class="dot active"></span>
+    <!-- futuras bolinhas -->
+  </div>
+</section>
+
+    </a>
+  </div>
+  <div class="carrossel-indicadores">
+    <span class="dot active"></span>
+    <!-- futuras bolinhas -->
+  </div>
+</section>
+
     </div>
   </div>
 </section>
@@ -97,7 +100,7 @@
     <h2>📄 Matérias Recentes</h2>
     <ul>
       <li><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</li>
-      <li><strong>Surf de Rua</strong> — A filosofia por trás do estilo dele.</li>
+      <li><strong>Street</strong> — A filosofia por trás do estilo dele.</li>
     </ul>
   </section>
 
@@ -111,23 +114,23 @@
   </footer>
 
 </body> <script>
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
+  <script>
+  // Slide automático — pronto pra quando tiver mais imagens
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.carrossel-img');
   const dots = document.querySelectorAll('.dot');
 
-  function showSlide(index) {
+  function showSlides() {
     slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-      dots[i].classList.toggle('active', i === index);
+      slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+      dots[i].classList.remove('active');
     });
+
+    dots[slideIndex].classList.add('active');
+    slideIndex = (slideIndex + 1) % slides.length;
   }
 
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  setInterval(nextSlide, 4000); // troca automática a cada 4 segundos
+  setInterval(showSlides, 4000);
 </script>
 
 </html>
