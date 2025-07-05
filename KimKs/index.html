@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kim KS • Skate Jornal</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body class="kimks-body">
+
+  <video class="video-fundo" autoplay muted loop playsinline>
+    <source src="../agua.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeos HTML5.
+  </video>
+
+  <header class="ks-header">
+    <h1 class="ks-logo">KIM KS</h1>
+    <nav class="ks-nav">
+      <a href="#historia">História</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#materias">Matérias</a>
+      <a href="#entrevistas">Entrevistas</a>
+    </nav>
+  </header>
+
+  <section class="ks-banner">
+    <div class="ks-banner-text">
+      <h2>Underground. Skate</h2>
+      <p>Bem-vindo ao portal oficial de Kim KS, onde a rua encontra o mar.</p>
+    </div>
+  </section>
+
+  <!-- CARROSSEL INSTA -->
+  <section id="historia" class="ks-section">
+    <h2>✨ História de Kim KS</h2>
+    <div class="carrossel-wrapper">
+      <div class="carrossel-slider">
+        <div class="carrossel-slide">
+          <a href="../o-comeco-de-tudo/index.html">
+            <img src="../imagens/criancaks.jpeg" alt="O Começo de Tudo" />
+            <p>O Começo de Tudo</p>
+          </a>
+        </div>
+        <div class="carrossel-slide">
+          <a href="../o-primeiro-skate/index.html">
+            <img src="../imagens/primeiroskate.jpeg" alt="Primeiro Skate" />
+            <p>Primeiro Skate</p>
+          </a>
+        </div>
+        <div class="carrossel-slide">
+          <a href="../relacionamento-skate/index.html">
+            <img src="../imagens/relacionamentoskt.jpeg" alt="Relacionamento" />
+            <p>Relacionamento</p>
+          </a>
+        </div>
+        <div class="carrossel-slide">
+          <a href="../churrasquinho/index.html">
+            <img src="../imagens/churrasquinho.jpeg" alt="Churrasquinho" />
+            <p>Churrasquinho</p>
+          </a>
+        </div>
+        <div class="carrossel-slide">
+          <a href="../fases-da-vida/index.html">
+            <img src="../imagens/riokim.jpeg" alt="Fases da Vida" />
+            <p>Fases da Vida</p>
+          </a>
+        </div>
+        <div class="carrossel-slide">
+          <a href="../reconhecimento-digital/index.html">
+            <img src="../imagens/skate.jpg" alt="Reconhecimento Digital" />
+            <p>Reconhecimento</p>
+          </a>
+        </div>
+        <div class="carrossel-slide">
+          <a href="../essencia-do-skate/index.html">
+            <img src="../imagens/kimks.jpg" alt="Essência do Skate" />
+            <p>Essência do Skate</p>
+          </a>
+        </div>
+      </div>
+      <div class="carrossel-indicadores"></div>
+    </div>
+  </section>
+
+  <!-- RESTANTE DO SITE -->
+  <section id="videos" class="ks-section">
+    <h2>🎥 Vídeos em Destaque</h2>
+    <div class="ks-videos">
+      <div class="ks-video-card">[Vídeo embed futuramente]</div>
+      <div class="ks-video-card">[Vídeo embed futuramente]</div>
+    </div>
+  </section>
+
+  <section id="materias" class="ks-section">
+    <h2>📄 Matérias Recentes</h2>
+    <ul>
+      <li><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</li>
+      <li><strong>Street</strong> — A filosofia por trás do estilo dele.</li>
+    </ul>
+  </section>
+
+  <section id="entrevistas" class="ks-section">
+    <h2>🎙️ Entrevistas Exclusivas</h2>
+    <p>Em breve: conversas reais com quem vive o underground e a cena.</p>
+  </section>
+
+  <footer class="ks-footer">
+    <p>Portal Kim KS &copy; 2025 — Desenvolvido por ITKS Girl</p>
+  </footer>
+
+  <!-- JavaScript do carrossel -->
+  <script>
+    const slider = document.querySelector(".carrossel-slider");
+    const slides = document.querySelectorAll(".carrossel-slide");
+    const indicadores = document.querySelector(".carrossel-indicadores");
+
+    let index = 0;
+
+    function criarIndicadores() {
+      slides.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => {
+          index = i;
+          atualizarCarrossel();
+        });
+        indicadores.appendChild(dot);
+      });
+    }
+
+    function atualizarCarrossel() {
+      slider.style.transform = `translateX(-${index * 100}%)`;
+      const dots = document.querySelectorAll(".dot");
+      dots.forEach(dot => dot.classList.remove("active"));
+      dots[index].classList.add("active");
+    }
+
+    function passarAuto() {
+      index = Math.floor(Math.random() * slides.length);
+      atualizarCarrossel();
+    }
+
+    criarIndicadores();
+    setInterval(passarAuto, 4000); // muda a cada 4s
+  </script>
+</body>
+</html>

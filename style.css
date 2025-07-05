@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+/* FONTE */
 body {
   font-family: 'Orbitron', sans-serif;
   background: transparent;
@@ -12,6 +13,13 @@ body {
   overflow-x: hidden;
 }
 
+body.kimks-body {
+  background: transparent;
+  color: #f2f2f2;
+  overflow-y: auto;
+}
+
+/* VÍDEO FUNDO */
 .video-fundo {
   position: fixed;
   top: 0;
@@ -21,121 +29,9 @@ body {
   object-fit: cover;
   filter: brightness(0.4) saturate(1.2);
   z-index: -1;
-  pointer-events: none;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-}
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.bonequinha {
-  width: 40px;
-}
-
-h1 {
-  font-size: 2rem;
-  color: #ff99cc;
-  font-family: 'Playfair Display', serif;
-}
-
-.btn-kimks {
-  background: linear-gradient(135deg, #ff0080, #7928ca);
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 0 15px rgba(255, 0, 128, 0.6);
-  transition: transform 0.3s, box-shadow 0.3s;
-  margin-left: 1rem;
-}
-
-.btn-kimks:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255, 0, 128, 0.8);
-}
-
-.slogan {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  animation: digita 4s steps(40, end) infinite;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 3px solid #fff;
-  max-width: 450px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@keyframes digita {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
-
-main {
-  display: grid;
-  gap: 2rem;
-  padding: 4rem 2rem;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 1.5rem;
-  max-width: 600px;
-  margin: 0 auto;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.card h2 {
-  color: #ffccff;
-  margin-top: 0;
-}
-
-.versiculo-canto {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 12px;
-  max-width: 300px;
-  font-size: 0.85rem;
-  backdrop-filter: blur(8px);
-}
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.8rem;
-  background: rgba(0, 0, 0, 0.3);
-  margin-top: 4rem;
-}
-
-/* KIM KS page */
-body.kimks-body {
-  font-family: 'Orbitron', sans-serif;
-  background: transparent;
-  color: #f2f2f2;
-  line-height: 1.6;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
+/* HEADER */
 .ks-header {
   background-color: #000;
   padding: 20px;
@@ -160,10 +56,9 @@ body.kimks-body {
   text-decoration: none;
   margin: 0 10px;
   font-weight: bold;
-  border: 2px solid transparent;
   padding: 6px 12px;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .ks-nav a:hover {
@@ -171,6 +66,7 @@ body.kimks-body {
   color: #000;
 }
 
+/* BANNER */
 .ks-banner {
   background: rgba(0, 0, 0, 0.5);
   height: 300px;
@@ -191,6 +87,7 @@ body.kimks-body {
   color: #00ffff;
 }
 
+/* SEÇÕES */
 .ks-section {
   padding: 40px 20px;
   max-width: 900px;
@@ -208,6 +105,7 @@ body.kimks-body {
   padding-bottom: 10px;
 }
 
+/* VÍDEOS */
 .ks-videos {
   display: flex;
   gap: 20px;
@@ -227,50 +125,62 @@ body.kimks-body {
   border-radius: 8px;
 }
 
+/* FOOTER */
 .ks-footer {
   background-color: #000;
   padding: 20px;
   text-align: center;
   border-top: 2px solid #00ffff;
-  margin-top: 40px;
   font-size: 0.9rem;
   color: #888;
 }
 
-.carrossel-historias {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+/* CARROSSEL */
+.carrossel-wrapper {
+  overflow: hidden;
+  position: relative;
 }
 
-.carrossel-container {
-  position: relative;
+.carrossel-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+}
+
+.carrossel-slide {
+  min-width: 160px;
   text-align: center;
 }
 
-.carrossel-img {
-  width: 280px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+.carrossel-slide img {
+  width: 100%;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
-.carrossel-titulo {
-  margin-top: 10px;
+.carrossel-slide span {
+  display: block;
+  margin-top: 8px;
   color: #00ffff;
-  font-size: 1.1rem;
   font-weight: bold;
 }
 
 .carrossel-indicadores {
-  margin-top: 10px;
+  text-align: center;
+  margin-top: 15px;
 }
 
 .carrossel-indicadores .dot {
-  height: 10px;
+  display: inline-block;
   width: 10px;
-  margin: 0 4px;
-  background-color: #bbb;
+  height: 10px;
+  background-color: #888;
+  border-radius: 50%;
+  margin: 0 5px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.carrossel-indicadores .active {
+  background-color: #00ffff;
+}
