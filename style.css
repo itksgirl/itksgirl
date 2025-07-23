@@ -184,3 +184,42 @@ body.kimks-body {
 .carrossel-indicadores .active {
   background-color: #00ffff;
 }
+.botao-materia {
+  padding: 10px 25px;
+  background-color: #ff66cc;
+  color: white;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 10px #ff99dd;
+  transition: 0.3s;
+}
+
+.botao-materia:hover {
+  background-color: #ff33aa;
+}
+body {
+  background-image: url('look2.jpg'); /* ou .png, dependendo do formato que você salvou */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 40px 0;
+  color: #222;
+}
+ul li a {
+  color: #ff7faf; /* rosa claro vibrante */
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  transition: all 0.3s ease;
+}
+
+ul li a:hover {
+  color: #d65c9a; /* tom mais profundo de rosa */
+  text-shadow: 0 0 5px rgba(255, 182, 212, 0.6);
+  text-decoration: underline;
+}
+
+
