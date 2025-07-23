@@ -2,34 +2,35 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Look de Rua com Alma</title>
   <style>
     body {
       background-image: url('look2.jpg');
       background-size: cover;
+      background-attachment: fixed;
       background-position: center;
-      background-repeat: no-repeat;
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 40px 0;
+      padding: 20px 0;
       color: #222;
+      min-height: 100vh;
     }
 
     .revista-container {
-      width: 800px;
-      max-width: 95%;
-      margin: auto;
-      background-color: rgba(255, 255, 255, 0.88); /* fundo branco translúcido pra destacar o texto */
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: rgba(255, 255, 255, 0.92);
       border-radius: 15px;
-      padding: 30px;
+      padding: 20px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
       display: flex;
+      flex-direction: column;
       gap: 20px;
     }
 
     .revista-imagem {
-      flex: 1;
-      min-width: 250px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -37,42 +38,72 @@
 
     .revista-imagem img {
       width: 100%;
+      max-width: 400px;
       border-radius: 10px;
       border: 3px solid #d42d9d;
     }
 
     .revista-legenda {
-      font-size: 13px;
+      font-size: 12px;
       color: #555;
       margin-top: 8px;
       font-style: italic;
+      text-align: center;
+    }
+
+    .revista-legenda a {
+      color: #a100b0;
+      text-decoration: none;
     }
 
     .revista-texto {
-      flex: 2;
+      padding: 0 10px;
     }
 
     .revista-titulo {
       color: #a100b0;
-      font-size: 26px;
+      font-size: 22px;
       font-weight: bold;
       margin-bottom: 15px;
+      text-align: center;
     }
 
     .revista-texto p {
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.6;
       margin-bottom: 12px;
+      text-align: justify;
     }
 
-    @media (max-width: 768px) {
+    @media (min-width: 768px) {
       .revista-container {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        padding: 30px;
       }
-
       .revista-texto {
-        padding-top: 15px;
+        padding: 0;
+      }
+      .revista-titulo {
+        text-align: left;
+        font-size: 26px;
+      }
+      .revista-texto p {
+        font-size: 15px;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px 0;
+        background-attachment: scroll;
+      }
+      .revista-container {
+        width: 95%;
+        padding: 15px;
+      }
+      .revista-titulo {
+        font-size: 20px;
       }
     }
   </style>
@@ -89,7 +120,7 @@
       <div class="revista-titulo">🖤 Looks de Rua com Alma: "Dark Safari Girl"</div>
       <p><strong>Instagram:</strong> <a href="https://instagram.com/itksgirl" target="_blank">@itksgirl</a></p>
       <p>A mistura perfeita entre o urbano e o selvagem — esse look batizado de <strong>"Dark Safari Girl"</strong> traz uma energia de quem pisa firme no mundo, com alma leve e olhos que enxergam além.</p>
-      <p>A saia com estampa de cobra e a bota tratorada estilo amazona criam uma base poderosa e estilizada. A regata preta com textura aveludada e brilho sutil ancora a produção com um toque de mistério sofisticado.</p>
+      <p>A saia com estampa de cobra e a bota tratorada estilo amazona criam uma base poderosa e estilizada. A regata preta com textura aveludada e brinco sutil ancora a produção com um toque de mistério sofisticado.</p>
       <p>A mochila oversized com estampa vintage adiciona contraste e liberdade ao visual, revelando uma menina que está pronta para explorar — ruas, ideias e possibilidades.</p>
       <p>Esse não é só um look, é um manifesto visual: sobre coragem, identidade e fé. A paleta terrosa conecta com a natureza, e os acessórios revelam que os detalhes também têm alma.</p>
       <p>Moda com propósito, visual com verdade — isso é o espírito de uma IT KS Girl. 🌍✨</p>
