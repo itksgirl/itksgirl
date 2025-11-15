@@ -1,203 +1,60 @@
-<!DOCTYPE html><html lang="pt-BR">
-<head> <link rel="icon" type="image/png" href="ksrosa.png">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head> 
+  <link rel="icon" type="image/png" href="ksrosa.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IT KS Girl • Moda e Fé</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Playfair+Display&display=swap" rel="stylesheet">
-  <style>
-    .video-fundo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      filter: brightness(0.4) saturate(1.2);
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      background: transparent;
-      overflow-x: hidden;
-    }header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-}
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
 
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+</head>
+<body class="itksgirl-body"> 
 
-.bonequinha {
-  width: 40px;
-}
-
-h1 {
-  font-size: 2rem;
-  color: #ff99cc;
-  font-family: 'Playfair Display', serif;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  transition: 0.3s;
-}
-
-nav a:hover {
-  background: #ff99cc;
-  color: #000;
-}
-
-.slogan {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  animation: digita 4s steps(40, end) infinite;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 3px solid #fff;
-  width: 100%;
-  max-width: 450px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@keyframes digita {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
-
-main {
-  display: grid;
-  gap: 2rem;
-  padding: 4rem 2rem;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 1.5rem;
-  max-width: 600px;
-  margin: 0 auto;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.card h2 {
-  color: #ffccff;
-  margin-top: 0;
-}
-
-.versiculo-canto {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  border-radius: 12px;
-  max-width: 300px;
-  font-size: 0.85rem;
-  backdrop-filter: blur(8px);
-}
-
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.8rem;
-  background: rgba(0, 0, 0, 0.3);
-  margin-top: 4rem;
-}
-
-.btn-kimks {
-  background: #ff0040;
-  color: white;
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  margin-left: 1rem;
-  border: 2px solid white;
-  box-shadow: 0 0 10px #ff0040, 0 0 20px #ff80bf;
-  transition: transform 0.2s ease-in-out;
-}
-
-.btn-kimks:hover {
-  transform: scale(1.05);
-}
-@media (max-width: 768px) {
-    header {
-        padding: 0.5rem 1rem !important;
-        flex-direction: column !important;
-    }
-    .card {
-        padding: 1rem !important;
-        margin: 0 auto !important;
-        width: 90% !important;
-    }
-    .slogan {
-        font-size: 1.2rem !important;
-    }
-}  /* ← ESTA CHAVE FECHA A MEDIA QUERY! */
-
-/* LINKS ROSA (MEXE SÓ NA COR!) */
-.card ul li a { color: #ff7faf !important; }
-.card ul li a:hover { color: #d65c9a !important; }
-  </style> 
-  </head>
-<body> 
-
-  <video class="video-fundo" autoplay muted loop playsinline>
-    <source src="galaxy.mp4" type="video/mp4">
-  </video>  <header>
+  <header class="itks-header">
     <div class="logo-area">
       <img src="bonequinha.png" alt="Bonequinha" class="bonequinha" />
-      <h1>ITKS Girl</h1>
+      <h1 class="itks-title">It Ks Girl</h1>
     </div>
+    
+    <nav class="itks-nav">
+        </nav>
+    
     <div>
       <a href="KimKs/" class="btn-kimks">Kim KS ❤️‍🔥</a>
     </div>
-  </header>  <div class="slogan">Moda. Fé. Frequência elevada.</div>  <main>
-    <div class="card">
+  </header>
+  
+  <main class="itks-main">
+    <section class="itks-banner-principal">
+        <h2> Débora Narsson</h2>
+        <p class="itks-slogan">Sua frequência elevada em moda e estilo de vida. ✨</p>
+    </section>
+    
+    <div class="itks-card itks-inspiracao">
       <h2>💫 Inspiração da Semana</h2>
       <p>"Estilo é quando a alma se veste de coragem e a maquiagem de luz."</p>
-    </div><div class="card">
-  <h2>📰 Últimos Artigos</h2>
-  <ul>
-   <li>
-  <a href="look1.html">
-    <strong>Fé e beleza</strong> 💄 A maquiagem como expressão de autoconfiança
-  </a>
-</li>
-    <li><strong>Fé e beleza</strong> – A maquiagem como expressão de autoconfiança</li>
-    <li><strong>Arte nas unhas</strong> – Estilos que falam por você</li>
-  </ul>
-</div>
-
-  </main>  <div class="versiculo-canto" id="verso"></div>  <footer>
+    </div>
+    
+    <div class="itks-card itks-artigos">
+        <h2>📰 Últimos Artigos</h2>
+        <ul>
+            <li><a href="look1.html"><strong>Fé e beleza</strong> 💄 A maquiagem como expressão de autoconfiança</a></li>
+            <li><a href="#"><strong>Arte nas unhas</strong> – Estilos que falam por você</a></li>
+            <li><a href="#"><strong>O poder do nude</strong> – A cor que te eleva</a></li>
+        </ul>
+    </div>
+  </main>
+  
+  <div class="versiculo-canto" id="verso"></div>
+  
+  <footer class="itks-footer">
     <p>© 2025 Débora | Todos os direitos reservados | IT KS Girl</p>
-  </footer>  <script>
+  </footer>
+  
+  <script>
     const versiculos = [
       "Salmo 91:1 – Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.",
       "Isaías 41:10 – Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.",
@@ -209,5 +66,6 @@ footer {
     ];
     const versoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
     document.getElementById("verso").textContent = versoAleatorio;
-  </script></body>
-  </html>
+  </script>
+</body>
+</html>

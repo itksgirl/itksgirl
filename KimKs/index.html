@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -31,7 +31,6 @@
     </div>
   </section>
 
-  <!-- CARROSSEL INSTA -->
   <section id="historia" class="ks-section">
     <h2>✨ História de Kim KS</h2>
     <div class="carrossel-wrapper">
@@ -83,18 +82,32 @@
     </div>
   </section>
 
-  <!-- RESTANTE DO SITE -->
   <section id="videos" class="ks-section">
     <h2>🎥 Vídeos em Destaque</h2>
     <div class="ks-videos">
-      <div class="ks-video-card">[Vídeo embed futuramente]</div>
-      <div class="ks-video-card">[Vídeo embed futuramente]</div>
+      <div class="ks-video-card">
+        <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;"
+                src="https://www.youtube.com/embed/UcRtruP19wo"
+                title="YouTube video player 1" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="ks-video-card">
+        <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;"
+                src="https://www.youtube.com/embed/-zeJvzhV5tE"
+                title="YouTube video player 2" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+      </div>
     </div>
   </section>
 
   <section id="materias" class="ks-section">
     <h2>📄 Matérias Recentes</h2>
-    <ul>
+    <ul class="ks-lista-materias">
       <li><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</li>
       <li><strong>Street</strong> — A filosofia por trás do estilo dele.</li>
     </ul>
@@ -106,15 +119,14 @@
   </section>
 
   <footer class="ks-footer">
-    <p>Portal Kim KS &copy; 2025 — Desenvolvido por ITKS Girl</p>
+    <p>Portal Kim KS &copy; 2025 — Desenvolvido por It Ks Girl</p>
   </footer>
 
-  <!-- JavaScript do carrossel -->
   <script>
     const slider = document.querySelector(".carrossel-slider");
     const slides = document.querySelectorAll(".carrossel-slide");
     const indicadores = document.querySelector(".carrossel-indicadores");
-
+    const totalSlides = slides.length; 
     let index = 0;
 
     function criarIndicadores() {
@@ -131,19 +143,28 @@
     }
 
     function atualizarCarrossel() {
+      // Move o slider para o slide atual
       slider.style.transform = `translateX(-${index * 100}%)`;
+      
+      // Atualiza os indicadores (bolinhas)
       const dots = document.querySelectorAll(".dot");
       dots.forEach(dot => dot.classList.remove("active"));
       dots[index].classList.add("active");
     }
 
-    function passarAuto() {
-      index = Math.floor(Math.random() * slides.length);
+    // NOVA FUNÇÃO: Passa para o próximo slide em sequência
+    function passarSequencial() {
+      index++;
+      // Se for o último slide, volta para o primeiro (0)
+      if (index >= totalSlides) {
+        index = 0;
+      }
       atualizarCarrossel();
     }
 
     criarIndicadores();
-    setInterval(passarAuto, 4000); // muda a cada 4s
+    // Muda a cada 6 segundos, suavemente.
+    setInterval(passarSequencial, 6000); 
   </script>
 </body>
-</html> 
+</html>
