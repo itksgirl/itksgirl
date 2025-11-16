@@ -9,50 +9,46 @@
 }
 
 a {
+    /* Base limpa para todos os links, será sobrescrito em cada página */
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
-/* AJUSTE CRÍTICO DE ESCALA (MANTIDO E NECESSÁRIO) */
-html {
-    -webkit-text-size-adjust: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-}
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-
 /* ========================================= */
 /* 2. ESTILOS DA PÁGINA PRINCIPAL: IT KS GIRL */
-/* (MANTIDO OTIMIZADO) */
+/* TEMA: CLEAN GIRL MINIMALISTA E CHIQUE  */
 /* ========================================= */
 
 :root {
     /* Paleta Clean Girl */
-    --cor-primaria: #f9f9f9; 
-    --cor-secundaria: #ffffff; 
-    --cor-destaque: #ffccd5; 
-    --cor-texto: #333333; 
-    --cor-texto-claro: #888888; 
-    --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.08); 
+    --cor-primaria: #f9f9f9; /* Fundo: Branco Pérola/Quase Branco */
+    --cor-secundaria: #ffffff; /* Elementos/Card: Branco Puro */
+    --cor-destaque: #ffccd5; /* Rosa Claríssimo Chique (Exigente) */
+    --cor-texto: #333333; /* Texto Principal */
+    --cor-texto-claro: #888888; /* Texto Secundário */
+    --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra Chique e Suave */
     --fonte-titulo: 'Playfair Display', serif;
-    --fonte-corpo: 'Montserrat', sans-serif; 
+    --fonte-corpo: 'Montserrat', sans-serif; /* Usando Montserrat para clean */
 }
 
-body.itksgirl-body {
+/* Corpo da página principal (itksgirl) */
+body {
+    margin: 0;
+    padding: 0;
     color: var(--cor-texto);
     font-family: var(--fonte-corpo);
     background-color: var(--cor-primaria);
-    display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* ... CÓDIGO IT KS GIRL (HEADER, MAIN, MANIFESTO, FOOTER) MANTIDO ... */
+/* Remove completamente o vídeo/imagem de fundo do body da página principal */
+body.itksgirl-body {
+    background-image: none !important;
+    background-color: var(--cor-primaria);
+}
+
+/* HEADER E NAVEGAÇÃO IT KS GIRL */
 .itks-header {
     display: flex;
     justify-content: space-between;
@@ -64,32 +60,163 @@ body.itksgirl-body {
     top: 0;
     z-index: 100;
 }
-/*... */
-/* BLOCO: MANIFESTO (FONTE MONTSERRAT LEGÍVEL) */
-.itks-manifesto {
-    background: #ffffff; 
-    padding: 2.5rem;
-    max-width: 650px; 
-    margin: 3rem auto 3rem auto; 
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bonequinha {
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--cor-destaque);
+}
+
+.itks-title {
+    font-size: 2.2rem;
+    color: var(--cor-texto);
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Botão Kim KS (Mantido o contraste para a subpágina) */
+.btn-kimks {
+    background: #ff7faf; /* Rosa mais chique para contraste */
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 127, 175, 0.3);
+}
+
+.btn-kimks:hover {
+    background: #e06a98;
+    transform: translateY(-2px);
+}
+
+/* MAIN E CARDS CLEAN GIRL */
+.itks-main {
+    padding: 4rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+
+.itks-banner-principal {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--cor-secundaria);
+    border-radius: 15px;
+    box-shadow: var(--sombra-card);
+    margin-bottom: 2rem;
+}
+
+.itks-banner-principal h2 {
+    font-family: var(--fonte-titulo);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--cor-texto);
+    margin: 0 0 10px 0;
+}
+
+.itks-slogan {
+    font-family: var(--fonte-corpo);
+    font-size: 1.2rem;
+    color: var(--cor-texto-claro);
+    font-style: italic;
+}
+
+.itks-card {
+    background: var(--cor-secundaria);
     border-radius: 10px;
-    text-align: left;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12); 
-    border: 1px solid #eee; 
+    padding: 2rem;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.3s;
 }
 
-.itks-manifesto p {
-    font-family: var(--fonte-corpo); 
-    font-size: 1rem; 
-    line-height: 1.7; 
-    color: var(--cor-texto); 
-    margin-bottom: 1.5rem;
-    font-weight: 400; 
+.itks-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
-/* ... RESTO DO CÓDIGO IT KS GIRL ... */
+
+.itks-card h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    margin-top: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* ESTILOS DOS ARTIGOS (MANTIDOS e adaptados ao novo tema) */
+.itks-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.itks-card ul li {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.itks-card ul li:last-child {
+    border-bottom: none;
+}
+
+.itks-card ul li a {
+    color: var(--cor-texto); /* Texto escuro para ser chique */
+    text-decoration: none;
+    font-weight: 400;
+    display: block;
+    padding: 5px 0;
+}
+
+.itks-card ul li a strong {
+    color: var(--cor-destaque);
+    font-weight: 600;
+}
+
+.itks-card ul li a:hover {
+    color: var(--cor-destaque);
+    text-decoration: underline;
+}
+
+/* Rodapé e Versículo */
+.itks-footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    background: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.versiculo-canto {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--cor-secundaria);
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    max-width: 250px;
+    font-size: 0.8rem;
+    color: var(--cor-texto);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: var(--fonte-corpo);
+}
+
 
 /* ========================================= */
-/* 3. ESTILOS DA SUBPÁGINA: KIM KS (REVERTIDA E AJUSTADA) */
+/* 3. ESTILOS DA SUBPÁGINA: KIM KS (PRESERVADOS) */
+/* CORREÇÃO DE MENU MOBILE INCLUÍDA       */
 /* ========================================= */
+
 body.kimks-body {
   font-family: 'Orbitron', sans-serif;
   background: transparent;
@@ -99,6 +226,7 @@ body.kimks-body {
   touch-action: manipulation;
 }
 
+/* VÍDEO DE FUNDO */
 .video-fundo {
   position: fixed;
   top: 0;
@@ -110,6 +238,7 @@ body.kimks-body {
   z-index: -1;
 }
 
+/* HEADER KIM KS (CORRIGIDO O Z-INDEX PARA CLICAR NO MOBILE) */
 .ks-header {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
@@ -118,14 +247,12 @@ body.kimks-body {
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
-  z-index: 1000; 
+  z-index: 1000; /* Força o header a ficar por cima de tudo e ser clicável */
 }
 
-/* AJUSTE CRÍTICO: Otimiza o tamanho do logo para mobile, eliminando o zoom */
 .ks-logo {
   font-family: 'Rubik Mono One', sans-serif;
-  /* Usando clamp para que o tamanho máximo seja 3rem e mínimo seja 1.8rem */
-  font-size: clamp(1.8rem, 7vw, 3rem); 
+  font-size: clamp(2rem, 8vw, 3rem);
   color: #53ac66;
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px #005a5a;
@@ -137,25 +264,24 @@ body.kimks-body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px; /* REVERTIDO para 10px, o original */
+  gap: 10px;
 }
 
-/* AJUSTE: MANTÉM os botões grandes, mas garante a escala mínima de 44px (Acessibilidade) */
 .ks-nav a {
   color: #fff;
   text-decoration: none;
   margin: 0 5px;
   font-weight: bold;
-  padding: 12px 20px; /* REVERTIDO para o padding maior */
+  padding: 12px 20px;
   border-radius: 25px;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  min-height: 44px; /* Garante que o botão seja clicável */
+  min-height: 44px;
   display: flex;
   align-items: center;
-  font-size: 0.9rem; /* MANTIDO menor */
-  z-index: 1001; 
+  font-size: 0.9rem;
+  z-index: 1001; /* Garante que os links dentro do header sejam clicáveis */
   position: relative;
 }
 
@@ -165,7 +291,23 @@ body.kimks-body {
   transform: translateY(-2px);
 }
 
-/* AJUSTE: Otimiza o tamanho do título do Banner para mobile */
+/* BANNER KIM KS */
+.ks-banner {
+  background: rgba(0, 0, 0, 0.6);
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 8px #000;
+  border-radius: 12px;
+  margin: 20px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(5px);
+}
+
 .ks-banner-text h2 {
   font-size: clamp(1.5rem, 6vw, 2rem);
   margin-bottom: 10px;
@@ -176,51 +318,373 @@ body.kimks-body {
   font-size: clamp(0.9rem, 4vw, 1.1rem);
   color: #ccc;
 }
-/* ... RESTO DO CÓDIGO KIM KS MANTIDO ... */
 
+/* SEÇÕES KIM KS */
+.ks-section {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.ks-section h2 {
+  color: #00ffff;
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  margin-bottom: 20px;
+  border-bottom: 2px solid #00ffff;
+  padding-bottom: 10px;
+}
+
+/* CARROSSEL KIM KS (Mantido) */
+.carrossel-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px 0;
+}
+
+.carrossel-slider {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Aumentei para 0.6s para combinar com a nova velocidade do JS */
+  width: 100%;
+}
+
+.carrossel-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.carrossel-slide a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.carrossel-slide a:hover {
+  transform: scale(1.05);
+}
+
+.carrossel-slide img {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid #00ffff;
+}
+
+.carrossel-slide p {
+  margin-top: 12px;
+  color: #00ffff;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.carrossel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 255, 0.8);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.carrossel-btn:hover {
+  background: #00ffff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carrossel-prev {
+  left: 10px;
+}
+
+.carrossel-next {
+  right: 10px;
+}
+
+.carrossel-indicadores {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.carrossel-indicadores .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #888;
+  border-radius: 50%;
+  margin: 0 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  min-height: 12px;
+  min-width: 12px;
+}
+
+.carrossel-indicadores .dot.active {
+  background-color: #00ffff;
+  transform: scale(1.2);
+}
+
+.carrossel-indicadores .dot:hover {
+  background-color: #00cccc;
+}
+
+/* VÍDEOS KIM KS (Estilização para os cards do YouTube) */
+.ks-videos {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ks-video-card {
+  background: rgba(0, 0, 0, 0.6);
+  flex: 1 1 300px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.ks-video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-placeholder {
+  padding: 30px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  width: 100%;
+}
+
+/* MATÉRIAS KIM KS */
+.ks-lista-materias {
+  list-style: none;
+  padding: 0;
+}
+
+.ks-lista-materias li {
+  margin-bottom: 15px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #00ffff;
+  transition: transform 0.3s ease;
+}
+
+.ks-lista-materias li:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.materia-link {
+  color: #ff7faf;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.materia-link:hover {
+  color: #d65c9a;
+  text-shadow: 0 0 5px rgba(255, 182, 212, 0.6);
+  background: rgba(255, 127, 175, 0.1);
+}
+
+.materia-link strong {
+  color: #00ffff;
+  margin-right: 5px;
+}
+
+/* BOTÕES KIM KS */
+.ks-botao-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ks-botao {
+  display: inline-block;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  color: #000;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+  min-height: 44px;
+  min-width: 44px;
+  border: none;
+  cursor: pointer;
+}
+
+.ks-botao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
+  background: linear-gradient(45deg, #00cccc, #0066cc);
+}
+
+/* FOOTER KIM KS */
+.ks-footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 2px solid #00ffff;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 50px;
+  backdrop-filter: blur(10px);
+}
 
 /* ========================================= */
-/* 4. RESPONSIVIDADE GERAL (FOCADA EM LAYOUT) */
+/* 4. RESPONSIVIDADE GERAL (IT KS GIRL e KIM KS) */
+/* (CORRIGIDO MOBILE DO KIM KS) */
 /* ========================================= */
 
 @media (max-width: 900px) {
-    /* IT KS GIRL - NO MOBILE: COLUNA ÚNICA */
+    /* IT KS GIRL */
     .itks-main {
-        grid-template-columns: 1fr; 
-        padding: 1.5rem 1rem; 
-        gap: 1.5rem; 
+        grid-template-columns: 1fr; /* Cards da página principal ficam em coluna */
+        padding: 2rem;
     }
 
-    /* ... Outras regras da It Ks Girl (mantidas) ... */
-
-    /* Kim KS - Botões */
-    .ks-nav {
-        flex-wrap: wrap;
-        gap: 8px; /* Ajuste sutil */
+    .itks-header {
+        padding: 1rem 2rem;
+        flex-direction: column;
+        gap: 15px;
     }
 }
 
 @media (max-width: 768px) {
-  /* IT KS GIRL - Ajustes Finais de Espaçamento */
+  /* IT KS GIRL */
   .itks-main {
-      padding: 1rem 0.5rem; 
+      grid-template-columns: 1fr; 
+      padding: 1.5rem; /* Reduz o padding na página principal */
+  }
+
+  .itks-header {
+      padding: 1rem;
+      flex-direction: column;
+      gap: 10px;
+  }
+    
+  /* KIM KS GERAL (Correção de estrutura) */
+  .ks-header {
+      padding: 1rem;
   }
   
-  /* KIM KS NAVEGAÇÃO: FORÇA COLUNA NO MOBILE */
+  .ks-section {
+    margin: 10px 5px; /* Reduz a margem lateral para que o conteúdo preencha mais */
+    padding: 20px 10px; /* Reduz o padding interno */
+  }
+  
+  .ks-banner {
+    margin: 10px 5px;
+    height: 200px;
+  }
+  
+  /* KIM KS NAVEGAÇÃO */
   .ks-nav {
     flex-direction: column;
     align-items: center;
-    gap: 8px;
   }
   
   .ks-nav a {
-    width: 90%; 
-    max-width: 250px; 
+    width: 100%; /* Ocupa a largura total para ficar um link abaixo do outro */
+    max-width: 200px; /* Limita a largura para não esticar demais */
     justify-content: center;
-    margin: 0;
+    margin: 5px 0;
   }
   
-  .ks-banner-text h2 {
-      font-size: 1.4rem;
+  /* CARROSSEL */
+  .carrossel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
   }
+  
+  .carrossel-prev {
+    left: 5px;
+  }
+  
+  .carrossel-next {
+    right: 5px;
+  }
+  
+  /* VÍDEOS */
+  .ks-video-card {
+      min-height: 180px; /* Reduz um pouco a altura mínima dos cards */
+      margin: 5px 0;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  /* KIM KS */
+  .ks-logo {
+    font-size: 2rem;
+  }
+  
+  .ks-banner {
+    height: 180px;
+  }
+  
+  .carrossel-slide img {
+    height: 150px;
+  }
+  
+  .ks-video-card {
+    min-height: 140px;
+  }
+}
+
+/* O Botão Matéria (antigo) e estilos de link soltos foram adaptados */
+.botao-materia {
+  padding: 10px 25px;
+  background-color: var(--cor-destaque);
+  color: var(--cor-texto);
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(255, 204, 213, 0.5);
+  transition: 0.3s;
+}
+
+.botao-materia:hover {
+  background-color: #ffb3c1;
 }
