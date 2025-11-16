@@ -1,4 +1,4 @@
-/* ========================================= */
+ /* ========================================= */
 /* 1. RESET E CONFIGURAÇÕES GERAIS (UNIFICADO) */
 /* ========================================= */
 * {
@@ -571,85 +571,75 @@ body.kimks-body {
 }
 
 /* ========================================= */
-/* 4. RESPONSIVIDADE GERAL (IT KS GIRL e KIM KS) */
-/* AJUSTE AGRESSIVO PARA KIM KS */
+/* 4. RESPONSIVIDADE GERAL (IT KS GIRL OTIMIZADA) */
 /* ========================================= */
 
 @media (max-width: 900px) {
-    /* IT KS GIRL - Mantido o ajuste que estava funcionando */
+    /* IT KS GIRL - NO MOBILE, COLUNA ÚNICA E ESPAÇAMENTO MENOR */
     .itks-main {
-        grid-template-columns: 1fr;
-        padding: 2rem;
+        grid-template-columns: 1fr; /* Força uma coluna única para os cards */
+        padding: 1.5rem 1rem; /* Reduz o padding lateral */
+        gap: 1.5rem; 
     }
 
     .itks-header {
-        padding: 1rem 2rem;
+        padding: 1rem; /* Reduz o padding do header */
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
+    }
+    
+    .itks-banner-principal {
+        padding: 3rem 1rem; /* Reduz o padding interno do banner */
     }
 
-    /* KIM KS - Ajuste de Margem e Padding */
+    /* KIM KS - Mantido o original */
+    .ks-header {
+        padding: 20px;
+    }
     .ks-section {
-        /* Garante que a seção não tenha margens ou paddings laterais grandes */
-        margin: 10px 5px; 
-        padding: 20px 10px;
+        max-width: 900px;
+        margin: 0 auto 30px;
+        padding: 40px 20px;
+    }
+    
+    .ks-nav {
+        flex-wrap: wrap;
+    }
+    
+    .ks-nav a {
+        min-height: 44px;
     }
 }
 
 @media (max-width: 768px) {
   /* IT KS GIRL - Ajustes Finais */
   .itks-main {
-      padding: 1rem 0.5rem; /* Aperta o padding para a página inicial */
+      padding: 1rem 0.5rem; /* Padding lateral quase zero em telas muito pequenas */
   }
 
-  /* KIM KS GERAL (Ajuste de Margens e Padding) */
-  .ks-header {
-      padding: 10px 5px; /* Aperta o padding do cabeçalho */
-  }
-  
-  .ks-banner {
-    margin: 5px 5px; /* Margem lateral mínima */
-    height: 180px;
-  }
-  
-  /* KIM KS NAVEGAÇÃO */
+  /* KIM KS NAVEGAÇÃO e Carrossel */
   .ks-nav {
     flex-direction: column;
     align-items: center;
   }
   
   .ks-nav a {
-    width: 90%; /* Ocupa quase a largura total */
+    width: 90%; 
     max-width: 250px; 
     justify-content: center;
     margin: 5px 0;
   }
   
-  /* CARROSSEL - Imagem menor */
-  .carrossel-wrapper {
-      padding: 10px 0;
-  }
   .carrossel-slide img {
-      max-width: 200px; /* Reduz o tamanho da imagem */
-      height: 140px;
-  }
-  .carrossel-btn {
-      width: 30px;
-      height: 30px;
+      max-width: 250px;
+      height: 160px;
   }
   
-  /* VÍDEOS - Força os vídeos a serem 100% da largura em telas pequenas */
-  .ks-videos {
-      flex-direction: column;
-      gap: 10px;
-  }
   .ks-video-card {
       flex: 1 1 100%; 
       min-height: 180px;
       max-width: 100%;
-      margin: 0;
   }
-  
 }
 
 @media (max-width: 480px) {
@@ -657,18 +647,21 @@ body.kimks-body {
   .itks-title {
     font-size: 1.8rem;
   }
+  .itks-slogan {
+    font-size: 1rem;
+  }
 
   /* KIM KS */
   .ks-logo {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
   
   .ks-banner {
-    height: 140px;
+    height: 160px;
   }
   
   .carrossel-slide img {
-    height: 120px;
+    height: 130px;
   }
   
   .ks-video-card {
