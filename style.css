@@ -32,14 +32,14 @@ a {
 }
 
 /* Corpo da página principal (itksgirl) */
-body {
-    margin: 0;
-    padding: 0;
-    color: var(--cor-texto);
-    font-family: var(--fonte-corpo);
-    background-color: var(--cor-primaria);
-    overflow-x: hidden;
+body.itksgirl-body { /* Localize este seletor */
+    /* Adicione estas três linhas para o Sticky Footer */
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+    
+    background-image: none !important;
+    background-color: var(--cor-primaria);
 }
 
 /* Remove completamente o vídeo/imagem de fundo do body da página principal */
@@ -106,6 +106,9 @@ body.itksgirl-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
+    
+    /* Adicione esta linha para preencher o espaço restante */
+    flex-grow: 1; 
 }
 
 .itks-banner-principal {
