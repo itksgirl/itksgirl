@@ -139,9 +139,9 @@ body.itksgirl-body {
     margin-bottom: 3rem; 
 }
 
-/* NOVO BLOCO: MANIFESTO (ESTILO DIÁRIO) */
+/* NOVO BLOCO: MANIFESTO (AGORA COM FONTE MONTSERRAT NORMAL) */
 .itks-manifesto {
-    /* Quadro Branco Perolado com leve sombra */
+    /* Quadro Branco Perolado com leve sombra MANTIDO */
     background: #ffffff; 
     padding: 2.5rem;
     max-width: 650px; 
@@ -153,25 +153,26 @@ body.itksgirl-body {
 }
 
 .itks-manifesto p {
-    /* Estilo Diário: Fonte cursiva, TAMANHO MAIOR E MAIS LEGÍVEL (Caveat) */
-    font-family: 'Caveat', cursive; /* FONTE ATUALIZADA */
-    font-size: 1.3rem; /* TAMANHO MAIOR */
-    line-height: 1.6; /* ESPAÇAMENTO AJUSTADO */
-    color: #444; 
+    /* Fonte Padrão Montserrat, Legível e Elegante */
+    font-family: var(--fonte-corpo); 
+    font-size: 1rem; /* Trazendo para o tamanho padrão de leitura */
+    line-height: 1.7; 
+    color: var(--cor-texto); 
     margin-bottom: 1.5rem;
+    font-weight: 400; /* Peso normal para leitura */
 }
 
 .itks-manifesto p:first-child {
-    font-weight: 700; 
-    font-size: 1.4rem; /* TAMANHO MAIOR */
+    font-weight: 600; /* Seminegrito para o título */
+    font-size: 1.1rem; 
     text-align: center;
     margin-bottom: 2rem;
     color: var(--cor-destaque);
 }
 
 .itks-manifesto .fusao-final {
-    font-weight: 700;
-    font-size: 1.35rem; /* TAMANHO MAIOR */
+    font-weight: 600; /* Seminegrito */
+    font-size: 1.05rem; 
     margin-top: 2rem;
     border-top: 1px dashed var(--cor-destaque); 
     padding-top: 1.5rem;
@@ -641,16 +642,16 @@ body.kimks-body {
     }
     
     .itks-manifesto p {
-        font-size: 1.1rem; /* Ajuste para mobile, mantendo a legibilidade */
-        line-height: 1.6;
+        font-size: 0.95rem; /* Ajuste para mobile */
+        line-height: 1.5;
     }
     
     .itks-manifesto p:first-child {
-        font-size: 1.2rem;
+        font-size: 1.05rem;
     }
 
     .itks-manifesto .fusao-final {
-        font-size: 1.15rem;
+        font-size: 1rem;
     }
     
     /* KIM KS - Mantido o original */
