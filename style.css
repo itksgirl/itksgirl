@@ -153,17 +153,17 @@ body.itksgirl-body {
 }
 
 .itks-manifesto p {
-    /* Estilo Diário: Fonte cursiva, tamanho pequeno, cor escura sutil */
-    font-family: 'Dancing Script', cursive; 
-    font-size: 1.1rem; 
-    line-height: 1.8; 
+    /* Estilo Diário: Fonte cursiva, TAMANHO MAIOR E MAIS LEGÍVEL (Caveat) */
+    font-family: 'Caveat', cursive; /* FONTE ATUALIZADA */
+    font-size: 1.3rem; /* TAMANHO MAIOR */
+    line-height: 1.6; /* ESPAÇAMENTO AJUSTADO */
     color: #444; 
     margin-bottom: 1.5rem;
 }
 
 .itks-manifesto p:first-child {
     font-weight: 700; 
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* TAMANHO MAIOR */
     text-align: center;
     margin-bottom: 2rem;
     color: var(--cor-destaque);
@@ -171,7 +171,7 @@ body.itksgirl-body {
 
 .itks-manifesto .fusao-final {
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.35rem; /* TAMANHO MAIOR */
     margin-top: 2rem;
     border-top: 1px dashed var(--cor-destaque); 
     padding-top: 1.5rem;
@@ -637,11 +637,20 @@ body.kimks-body {
     .itks-manifesto {
         padding: 1.5rem;
         margin-top: 1rem;
+        max-width: 100%;
     }
     
     .itks-manifesto p {
-        font-size: 1rem;
+        font-size: 1.1rem; /* Ajuste para mobile, mantendo a legibilidade */
         line-height: 1.6;
+    }
+    
+    .itks-manifesto p:first-child {
+        font-size: 1.2rem;
+    }
+
+    .itks-manifesto .fusao-final {
+        font-size: 1.15rem;
     }
     
     /* KIM KS - Mantido o original */
