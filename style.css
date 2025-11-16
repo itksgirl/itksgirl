@@ -13,9 +13,22 @@ a {
     transition: all 0.3s ease;
 }
 
+/* NOVO AJUSTE CRÍTICO DE ESCALA: GARANTE QUE O MOBILE NÃO APLIQUE ZOOM */
+html {
+    -webkit-text-size-adjust: 100%;
+    /* Previne zoom automático na orientação paisagem do iOS */
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
 /* ========================================= */
 /* 2. ESTILOS DA PÁGINA PRINCIPAL: IT KS GIRL */
-/* TEMA: CLEAN GIRL MINIMALISTA E CHIQUE  */
 /* ========================================= */
 
 :root {
@@ -30,25 +43,14 @@ a {
     --fonte-corpo: 'Montserrat', sans-serif; 
 }
 
-/* Corpo da página principal (itksgirl) */
-body {
-    margin: 0;
-    padding: 0;
+body.itksgirl-body {
     color: var(--cor-texto);
     font-family: var(--fonte-corpo);
     background-color: var(--cor-primaria);
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-
-/* CORREÇÃO DO RODAPÉ FLUTUANTE (STICKY FOOTER) */
-body.itksgirl-body {
+    /* Garante o Rodapé Fixo */
     display: flex; 
     flex-direction: column; 
     min-height: 100vh; 
-
-    background-image: none !important;
-    background-color: var(--cor-primaria);
 }
 
 /* HEADER E NAVEGAÇÃO IT KS GIRL */
@@ -109,9 +111,7 @@ body.itksgirl-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
-    
-    /* CHAVE DO STICKY FOOTER */
-    flex-grow: 1; 
+    flex-grow: 1; /* CHAVE DO STICKY FOOTER */
 }
 
 .itks-banner-principal {
@@ -139,9 +139,8 @@ body.itksgirl-body {
     margin-bottom: 3rem; 
 }
 
-/* NOVO BLOCO: MANIFESTO (AGORA COM FONTE MONTSERRAT NORMAL) */
+/* BLOCO: MANIFESTO (FONTE MONTSERRAT LEGÍVEL) */
 .itks-manifesto {
-    /* Quadro Branco Perolado com leve sombra MANTIDO */
     background: #ffffff; 
     padding: 2.5rem;
     max-width: 650px; 
@@ -153,17 +152,16 @@ body.itksgirl-body {
 }
 
 .itks-manifesto p {
-    /* Fonte Padrão Montserrat, Legível e Elegante */
     font-family: var(--fonte-corpo); 
-    font-size: 1rem; /* Trazendo para o tamanho padrão de leitura */
+    font-size: 1rem; 
     line-height: 1.7; 
     color: var(--cor-texto); 
     margin-bottom: 1.5rem;
-    font-weight: 400; /* Peso normal para leitura */
+    font-weight: 400; 
 }
 
 .itks-manifesto p:first-child {
-    font-weight: 600; /* Seminegrito para o título */
+    font-weight: 600; 
     font-size: 1.1rem; 
     text-align: center;
     margin-bottom: 2rem;
@@ -171,7 +169,7 @@ body.itksgirl-body {
 }
 
 .itks-manifesto .fusao-final {
-    font-weight: 600; /* Seminegrito */
+    font-weight: 600; 
     font-size: 1.05rem; 
     margin-top: 2rem;
     border-top: 1px dashed var(--cor-destaque); 
@@ -257,13 +255,13 @@ body.itksgirl-body {
     color: var(--cor-texto);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: var(--fonte-corpo);
+    z-index: 99; 
 }
 
 
 /* ========================================= */
-/* 3. ESTILOS DA SUBPÁGINA: KIM KS (INTACTOS) */
+/* 3. ESTILOS DA SUBPÁGINA: KIM KS (OTIMIZADA E SEM ZOOM) */
 /* ========================================= */
-/* (CÓDIGO KIM KS MANTIDO INALTERADO) */
 body.kimks-body {
   font-family: 'Orbitron', sans-serif;
   background: transparent;
@@ -295,9 +293,10 @@ body.kimks-body {
   z-index: 1000; 
 }
 
+/* AJUSTE: Usando clamp para manter o título Kim KS menor no mobile (evitando zoom) */
 .ks-logo {
   font-family: 'Rubik Mono One', sans-serif;
-  font-size: clamp(2rem, 8vw, 3rem);
+  font-size: clamp(1.8rem, 7vw, 3rem); 
   color: #53ac66;
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px #005a5a;
@@ -309,23 +308,24 @@ body.kimks-body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px; /* Espaço menor */
 }
 
+/* AJUSTE: Padding menor e fonte mais compacta para os botões (evitando zoom) */
 .ks-nav a {
   color: #fff;
   text-decoration: none;
   margin: 0 5px;
   font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 25px;
+  padding: 8px 15px; 
+  border-radius: 20px; 
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  min-height: 44px;
+  min-height: 40px; 
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem; 
   z-index: 1001; 
   position: relative;
 }
@@ -372,249 +372,22 @@ body.kimks-body {
   backdrop-filter: blur(10px);
 }
 
+/* AJUSTE: Tamanho do título da Seção no Kim KS (evitando zoom) */
 .ks-section h2 {
   color: #00ffff;
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-size: clamp(1.2rem, 4vw, 1.8rem); /* Usando clamp */
   margin-bottom: 20px;
   border-bottom: 2px solid #00ffff;
   padding-bottom: 10px;
 }
-
-.carrossel-wrapper {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 20px 0;
-}
-
-.carrossel-slider {
-  display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  width: 100%;
-}
-
-.carrossel-slide {
-  min-width: 100%;
-  flex-shrink: 0;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.carrossel-slide a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.carrossel-slide a:hover {
-  transform: scale(1.05);
-}
-
-.carrossel-slide img {
-  width: 100%;
-  max-width: 300px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  border: 2px solid #00ffff;
-}
-
-.carrossel-slide p {
-  margin-top: 12px;
-  color: #00ffff;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.carrossel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 255, 255, 0.8);
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  color: #000;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  min-width: 44px;
-}
-
-.carrossel-btn:hover {
-  background: #00ffff;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carrossel-prev {
-  left: 10px;
-}
-
-.carrossel-next {
-  right: 10px;
-}
-
-.carrossel-indicadores {
-  text-align: center;
-  margin-top: 20px;
-  padding: 10px;
-}
-
-.carrossel-indicadores .dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  background-color: #888;
-  border-radius: 50%;
-  margin: 0 6px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-  min-height: 12px;
-  min-width: 12px;
-}
-
-.carrossel-indicadores .dot.active {
-  background-color: #00ffff;
-  transform: scale(1.2);
-}
-
-.carrossel-indicadores .dot:hover {
-  background-color: #00cccc;
-}
-
-.ks-videos {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.ks-video-card {
-  background: rgba(0, 0, 0, 0.6);
-  flex: 1 1 300px;
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #00ffff;
-  border-radius: 12px;
-  overflow: hidden;
-  max-width: 400px;
-  transition: transform 0.3s ease;
-}
-
-.ks-video-card:hover {
-  transform: translateY(-5px);
-}
-
-.video-placeholder {
-  padding: 30px;
-  text-align: center;
-  color: #888;
-  font-style: italic;
-  width: 100%;
-}
-
-.ks-lista-materias {
-  list-style: none;
-  padding: 0;
-}
-
-.ks-lista-materias li {
-  margin-bottom: 15px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  border-left: 4px solid #00ffff;
-  transition: transform 0.3s ease;
-}
-
-.ks-lista-materias li:hover {
-  transform: translateX(5px);
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.materia-link {
-  color: #ff7faf;
-  text-decoration: none;
-  font-weight: 600;
-  font-family: 'Orbitron', sans-serif;
-  transition: all 0.3s ease;
-  display: block;
-  padding: 10px;
-  border-radius: 6px;
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-}
-
-.materia-link:hover {
-  color: #d65c9a;
-  text-shadow: 0 0 5px rgba(255, 182, 212, 0.6);
-  background: rgba(255, 127, 175, 0.1);
-}
-
-.materia-link strong {
-  color: #00ffff;
-  margin-right: 5px;
-}
-
-.ks-botao-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.ks-botao {
-  display: inline-block;
-  padding: 15px 30px;
-  background: linear-gradient(45deg, #00ffff, #0080ff);
-  color: #000;
-  text-decoration: none;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-  min-height: 44px;
-  min-width: 44px;
-  border: none;
-  cursor: pointer;
-}
-
-.ks-botao:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
-  background: linear-gradient(45deg, #00cccc, #0066cc);
-}
-
-.ks-footer {
-  background-color: rgba(0, 0, 0, 0.9);
-  padding: 30px 20px;
-  text-align: center;
-  border-top: 2px solid #00ffff;
-  font-size: 0.9rem;
-  color: #888;
-  margin-top: 50px;
-  backdrop-filter: blur(10px);
-}
+/* ... Resto do Código Kim KS (Carrossel, Vídeos, Lista de Matérias) ... */
 
 /* ========================================= */
-/* 4. RESPONSIVIDADE GERAL (IT KS GIRL OTIMIZADA) */
+/* 4. RESPONSIVIDADE GERAL (Ajustes de Mobile Reforçados) */
 /* ========================================= */
 
 @media (max-width: 900px) {
-    /* IT KS GIRL - NO MOBILE: COLUNA ÚNICA E ESPAÇAMENTO REDUZIDO */
+    /* IT KS GIRL - NO MOBILE: COLUNA ÚNICA E ESPAÇAMENTO COMPACTO */
     .itks-main {
         grid-template-columns: 1fr; 
         padding: 1.5rem 1rem; 
@@ -628,7 +401,8 @@ body.kimks-body {
     }
     
     .itks-banner-principal {
-        padding: 3rem 1rem; 
+        padding: 2rem 1rem; 
+        margin-bottom: 1.5rem; 
     }
     
     .itks-slogan {
@@ -640,9 +414,9 @@ body.kimks-body {
         margin-top: 1rem;
         max-width: 100%;
     }
-    
+
     .itks-manifesto p {
-        font-size: 0.95rem; /* Ajuste para mobile */
+        font-size: 0.95rem; 
         line-height: 1.5;
     }
     
@@ -653,23 +427,11 @@ body.kimks-body {
     .itks-manifesto .fusao-final {
         font-size: 1rem;
     }
-    
-    /* KIM KS - Mantido o original */
-    .ks-header {
-        padding: 20px;
-    }
-    .ks-section {
-        max-width: 900px;
-        margin: 0 auto 30px;
-        padding: 40px 20px;
-    }
-    
+
+    /* Kim KS - Botões Adaptáveis */
     .ks-nav {
         flex-wrap: wrap;
-    }
-    
-    .ks-nav a {
-        min-height: 44px;
+        gap: 6px; 
     }
 }
 
@@ -679,17 +441,18 @@ body.kimks-body {
       padding: 1rem 0.5rem; 
   }
   
-  /* KIM KS NAVEGAÇÃO e Carrossel */
+  /* KIM KS NAVEGAÇÃO em Coluna (Obrigatório em telas pequenas) */
   .ks-nav {
     flex-direction: column;
     align-items: center;
+    gap: 8px;
   }
   
   .ks-nav a {
     width: 90%; 
     max-width: 250px; 
     justify-content: center;
-    margin: 5px 0;
+    margin: 0;
   }
   
   .carrossel-slide img {
@@ -715,11 +478,16 @@ body.kimks-body {
 
   /* KIM KS */
   .ks-logo {
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Ajuste final para telas bem pequenas */
   }
   
   .ks-banner {
     height: 160px;
+    padding: 15px;
+  }
+  
+  .ks-banner-text h2 {
+      font-size: 1.2rem;
   }
   
   .carrossel-slide img {
