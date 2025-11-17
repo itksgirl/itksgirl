@@ -1,4 +1,4 @@
- /* ========================================= */
+/* ========================================= */
 /* 1. RESET E CONFIGURAÇÕES GERAIS (UNIFICADO) */
 /* ========================================= */
 * {
@@ -9,29 +9,26 @@
 }
 
 a {
-    /* Base limpa para todos os links, será sobrescrito em cada página */
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 /* ========================================= */
 /* 2. ESTILOS DA PÁGINA PRINCIPAL: IT KS GIRL */
-/* TEMA: CLEAN GIRL MINIMALISTA E CHIQUE  */
 /* ========================================= */
 
 :root {
     /* Paleta Clean Girl */
-    --cor-primaria: #f9f9f9; /* Fundo: Branco Pérola/Quase Branco */
-    --cor-secundaria: #ffffff; /* Elementos/Card: Branco Puro */
-    --cor-destaque: #ffccd5; /* Rosa Claríssimo Chique (Exigente) */
-    --cor-texto: #333333; /* Texto Principal */
-    --cor-texto-claro: #888888; /* Texto Secundário */
-    --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra Chique e Suave */
+    --cor-primaria: #f9f9f9; 
+    --cor-secundaria: #ffffff; 
+    --cor-destaque: #ffccd5; 
+    --cor-texto: #333333; 
+    --cor-texto-claro: #888888; 
+    --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.08); 
     --fonte-titulo: 'Playfair Display', serif;
-    --fonte-corpo: 'Montserrat', sans-serif; /* Usando Montserrat para clean */
+    --fonte-corpo: 'Montserrat', sans-serif; 
 }
 
-/* Corpo da página principal (itksgirl) */
 body {
     margin: 0;
     padding: 0;
@@ -42,13 +39,11 @@ body {
     min-height: 100vh;
 }
 
-/* Remove completamente o vídeo/imagem de fundo do body da página principal */
 body.itksgirl-body {
     background-image: none !important;
     background-color: var(--cor-primaria);
 }
 
-/* HEADER E NAVEGAÇÃO IT KS GIRL */
 .itks-header {
     display: flex;
     justify-content: space-between;
@@ -81,9 +76,8 @@ body.itksgirl-body {
     letter-spacing: 1px;
 }
 
-/* Botão Kim KS (Mantido o contraste para a subpágina) */
 .btn-kimks {
-    background: #ff7faf; /* Rosa mais chique para contraste */
+    background: #ff7faf; 
     color: white;
     padding: 0.7rem 1.2rem;
     border-radius: 25px;
@@ -98,7 +92,6 @@ body.itksgirl-body {
     transform: translateY(-2px);
 }
 
-/* MAIN E CARDS CLEAN GIRL */
 .itks-main {
     padding: 4rem 4rem;
     max-width: 1200px;
@@ -154,7 +147,6 @@ body.itksgirl-body {
     margin-bottom: 15px;
 }
 
-/* ESTILOS DOS ARTIGOS (MANTIDOS e adaptados ao novo tema) */
 .itks-card ul {
     list-style: none;
     padding: 0;
@@ -170,7 +162,7 @@ body.itksgirl-body {
 }
 
 .itks-card ul li a {
-    color: var(--cor-texto); /* Texto escuro para ser chique */
+    color: var(--cor-texto); 
     text-decoration: none;
     font-weight: 400;
     display: block;
@@ -187,7 +179,6 @@ body.itksgirl-body {
     text-decoration: underline;
 }
 
-/* Rodapé e Versículo */
 .itks-footer {
     text-align: center;
     padding: 1.5rem;
@@ -213,75 +204,100 @@ body.itksgirl-body {
 
 
 /* ========================================= */
-/* 3. ESTILOS DA SUBPÁGINA: KIM KS (PRESERVADOS) */
-/* CORREÇÃO DE MENU MOBILE INCLUÍDA       */
+/* 3. ESTILOS DA SUBPÁGINA: KIM KS (SOLUÇÃO ESTÁVEL E COMPACTA) */
 /* ========================================= */
+
+/* Adicionado: Garante que o HTML ocupa 100% da altura da viewport */
+html {
+    height: 100%;
+}
 
 body.kimks-body {
   font-family: 'Orbitron', sans-serif;
   background: transparent;
   color: #f2f2f2;
   overflow-x: hidden;
-  overflow-y: auto;
+  /* CRÍTICO: body precisa ter altura mínima para o vídeo de fundo */
+  min-height: 100vh; 
+  /* Removido: overflow-y: auto para evitar barras de rolagem duplas */
+  overflow-y: overlay; /* Melhor experiência de rolagem */
   touch-action: manipulation;
+  position: relative; /* Adicionado: Para que o vídeo de fundo se posicione corretamente */
 }
 
-/* VÍDEO DE FUNDO */
+/* VÍDEO DE FUNDO (USANDO ABSOLUTE) */
 .video-fundo {
-  position: fixed;
+  position: fixed; /* Mudado de absolute para fixed */
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%; 
   object-fit: cover;
   filter: brightness(0.4) saturate(1.2);
   z-index: -1;
+  /* Certifica-se de que não há espaço extra abaixo do vídeo */
+  margin: 0; 
+  padding: 0;
 }
 
-/* HEADER KIM KS (CORRIGIDO O Z-INDEX PARA CLICAR NO MOBILE) */
+/* HEADER KIM KS (FIXO E COMPACTO) */
 .ks-header {
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  text-align: center;
+  background-color: rgba(0, 0, 0, 0.98); 
+  padding: 10px 20px; /* Reduzido no PC */
   border-bottom: 3px solid #5e9e7e;
   backdrop-filter: blur(10px);
-  position: sticky;
+  
+  /* LAYOUT FLEXBOX: Logo e Navegação na mesma linha no PC */
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  flex-wrap: wrap; 
+  
+  position: fixed; 
   top: 0;
-  z-index: 1000; /* Força o header a ficar por cima de tudo e ser clicável */
+  left: 0;
+  width: 100%; 
+  z-index: 9999; 
 }
 
+
+/* LOGO KIM KS */
 .ks-logo {
   font-family: 'Rubik Mono One', sans-serif;
-  font-size: clamp(2rem, 8vw, 3rem);
+  font-size: clamp(1.8rem, 3vw, 2.2rem); 
   color: #53ac66;
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px #005a5a;
-  margin-bottom: 15px;
+  margin: 0; 
+  flex-basis: auto; /* Ocupa o mínimo de espaço necessário */
 }
 
+/* NAVEGAÇÃO */
 .ks-nav {
-  margin-top: 15px;
+  /* Ocupa o espaço central no PC */
+  flex-grow: 1; 
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Centraliza os links */
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 10px; 
+  margin: 0 20px; /* Margem lateral para não encostar nas bordas */
+  padding: 5px 0;
 }
 
 .ks-nav a {
   color: #fff;
   text-decoration: none;
-  margin: 0 5px;
   font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 25px;
+  padding: 6px 15px; 
+  border-radius: 20px; 
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  min-height: 44px;
+  min-height: 35px; 
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
-  z-index: 1001; /* Garante que os links dentro do header sejam clicáveis */
+  font-size: 0.8rem; 
+  z-index: 10000; 
   position: relative;
 }
 
@@ -291,8 +307,21 @@ body.kimks-body {
   transform: translateY(-2px);
 }
 
-/* BANNER KIM KS */
+/* CONTAINER #main-content */
+#main-content {
+    /* Ajustado para o header fixo reduzido no PC (aproximadamente 70-80px de altura) */
+    margin-top: 80px; 
+    
+    position: relative; 
+    padding-top: 0; 
+    height: auto;
+    overflow-y: visible;
+    z-index: 10; 
+}
+
+/* ... (Mantenha o restante das suas regras ks-banner, ks-section, carrossel, etc. INALTERADAS) ... */
 .ks-banner {
+  margin-top: 0; 
   background: rgba(0, 0, 0, 0.6);
   height: 300px;
   display: flex;
@@ -303,8 +332,9 @@ body.kimks-body {
   color: #fff;
   text-shadow: 2px 2px 8px #000;
   border-radius: 12px;
-  margin: 20px;
-  margin-bottom: 30px;
+  margin-left: 20px; 
+  margin-right: 20px; 
+  margin-bottom: 30px; 
   backdrop-filter: blur(5px);
 }
 
@@ -319,7 +349,6 @@ body.kimks-body {
   color: #ccc;
 }
 
-/* SEÇÕES KIM KS */
 .ks-section {
   padding: 40px 20px;
   max-width: 900px;
@@ -337,7 +366,6 @@ body.kimks-body {
   padding-bottom: 10px;
 }
 
-/* CARROSSEL KIM KS (Mantido) */
 .carrossel-wrapper {
   overflow: hidden;
   position: relative;
@@ -349,7 +377,7 @@ body.kimks-body {
 
 .carrossel-slider {
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Aumentei para 0.6s para combinar com a nova velocidade do JS */
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   width: 100%;
 }
 
@@ -451,7 +479,6 @@ body.kimks-body {
   background-color: #00cccc;
 }
 
-/* VÍDEOS KIM KS (Estilização para os cards do YouTube) */
 .ks-videos {
   display: flex;
   gap: 20px;
@@ -485,7 +512,6 @@ body.kimks-body {
   width: 100%;
 }
 
-/* MATÉRIAS KIM KS */
 .ks-lista-materias {
   list-style: none;
   padding: 0;
@@ -530,7 +556,6 @@ body.kimks-body {
   margin-right: 5px;
 }
 
-/* BOTÕES KIM KS */
 .ks-botao-container {
   text-align: center;
   margin-top: 20px;
@@ -559,7 +584,6 @@ body.kimks-body {
   background: linear-gradient(45deg, #00cccc, #0066cc);
 }
 
-/* FOOTER KIM KS */
 .ks-footer {
   background-color: rgba(0, 0, 0, 0.9);
   padding: 30px 20px;
@@ -572,14 +596,13 @@ body.kimks-body {
 }
 
 /* ========================================= */
-/* 4. RESPONSIVIDADE GERAL (IT KS GIRL e KIM KS) */
-/* (CORRIGIDO MOBILE DO KIM KS) */
+/* 4. RESPONSIVIDADE GERAL (CABEÇALHO COMPACTO) */
 /* ========================================= */
 
 @media (max-width: 900px) {
     /* IT KS GIRL */
     .itks-main {
-        grid-template-columns: 1fr; /* Cards da página principal ficam em coluna */
+        grid-template-columns: 1fr; 
         padding: 2rem;
     }
 
@@ -594,7 +617,7 @@ body.kimks-body {
   /* IT KS GIRL */
   .itks-main {
       grid-template-columns: 1fr; 
-      padding: 1.5rem; /* Reduz o padding na página principal */
+      padding: 1.5rem; 
   }
 
   .itks-header {
@@ -603,35 +626,57 @@ body.kimks-body {
       gap: 10px;
   }
     
-  /* KIM KS GERAL (Correção de estrutura) */
+  /* === REGRAS KIM KS PARA CELULAR (COMPACTAÇÃO MÁXIMA) === */
+
   .ks-header {
-      padding: 1rem;
+      padding: 8px 5px; 
+      /* Força o layout em coluna no celular: LOGO em cima, NAV em baixo */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
   }
   
-  .ks-section {
-    margin: 10px 5px; /* Reduz a margem lateral para que o conteúdo preencha mais */
-    padding: 20px 10px; /* Reduz o padding interno */
+  .ks-logo {
+    font-size: 1.5rem;
+    margin-bottom: 5px; /* Espaço entre logo e nav */
+    text-align: center; 
   }
   
-  .ks-banner {
-    margin: 10px 5px;
-    height: 200px;
-  }
-  
-  /* KIM KS NAVEGAÇÃO */
+  /* NAVEGAÇÃO: Em linha, abaixo do logo, para economizar espaço */
   .ks-nav {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 4px; 
+    margin: 5px 0 0 0; /* Ajusta a margem */
+    flex-grow: 0; /* Não tenta crescer */
   }
   
   .ks-nav a {
-    width: 100%; /* Ocupa a largura total para ficar um link abaixo do outro */
-    max-width: 200px; /* Limita a largura para não esticar demais */
-    justify-content: center;
-    margin: 5px 0;
+    width: auto; 
+    max-width: none; 
+    padding: 6px 10px; 
+    font-size: 0.75rem; 
+    min-height: 35px; 
+  }
+
+  /* Ajusta o espaçamento superior para o cabeçalho fixo menor */
+  #main-content {
+    margin-top: 100px; 
   }
   
-  /* CARROSSEL */
+  /* OUTROS ELEMENTOS KIM KS NO MOBILE */
+  .ks-banner {
+    margin-left: 5px; 
+    margin-right: 5px; 
+    height: 200px;
+  }
+  
+  .ks-section {
+    margin: 10px 5px; 
+    padding: 20px 10px; 
+  }
+
   .carrossel-btn {
     width: 40px;
     height: 40px;
@@ -646,22 +691,20 @@ body.kimks-body {
     right: 5px;
   }
   
-  /* VÍDEOS */
   .ks-video-card {
-      min-height: 180px; /* Reduz um pouco a altura mínima dos cards */
+      min-height: 180px; 
       margin: 5px 0;
   }
-  
 }
 
 @media (max-width: 480px) {
   /* KIM KS */
   .ks-logo {
-    font-size: 2rem;
+    font-size: 1.3rem; 
   }
   
   .ks-banner {
-    height: 180px;
+    height: 150px; 
   }
   
   .carrossel-slide img {
@@ -671,9 +714,13 @@ body.kimks-body {
   .ks-video-card {
     min-height: 140px;
   }
+  
+  .ks-nav a {
+    padding: 6px 8px; 
+    font-size: 0.7rem;
+  }
 }
 
-/* O Botão Matéria (antigo) e estilos de link soltos foram adaptados */
 .botao-materia {
   padding: 10px 25px;
   background-color: var(--cor-destaque);
