@@ -223,14 +223,14 @@ body.kimks-body {
   position: relative; 
 }
 
-/* VÍDEO DE FUNDO (SOLUÇÃO FINAL) */
+/* VÍDEO DE FUNDO (SOLUÇÃO ESTÁVEL FINAL) */
 .video-fundo {
-  /* CRÍTICO: Usaremos 'absolute' para que ele role com o conteúdo (e evite o zoom indesejado) */
-  position: absolute; 
+  /* Retornamos para 'fixed' que é mais estável para preencher a tela */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* Agora ele cobre 100% da altura do body */
+  height: 100%; 
   object-fit: cover;
   filter: brightness(0.4) saturate(1.2);
   z-index: -1;
@@ -267,7 +267,6 @@ body.kimks-body {
   text-shadow: 2px 2px 8px #005a5a;
   margin: 0; 
   flex-basis: auto; 
-  /* Adicionado para garantir que o logo fique no canto direito quando a nav centraliza */
   order: 2; 
 }
 
@@ -281,7 +280,6 @@ body.kimks-body {
   gap: 10px; 
   margin: 0 20px; 
   padding: 5px 0;
-  /* Adicionado para garantir que a nav centralize no PC */
   order: 1; 
 }
 
@@ -365,7 +363,223 @@ body.kimks-body {
   padding-bottom: 10px;
 }
 
-/* ... (O restante do código de carrossel, vídeos, etc. permanece igual) ... */
+.carrossel-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px 0;
+}
+
+.carrossel-slider {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 100%;
+}
+
+.carrossel-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.carrossel-slide a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.carrossel-slide a:hover {
+  transform: scale(1.05);
+}
+
+.carrossel-slide img {
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid #00ffff;
+}
+
+.carrossel-slide p {
+  margin-top: 12px;
+  color: #00ffff;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.carrossel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 255, 0.8);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.carrossel-btn:hover {
+  background: #00ffff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carrossel-prev {
+  left: 10px;
+}
+
+.carrossel-next {
+  right: 10px;
+}
+
+.carrossel-indicadores {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.carrossel-indicadores .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-color: #888;
+  border-radius: 50%;
+  margin: 0 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  min-height: 12px;
+  min-width: 12px;
+}
+
+.carrossel-indicadores .dot.active {
+  background-color: #00ffff;
+  transform: scale(1.2);
+}
+
+.carrossel-indicadores .dot:hover {
+  background-color: #00cccc;
+}
+
+.ks-videos {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ks-video-card {
+  background: rgba(0, 0, 0, 0.6);
+  flex: 1 1 300px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+.ks-video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-placeholder {
+  padding: 30px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  width: 100%;
+}
+
+.ks-lista-materias {
+  list-style: none;
+  padding: 0;
+}
+
+.ks-lista-materias li {
+  margin-bottom: 15px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #00ffff;
+  transition: transform 0.3s ease;
+}
+
+.ks-lista-materias li:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.materia-link {
+  color: #ff7faf;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.materia-link:hover {
+  color: #d65c9a;
+  text-shadow: 0 0 5px rgba(255, 182, 212, 0.6);
+  background: rgba(255, 127, 175, 0.1);
+}
+
+.materia-link strong {
+  color: #00ffff;
+  margin-right: 5px;
+}
+
+.ks-botao-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ks-botao {
+  display: inline-block;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #00ffff, #0080ff);
+  color: #000;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+  min-height: 44px;
+  min-width: 44px;
+  border: none;
+  cursor: pointer;
+}
+
+.ks-botao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
+  background: linear-gradient(45deg, #00cccc, #0066cc);
+}
 
 .ks-footer {
   background-color: rgba(0, 0, 0, 0.9);
@@ -384,43 +598,61 @@ body.kimks-body {
 
 @media (max-width: 900px) {
     /* IT KS GIRL */
-    /* ... */
+    .itks-main {
+        grid-template-columns: 1fr; 
+        padding: 2rem;
+    }
+
+    .itks-header {
+        padding: 1rem 2rem;
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
 @media (max-width: 768px) {
   /* IT KS GIRL */
-  /* ... */
+  .itks-main {
+      grid-template-columns: 1fr; 
+      padding: 1.5rem; 
+  }
+
+  .itks-header {
+      padding: 1rem;
+      flex-direction: column;
+      gap: 10px;
+  }
     
   /* === REGRAS KIM KS PARA CELULAR (COMPACTAÇÃO MÁXIMA E CORREÇÃO DE ZOOM) === */
 
   .ks-header {
-      /* Revertendo para ROW e garantindo a LOGO no canto */
+      /* Garante logo no canto e nav abaixo */
       flex-direction: row; 
       justify-content: space-between;
       align-items: center;
       padding: 10px 10px;
-      flex-wrap: wrap; /* Permite que a navegação desça */
+      flex-wrap: wrap; 
   }
   
   /* CRÍTICO: NAV OCUPA UMA LINHA INTEIRA ABAIXO NO MOBILE */
   .ks-nav {
-    flex-basis: 100%; /* Ocupa 100% da largura, empurrando para a linha de baixo */
+    flex-basis: 100%; 
     justify-content: center;
     gap: 4px; 
     margin: 5px 0 0 0; 
-    order: 3; /* Garante que fique abaixo do logo */
+    order: 3; 
   }
   
   .ks-logo {
-    font-size: 1.3rem; /* Diminui a fonte do logo */
+    font-size: 1.3rem; 
     margin: 0; 
     text-align: right; 
-    order: 2; /* Garante que fique no topo, à direita */
+    order: 2; 
   }
   
   .ks-nav a {
-    padding: 5px 8px; /* Reduz padding dos botões */
-    font-size: 0.7rem; /* Reduz tamanho das letras dos botões */
+    padding: 5px 8px; 
+    font-size: 0.7rem; 
     min-height: 30px; 
   }
 
@@ -429,20 +661,20 @@ body.kimks-body {
     margin-top: 100px; 
   }
   
-  /* AJUSTE PRINCIPAL DO ZOOM NO BANNER E TEXTO */
+  /* AJUSTE FINAL DO ZOOM NO BANNER E TEXTO */
   .ks-banner {
-    height: 120px; /* Altura do banner bem menor */
-    padding: 5px; /* Padding interno bem menor */
-    margin: 10px 5px 15px 5px; /* Margens mínimas */
+    height: 120px; 
+    padding: 5px; 
+    margin: 10px 5px 15px 5px; 
   }
   
   .ks-banner-text h2 {
-    font-size: 1.2rem; /* Título bem menor */
+    font-size: 1.2rem; 
     margin-bottom: 3px; 
   }
 
   .ks-banner-text p {
-    font-size: 0.7rem; /* Parágrafo bem menor */
+    font-size: 0.7rem; 
     line-height: 1.2;
   }
   
@@ -452,12 +684,11 @@ body.kimks-body {
   }
 
   .ks-section h2 {
-    font-size: 1.2rem; /* Títulos de seção menores */
+    font-size: 1.2rem; 
   }
   
   .carrossel-slide img {
-    height: 120px; /* Imagem do carrossel menor */
+    height: 120px; 
   }
-
-  /* ... o restante das regras mobile ... */
-}
+  
+  .carrossel-
