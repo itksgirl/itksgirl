@@ -1,4 +1,4 @@
-/* ========================================= */
+ /* ========================================= */
 /* 1. RESET E CONFIGURAÇÕES GERAIS (UNIFICADO) */
 /* ========================================= */
 * {
@@ -207,7 +207,7 @@ body.itksgirl-body {
 /* 3. ESTILOS DA SUBPÁGINA: KIM KS (SOLUÇÃO ESTÁVEL E COMPACTA) */
 /* ========================================= */
 
-/* Adicionado: Garante que o HTML ocupa 100% da altura da viewport */
+/* Garante que o HTML ocupa 100% da altura da viewport */
 html {
     height: 100%;
 }
@@ -219,15 +219,14 @@ body.kimks-body {
   overflow-x: hidden;
   /* CRÍTICO: body precisa ter altura mínima para o vídeo de fundo */
   min-height: 100vh; 
-  /* Removido: overflow-y: auto para evitar barras de rolagem duplas */
   overflow-y: overlay; /* Melhor experiência de rolagem */
   touch-action: manipulation;
-  position: relative; /* Adicionado: Para que o vídeo de fundo se posicione corretamente */
+  position: relative; /* Para que o vídeo de fundo se posicione corretamente */
 }
 
-/* VÍDEO DE FUNDO (USANDO ABSOLUTE) */
+/* VÍDEO DE FUNDO (SOLUÇÃO FINAL) */
 .video-fundo {
-  position: fixed; /* Mudado de absolute para fixed */
+  position: fixed; /* Fixed garante que ele cubra 100% da viewport e não se mova com a rolagem */
   top: 0;
   left: 0;
   width: 100%;
@@ -235,7 +234,6 @@ body.kimks-body {
   object-fit: cover;
   filter: brightness(0.4) saturate(1.2);
   z-index: -1;
-  /* Certifica-se de que não há espaço extra abaixo do vídeo */
   margin: 0; 
   padding: 0;
 }
@@ -247,7 +245,7 @@ body.kimks-body {
   border-bottom: 3px solid #5e9e7e;
   backdrop-filter: blur(10px);
   
-  /* LAYOUT FLEXBOX: Logo e Navegação na mesma linha no PC */
+  /* LAYOUT FLEXBOX */
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -260,7 +258,6 @@ body.kimks-body {
   z-index: 9999; 
 }
 
-
 /* LOGO KIM KS */
 .ks-logo {
   font-family: 'Rubik Mono One', sans-serif;
@@ -269,18 +266,17 @@ body.kimks-body {
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px #005a5a;
   margin: 0; 
-  flex-basis: auto; /* Ocupa o mínimo de espaço necessário */
+  flex-basis: auto; 
 }
 
 /* NAVEGAÇÃO */
 .ks-nav {
-  /* Ocupa o espaço central no PC */
   flex-grow: 1; 
   display: flex;
-  justify-content: center; /* Centraliza os links */
+  justify-content: center; 
   flex-wrap: wrap;
   gap: 10px; 
-  margin: 0 20px; /* Margem lateral para não encostar nas bordas */
+  margin: 0 20px; 
   padding: 5px 0;
 }
 
@@ -309,9 +305,7 @@ body.kimks-body {
 
 /* CONTAINER #main-content */
 #main-content {
-    /* Ajustado para o header fixo reduzido no PC (aproximadamente 70-80px de altura) */
     margin-top: 80px; 
-    
     position: relative; 
     padding-top: 0; 
     height: auto;
@@ -319,11 +313,11 @@ body.kimks-body {
     z-index: 10; 
 }
 
-/* ... (Mantenha o restante das suas regras ks-banner, ks-section, carrossel, etc. INALTERADAS) ... */
+/* BANNER */
 .ks-banner {
   margin-top: 0; 
   background: rgba(0, 0, 0, 0.6);
-  height: 300px;
+  height: 300px; /* PC/Tablet */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -596,7 +590,7 @@ body.kimks-body {
 }
 
 /* ========================================= */
-/* 4. RESPONSIVIDADE GERAL (CABEÇALHO COMPACTO) */
+/* 4. RESPONSIVIDADE GERAL (CABEÇALHO COMPACTO + CORREÇÃO DE ZOOM) */
 /* ========================================= */
 
 @media (max-width: 900px) {
@@ -630,7 +624,6 @@ body.kimks-body {
 
   .ks-header {
       padding: 8px 5px; 
-      /* Força o layout em coluna no celular: LOGO em cima, NAV em baixo */
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -638,18 +631,17 @@ body.kimks-body {
   
   .ks-logo {
     font-size: 1.5rem;
-    margin-bottom: 5px; /* Espaço entre logo e nav */
+    margin-bottom: 5px; 
     text-align: center; 
   }
   
-  /* NAVEGAÇÃO: Em linha, abaixo do logo, para economizar espaço */
   .ks-nav {
     flex-direction: row; 
     flex-wrap: wrap; 
     justify-content: center;
     gap: 4px; 
-    margin: 5px 0 0 0; /* Ajusta a margem */
-    flex-grow: 0; /* Não tenta crescer */
+    margin: 5px 0 0 0; 
+    flex-grow: 0; 
   }
   
   .ks-nav a {
@@ -665,11 +657,18 @@ body.kimks-body {
     margin-top: 100px; 
   }
   
-  /* OUTROS ELEMENTOS KIM KS NO MOBILE */
+  /* AJUSTE PRINCIPAL DO ZOOM NO BANNER */
   .ks-banner {
+    height: 150px; /* Reduz a altura do banner */
+    padding: 10px; /* Reduz o padding interno */
     margin-left: 5px; 
     margin-right: 5px; 
-    height: 200px;
+    margin-bottom: 20px; /* Reduz o espaço abaixo */
+  }
+
+  .ks-banner-text p {
+    font-size: 0.8rem; /* Reduz o tamanho da fonte do parágrafo */
+    line-height: 1.2;
   }
   
   .ks-section {
@@ -703,8 +702,17 @@ body.kimks-body {
     font-size: 1.3rem; 
   }
   
+  /* Ajuste de altura extra baixa para telas muito pequenas */
   .ks-banner {
-    height: 150px; 
+    height: 120px; 
+  }
+
+  .ks-banner-text h2 {
+    font-size: 1.3rem; 
+  }
+  
+  .ks-banner-text p {
+    font-size: 0.7rem; /* Redução máxima para o texto do portal */
   }
   
   .carrossel-slide img {
