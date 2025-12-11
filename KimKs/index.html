@@ -1,21 +1,26 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kim KS • Skate Jornal</title>
+  <!-- Mantém o link para o CSS compartilhado na raiz -->
   <link rel="stylesheet" href="../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 </head>
+
+<!-- Se você remover o vídeo do HTML, adicione 'no-video' à classe do body:
+     <body class="kimks-body no-video"> -->
 <body class="kimks-body">
 
+  <!-- Video de fundo (opcional). Se não quiser vídeo, remova este bloco e adicione 'no-video' ao body -->
   <video class="video-fundo" autoplay muted loop playsinline>
     <source src="../agua.mp4" type="video/mp4" />
     Seu navegador não suporta vídeos HTML5.
   </video>
 
-  <header class="ks-header">
-    <nav class="ks-nav">
+  <header class="ks-header" role="banner">
+    <nav class="ks-nav" aria-label="Menu principal">
       <a href="#historia">História</a>
       <a href="#videos">Vídeos</a>
       <a href="#materias">Matérias</a>
@@ -24,147 +29,156 @@
     <h1 class="ks-logo">KIM KS</h1>
   </header>
 
-  <section class="ks-banner">
-    <div class="ks-banner-text">
-      <h2>Underground. Skate</h2>
-      <p>Bem-vindo ao portal oficial de Kim KS, onde a rua encontra o mar.</p>
-    </div>
-  </section>
+  <main id="main-content" role="main">
+    <section class="ks-banner" aria-labelledby="banner-title">
+      <div class="ks-banner-text">
+        <h2 id="banner-title">Underground. Skate</h2>
+        <p>Bem-vindo ao portal oficial de Kim KS, onde a rua encontra o mar.</p>
+      </div>
+    </section>
 
-  <section id="historia" class="ks-section">
-    <h2>✨ História de Kim KS</h2>
-    <div class="carrossel-wrapper">
-      <div class="carrossel-slider">
-        <div class="carrossel-slide">
-          <a href="o-comeco-de-tudo/">
-            <img src="../imagens/criancaks.jpeg" alt="O Começo de Tudo" />
-            <p>O Começo de Tudo</p>
-          </a>
+    <section id="historia" class="ks-section">
+      <h2>✨ História de Kim KS</h2>
+      <div class="carrossel-wrapper">
+        <div class="carrossel-slider">
+          <div class="carrossel-slide">
+            <a href="o-comeco-de-tudo/">
+              <img src="../imagens/criancaks.jpeg" alt="O Começo de Tudo" />
+              <p>O Começo de Tudo</p>
+            </a>
+          </div>
+          <div class="carrossel-slide">
+            <a href="o-primeiro-skate/">
+              <img src="../imagens/primeiroskate.jpeg" alt="Primeiro Skate" />
+              <p>Primeiro Skate</p>
+            </a>
+          </div>
+          <div class="carrossel-slide">
+            <a href="relacionamento-com-o-skate/">
+              <img src="../imagens/relacionamentoskt.jpeg" alt="Relacionamento" />
+              <p>Relacionamento</p>
+            </a>
+          </div>
+          <div class="carrossel-slide">
+            <a href="churrasquinho/">
+              <img src="../imagens/churrasquinho.jpeg" alt="Churrasquinho" />
+              <p>Churrasquinho</p>
+            </a>
+          </div>
+          <div class="carrossel-slide">
+            <a href="fases-da-vida/">
+              <img src="../imagens/riokim.jpeg" alt="Fases da Vida" />
+              <p>Fases da Vida</p>
+            </a>
+          </div>
+          <div class="carrossel-slide">
+            <a href="reconhecimento-digital/">
+              <img src="../imagens/skate.jpg" alt="Reconhecimento Digital" />
+              <p>Reconhecimento</p>
+            </a>
+          </div>
+          <div class="carrossel-slide">
+            <a href="essencia-do-skate/">
+              <img src="../imagens/kimks.jpg" alt="Essência do Skate" />
+              <p>Essência do Skate</p>
+            </a>
+          </div>
         </div>
-        <div class="carrossel-slide">
-          <a href="o-primeiro-skate/">
-            <img src="../imagens/primeiroskate.jpeg" alt="Primeiro Skate" />
-            <p>Primeiro Skate</p>
-          </a>
+        <div class="carrossel-indicadores" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="videos" class="ks-section">
+      <h2>🎥 Vídeos em Destaque</h2>
+      <div class="ks-videos">
+        <div class="ks-video-card">
+          <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;"
+                  src="https://www.youtube.com/embed/UcRtruP19wo"
+                  title="YouTube video player 1" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
         </div>
-        <div class="carrossel-slide">
-          <a href="relacionamento-com-o-skate/">
-            <img src="../imagens/relacionamentoskt.jpeg" alt="Relacionamento" />
-            <p>Relacionamento</p>
-          </a>
-        </div>
-        <div class="carrossel-slide">
-          <a href="churrasquinho/">
-            <img src="../imagens/churrasquinho.jpeg" alt="Churrasquinho" />
-            <p>Churrasquinho</p>
-          </a>
-        </div>
-        <div class="carrossel-slide">
-          <a href="fases-da-vida/">
-            <img src="../imagens/riokim.jpeg" alt="Fases da Vida" />
-            <p>Fases da Vida</p>
-          </a>
-        </div>
-        <div class="carrossel-slide">
-          <a href="reconhecimento-digital/">
-            <img src="../imagens/skate.jpg" alt="Reconhecimento Digital" />
-            <p>Reconhecimento</p>
-          </a>
-        </div>
-        <div class="carrossel-slide">
-          <a href="essencia-do-skate/">
-            <img src="../imagens/kimks.jpg" alt="Essência do Skate" />
-            <p>Essência do Skate</p>
-          </a>
+
+        <div class="ks-video-card">
+          <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;"
+                  src="https://www.youtube.com/embed/-zeJvzhV5tE"
+                  title="YouTube video player 2" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen>
+          </iframe>
         </div>
       </div>
-      <div class="carrossel-indicadores"></div>
-    </div>
-  </section>
+    </section>
 
-  <section id="videos" class="ks-section">
-    <h2>🎥 Vídeos em Destaque</h2>
-    <div class="ks-videos">
-      <div class="ks-video-card">
-        <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;"
-                src="https://www.youtube.com/embed/UcRtruP19wo"
-                title="YouTube video player 1" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-        </iframe>
-      </div>
-      
-      <div class="ks-video-card">
-        <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;"
-                src="https://www.youtube.com/embed/-zeJvzhV5tE"
-                title="YouTube video player 2" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  </section>
+    <section id="materias" class="ks-section">
+      <h2>📄 Matérias Recentes</h2>
+      <ul class="ks-lista-materias">
+        <li><a class="materia-link" href="#"><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</a></li>
+        <li><a class="materia-link" href="#"><strong>Street</strong> — A filosofia por trás do estilo dele.</a></li>
+      </ul>
+    </section>
 
-  <section id="materias" class="ks-section">
-    <h2>📄 Matérias Recentes</h2>
-    <ul class="ks-lista-materias">
-      <li><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</li>
-      <li><strong>Street</strong> — A filosofia por trás do estilo dele.</li>
-    </ul>
-  </section>
+    <section id="entrevistas" class="ks-section">
+      <h2>🎙️ Entrevistas Exclusivas</h2>
+      <p>Em breve: conversas reais com quem vive o underground e a cena.</p>
+    </section>
+  </main>
 
-  <section id="entrevistas" class="ks-section">
-    <h2>🎙️ Entrevistas Exclusivas</h2>
-    <p>Em breve: conversas reais com quem vive o underground e a cena.</p>
-  </section>
-
-  <footer class="ks-footer">
+  <footer class="ks-footer" role="contentinfo">
     <p>Portal Kim KS &copy; 2025 — Desenvolvido por ITKS Girl</p>
   </footer>
 
+  <!-- Carrossel controls/JS (isolado para esta página) -->
   <script>
-    const slider = document.querySelector(".carrossel-slider");
-    const slides = document.querySelectorAll(".carrossel-slide");
-    const indicadores = document.querySelector(".carrossel-indicadores");
-    const totalSlides = slides.length; 
-    let index = 0;
+    (function () {
+      const slider = document.querySelector(".carrossel-slider");
+      const slides = document.querySelectorAll(".carrossel-slide");
+      const indicadores = document.querySelector(".carrossel-indicadores");
+      const totalSlides = slides.length;
+      let index = 0;
+      let intervalId = null;
 
-    function criarIndicadores() {
-      slides.forEach((_, i) => {
-        const dot = document.createElement("span");
-        dot.classList.add("dot");
-        if (i === 0) dot.classList.add("active");
-        dot.addEventListener("click", () => {
-          index = i;
-          atualizarCarrossel();
+      function criarIndicadores() {
+        indicadores.innerHTML = '';
+        slides.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.className = "dot";
+          if (i === 0) dot.classList.add("active");
+          dot.addEventListener("click", () => {
+            index = i;
+            atualizarCarrossel();
+            reiniciarInterval();
+          });
+          indicadores.appendChild(dot);
         });
-        indicadores.appendChild(dot);
-      });
-    }
-
-    function atualizarCarrossel() {
-      // Move o slider para o slide atual
-      slider.style.transform = `translateX(-${index * 100}%)`;
-      
-      // Atualiza os indicadores (bolinhas)
-      const dots = document.querySelectorAll(".dot");
-      dots.forEach(dot => dot.classList.remove("active"));
-      dots[index].classList.add("active");
-    }
-
-    // NOVA FUNÇÃO: Passa para o próximo slide em sequência
-    function passarSequencial() {
-      index++;
-      // Se for o último slide, volta para o primeiro (0)
-      if (index >= totalSlides) {
-        index = 0;
       }
-      atualizarCarrossel();
-    }
 
-    criarIndicadores();
-    // Muda a cada 6 segundos, suavemente.
-    setInterval(passarSequencial, 6000); 
+      function atualizarCarrossel() {
+        if (!slider) return;
+        slider.style.transform = `translateX(-${index * 100}%)`;
+        const dots = indicadores.querySelectorAll(".dot");
+        dots.forEach(d => d.classList.remove("active"));
+        if (dots[index]) dots[index].classList.add("active");
+      }
+
+      function passarSequencial() {
+        index = (index + 1) % totalSlides;
+        atualizarCarrossel();
+      }
+
+      function reiniciarInterval() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(passarSequencial, 6000);
+      }
+
+      // Inicia apenas se há slides
+      if (slides.length > 0) {
+        criarIndicadores();
+        atualizarCarrossel();
+        reiniciarInterval();
+      }
+    })();
   </script>
 </body>
 </html>
