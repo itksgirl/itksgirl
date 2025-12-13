@@ -712,3 +712,14 @@ body.kimks-body .ks-footer {
   color: #000000;
 }
 /* Fim do arquivo */
+/* LOGO APENAS NO TÍTULO DO MEIO */
+.title-with-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-logo {
+  width: 52px;   /* aumenta sem pesar */
+  height: auto;
+}
