@@ -1,71 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head> 
+<head>
   <link rel="icon" type="image/png" href="ksrosa.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>It Ks Girl • Moda e Fé</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-  
+  <title>It Ks Girl & King of Scrawl • Store</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body class="itksgirl-body"> 
+<body class="modern-body">
 
-  <header class="itks-header">
-    <div class="logo-area">
-      <img src="bonequinha.png" alt="Bonequinha" class="bonequinha" />
-      <h1 class="itks-title">It Ks Girl</h1>
+  <header class="modern-header">
+    <div class="header-left">
+        <h1 class="logo-title">IT KS GIRL / KING OF SCRAWL</h1>
     </div>
-    
-    <nav class="itks-nav">
-        </nav>
-    
-    <div>
-      <a href="KimKs/" class="btn-kimks">Kim KS ❤️‍🔥</a>
+
+    <nav class="shop-nav">
+        <a href="#loja-feminina" class="nav-item female">IT KS GIRL</a>
+        <a href="#loja-masculina" class="nav-item male">KING OF SCRAWL</a>
+    </nav>
+
+    <div class="header-right">
+        <button class="btn-carrinho" disabled>
+            <i class="fas fa-shopping-bag"></i> (0) </button>
+        <a href="KimKs/" class="btn-kimks-modern">KIM KS</a>
     </div>
   </header>
-  
-  <main class="itks-main">
-    <section class="itks-banner-principal">
-        <h2>Débora Narsson.</h2>
-        <p class="itks-slogan">Sua frequência elevada em moda e estilo de vida. ✨</p>
+
+  <main class="modern-main">
+
+    <section id="loja-feminina" class="store-section female-section">
+        <h2 class="section-title female-title">IT KS GIRL <span class="subtitle-mode">MODA FEMININA</span></h2>
+
+        <div class="section-content">
+            <p class="construction-message">
+                Esta área está sendo preparada com o melhor do design **moderno e minimalista**.
+                Em breve, a coleção **It Ks Girl** estará disponível, com a elegância do **Rosé de Luxo** e
+                o toque **tecnológico** que você merece.
+            </p>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image construction"></div>
+                    <div class="product-details">
+                        <p class="product-name">Produto Feminino 01</p>
+                        <p class="product-status">Em Construção</p>
+                        <button class="btn-add-cart female" disabled>Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image construction"></div>
+                    <div class="product-details">
+                        <p class="product-name">Produto Feminino 02</p>
+                        <p class="product-status">Em Construção</p>
+                        <button class="btn-add-cart female" disabled>Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="view-all-btn female" disabled>Ver Coleção Completa (Em Breve)</a>
+        </div>
     </section>
-    
-    <div class="itks-card itks-inspiracao">
-      <h2>💫 Inspiração da Semana</h2>
-      <p>"Estilo é quando a alma se veste de coragem e a maquiagem de luz."</p>
-    </div>
-    
-    <div class="itks-card itks-artigos">
-        <h2>📰 Últimos Artigos</h2>
-        <ul>
-            <li><a href="look1.html"><strong>Fé e beleza</strong> 💄 A maquiagem como expressão de autoconfiança</a></li>
-            <li><a href="#"><strong>Arte nas unhas</strong> – Estilos que falam por você</a></li>
-            <li><a href="#"><strong>O poder do nude</strong> – A cor que te eleva</a></li>
-        </ul>
-    </div>
+
+    <section id="loja-masculina" class="store-section male-section">
+        <h2 class="section-title male-title">KING OF SCRAWL <span class="subtitle-mode">MODA MASCULINA</span></h2>
+
+        <div class="section-content">
+            <p class="construction-message">
+                A moda masculina **King of Scrawl** está em fase final de produção.
+                Teremos peças minimalistas, com uma pegada **tecnológica** e sofisticada, utilizando a força do **Preto**
+                e a elegância das cores neutras.
+            </p>
+
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image construction"></div>
+                    <div class="product-details">
+                        <p class="product-name">Produto Masculino 01</p>
+                        <p class="product-status">Em Construção</p>
+                        <button class="btn-add-cart male" disabled>Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image construction"></div>
+                    <div class="product-details">
+                        <p class="product-name">Produto Masculino 02</p>
+                        <p class="product-status">Em Construção</p>
+                        <button class="btn-add-cart male" disabled>Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="view-all-btn male" disabled>Ver Coleção Completa (Em Breve)</a>
+        </div>
+    </section>
+
   </main>
-  
-  <div class="versiculo-canto" id="verso"></div>
-  
-  <footer class="itks-footer">
-    <p>© 2025 Débora | Todos os direitos reservados | IT KS Girl</p>
+
+  <footer class="modern-footer">
+    <p>IT KS Girl & King of Scrawl © 2025 | Minimalist Store</p>
   </footer>
-  
-  <script>
-    const versiculos = [
-      "Salmo 91:1 – Aquele que habita no esconderijo do Altíssimo, à sombra do Onipotente descansará.",
-      "Isaías 41:10 – Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.",
-      "Provérbios 3:5 – Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.",
-      "Filipenses 4:13 – Posso todas as coisas naquele que me fortalece.",
-      "Romanos 8:28 – Sabemos que todas as coisas cooperam para o bem daqueles que amam a Deus.",
-      "Jeremias 29:11 – Eu é que sei os planos que tenho para vocês, diz o Senhor.",
-      "Salmo 46:1 – Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia."
-    ];
-    const versoAleatorio = versiculos[Math.floor(Math.random() * versiculos.length)];
-    document.getElementById("verso").textContent = versoAleatorio;
-  </script>
+
 </body>
-<html>
+</html>
