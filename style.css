@@ -641,7 +641,6 @@ body.kimks-body .ks-lista-materias li {
   margin-bottom: 12px;
   padding: 12px;
   background: rgba(255,255,255,0.04);
-  border-radius: 8px;
   border-left: 4px solid var(--accent);
 }
 
@@ -689,8 +688,33 @@ body.kimks-body .ks-footer {
 
 @media (max-width: 768px) {
   /*
-   *** AJUSTE DO CARRINHO PARA MOBILE (SOLICITADO) ***
+   *** AJUSTES DE HEADER PARA MOBILE (SOLICITADO) ***
    */
+  .modern-header {
+      /* Reorganizando para 3 linhas no mobile: Left, Nav, Right */
+      flex-direction: column;
+      gap: 15px;
+      padding: 1rem 4vw;
+  }
+  
+  .header-left, .header-right {
+      /* Garante que os containers Left e Right ocupem a largura total */
+      width: 100%;
+      /* Usando flex para alinhar os itens dentro do header-right na mesma linha */
+      display: flex;
+      /* Os itens do header-right (Carrinho e KIM KS) são empurrados para as extremidades */
+      justify-content: flex-end; /* Alinha o conteúdo à direita */
+      align-items: center;
+      gap: 15px; /* Mantém o espaço entre o Carrinho e o KIM KS */
+  }
+
+  .shop-nav {
+      width: 100%;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 5px;
+  }
+  
   .btn-carrinho {
       font-size: 1.2rem; /* Tamanho reduzido para mobile */
   }
@@ -706,27 +730,7 @@ body.kimks-body .ks-footer {
   /*
    *** FIM DO AJUSTE MOBILE ***
    */
-  
-  .modern-header {
-      flex-direction: column;
-      gap: 15px;
-      padding: 1rem 4vw;
-  }
 
-  .header-left, .header-right {
-      width: 100%;
-      justify-content: space-between;
-      display: flex;
-  }
-
-  .shop-nav {
-      width: 100%;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 5px;
-  }
-
-  /* Ajuste no padding do btn-kimks-modern no mobile, já que o .btn-carrinho foi alterado acima */
   .btn-kimks-modern {
       padding: 0.6rem 1rem;
       font-size: 0.8rem;
