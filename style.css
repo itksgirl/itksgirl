@@ -125,22 +125,38 @@ body.modern-body {
     align-items: center;
 }
 
+/* ========================================= */
+/* AJUSTE DO ÍCONE DO CARRINHO (SOLICITADO) */
+/* ========================================= */
+
 .btn-carrinho {
-    /* Botão de Carrinho: Alterado para ser menor e focado no ícone */
-    background: var(--cor-perolado);
+    /* Tornando o botão transparente/sem fundo */
+    background: transparent;
     border: none;
-    padding: 0.7rem 0.8rem;
-    border-radius: 6px;
-    font-size: 1rem; /* Aumenta o ícone */
+    /* Removendo padding para ficar apenas o ícone */
+    padding: 0; 
+    /* Tamanho PC */
+    font-size: 1.5rem; 
     font-weight: 600;
-    color: var(--cor-texto-suave);
+    color: var(--cor-texto-principal); /* Cor principal para o ícone */
     cursor: not-allowed;
-    transition: background 0.2s;
-    opacity: 0.7;
+    transition: opacity 0.2s;
+    opacity: 1; /* Sem opacidade padrão, já que não tem fundo */
     display: flex;
     align-items: center;
     gap: 4px;
 }
+
+/* Efeito ao passar o mouse */
+.btn-carrinho:hover {
+    color: var(--cor-texto-suave);
+}
+
+/* Garante que o ícone do Font Awesome seja herdado */
+.btn-carrinho .fas {
+    font-size: inherit; 
+}
+
 
 /* Botão KIM KS: Essencial, minimalista no novo layout */
 .btn-kimks-modern {
@@ -659,7 +675,7 @@ body.kimks-body .ks-footer {
 }
 
 /* ============================
-   RESPONSIVIDADE GERAL
+   7. RESPONSIVIDADE GERAL
    ============================ */
 
 @media (max-width: 900px) {
@@ -672,6 +688,13 @@ body.kimks-body .ks-footer {
 }
 
 @media (max-width: 768px) {
+  /*
+   *** AJUSTE DO CARRINHO PARA MOBILE (SOLICITADO) ***
+   */
+  .btn-carrinho {
+      font-size: 1.2rem; /* Tamanho reduzido para mobile */
+  }
+  
   /*
    *** AJUSTE DE TAMANHO DOS TÍTULOS FEMININO/MASCULINO NO CELULAR (MANTIDO) ***
    */
@@ -703,10 +726,7 @@ body.kimks-body .ks-footer {
       margin-top: 5px;
   }
 
-  .btn-carrinho {
-      padding: 0.7rem 0.8rem;
-  }
-
+  /* Ajuste no padding do btn-kimks-modern no mobile, já que o .btn-carrinho foi alterado acima */
   .btn-kimks-modern {
       padding: 0.6rem 1rem;
       font-size: 0.8rem;
