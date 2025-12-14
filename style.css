@@ -758,3 +758,34 @@ body.kimks-body .ks-footer {
 .section-logo {
   width: 44px !important;
 }
+/* ================================
+   MOBILE — CORREÇÃO DE TÍTULO
+   KING OF SCRAWL LADO A LADO
+   ================================ */
+
+@media (max-width: 768px) {
+
+  /* Garante que o título não quebre linha */
+  .section-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  /* Texto do título */
+  .female-title,
+  .male-title {
+    font-size: 1.6rem; /* mesmo feeling do PC */
+    white-space: nowrap;
+  }
+
+  /* Logo do meio (se tiver) */
+  .section-logo {
+    width: 38px;
+    flex-shrink: 0;
+  }
+
+}
