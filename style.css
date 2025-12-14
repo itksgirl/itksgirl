@@ -723,3 +723,38 @@ body.kimks-body .ks-footer {
   width: 52px;   /* aumenta sem pesar */
   height: auto;
 }
+/* ================================
+   AJUSTE FINAL DE TAMANHOS – IT KS
+   (NÃO REMOVE NADA EXISTENTE)
+   ================================ */
+
+/* TÍTULOS PRINCIPAIS */
+.section-title {
+  font-size: 1.9rem !important;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* IT KS GIRL */
+.female-title {
+  font-size: 1.9rem !important;
+}
+
+/* KING OF SCRAWL */
+.male-title {
+  font-size: 1.9rem !important;
+}
+
+/* SUBTÍTULO */
+.subtitle-mode {
+  font-size: 0.85rem !important;
+}
+
+/* LOGO NO TÍTULO */
+.section-logo {
+  width: 44px !important;
+}
