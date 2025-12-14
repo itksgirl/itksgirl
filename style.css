@@ -232,8 +232,12 @@ body.modern-body {
     color: var(--cor-masculina); /* Preto, conforme solicitado */
 }
 
+/*
+   *** AJUSTE PARA DIMINUIR TÍTULOS NO PC (E O TAMANHO BASE) ***
+   O tamanho foi reduzido de clamp(1.8rem, 4vw, 2.5rem) para clamp(1.6rem, 3vw, 2rem)
+*/
 .section-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.6rem, 3vw, 2rem); 
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: 0.5px;
@@ -668,6 +672,18 @@ body.kimks-body .ks-footer {
 }
 
 @media (max-width: 768px) {
+  /*
+   *** AJUSTE DE TAMANHO DOS TÍTULOS FEMININO/MASCULINO NO CELULAR (MANTIDO) ***
+   */
+  .female-title,
+  .male-title {
+      font-size: 1.5rem !important; /* Tamanho fixo e menor no mobile */
+      line-height: 1.2;
+  }
+  /*
+   *** FIM DO AJUSTE MOBILE ***
+   */
+  
   .modern-header {
       flex-direction: column;
       gap: 15px;
