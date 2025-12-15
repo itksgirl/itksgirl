@@ -759,3 +759,75 @@ body.kimks-body .ks-footer {
   width: 52px;   /* aumenta sem pesar */
   height: auto;
 }
+/* ===== PÁGINAS INSTITUCIONAIS ===== */
+.pagina-institucional {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #f4f4f4; /* cinza claro elegante */
+  border-radius: 16px;
+  color: #444; /* texto cinza escuro */
+  line-height: 1.8;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Título principal */
+.pagina-institucional h1 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #2f2f2f;
+  margin-bottom: 20px;
+}
+
+/* Subtítulos */
+.pagina-institucional h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Sub-subtítulos (tipo 1.1, 1.2) */
+.pagina-institucional h3 {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 20px;
+  color: #666;
+}
+
+/* Parágrafos */
+.pagina-institucional p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+/* Listas */
+.pagina-institucional ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.pagina-institucional li {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* Linha divisória */
+.pagina-institucional hr {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 40px 0;
+}
+/* REMOVER ROXO / AZUL DE LINKS NAS PÁGINAS INSTITUCIONAIS */
+.pagina-institucional a,
+.pagina-institucional a:link,
+.pagina-institucional a:visited,
+.pagina-institucional a:hover,
+.pagina-institucional a:active {
+  color: #2f2f2f !important;
+  text-decoration: none !important;
+}
