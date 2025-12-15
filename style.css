@@ -822,12 +822,30 @@ body.kimks-body .ks-footer {
   background-color: #ddd;
   margin: 40px 0;
 }
-/* REMOVER ROXO / AZUL DE LINKS NAS PÁGINAS INSTITUCIONAIS */
-.pagina-institucional a,
-.pagina-institucional a:link,
-.pagina-institucional a:visited,
-.pagina-institucional a:hover,
-.pagina-institucional a:active {
-  color: #2f2f2f !important;
-  text-decoration: none !important;
+/* ===== AJUSTES MOBILE – PÁGINAS INSTITUCIONAIS ===== */
+@media (max-width: 768px) {
+
+  .pagina-institucional {
+    padding: 24px 16px;
+    border-radius: 12px;
+  }
+
+  .pagina-institucional h1 {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+
+  .pagina-institucional h2 {
+    font-size: 16px;
+  }
+
+  .pagina-institucional h3 {
+    font-size: 14px;
+  }
+
+  .pagina-institucional p,
+  .pagina-institucional li {
+    font-size: 13px;
+  }
+
 }
