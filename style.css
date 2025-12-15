@@ -849,3 +849,84 @@ body.kimks-body .ks-footer {
   }
 
 }
+
+/* ========================================= */
+/* 8. BANNER DE COOKIES (NOVO) */
+/* ========================================= */
+#cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: var(--cor-branco); /* Fundo branco minimalista */
+    border: var(--borda-suave);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 320px;
+    max-width: 90%;
+    z-index: 1000;
+    border-radius: 8px;
+    font-family: var(--fonte-principal);
+}
+
+.cookie-content p {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: var(--cor-texto-principal);
+}
+
+.cookie-link {
+    color: var(--cor-texto-principal); /* Link preto, discreto */
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.cookie-link:hover {
+    color: var(--cor-texto-suave);
+}
+
+.cookie-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-aceitar, .btn-rejeitar {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+/* Botão Aceitar (Preto - Ação principal, seguindo o destaque do seu site) */
+.btn-aceitar {
+    background-color: var(--cor-masculina); /* Preto */
+    color: var(--cor-branco);
+    border: 1px solid var(--cor-masculina);
+}
+
+.btn-aceitar:hover {
+    background-color: var(--cor-masculina-hover);
+}
+
+/* Botão Rejeitar (Branco/Contorno - Ação secundária) */
+.btn-rejeitar {
+    background: none;
+    color: var(--cor-texto-principal);
+    border: 1px solid var(--cor-texto-suave);
+}
+
+.btn-rejeitar:hover {
+    background-color: var(--cor-perolado);
+}
+
+@media (max-width: 400px) {
+    #cookie-banner {
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+}
