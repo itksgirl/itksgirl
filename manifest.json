@@ -1,0 +1,20 @@
+{
+  "name": "It ks Girl & King of Scrawl",
+  "short_name": "KS Store",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8f8f8",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "kimdourado.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "kimdourado.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
