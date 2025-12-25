@@ -971,33 +971,15 @@ body.kimks-body .ks-footer {
     margin-bottom: 12px;
     font-family: 'Orbitron', sans-serif;
 }
-/* ========================================= */
-/* 9. CORREÇÃO DEFINITIVA RODAPÉ HOME (KIM KS) */
-/* ========================================= */
-
-/* Alvo direto na classe da Home */
-body.kimks-body .ks-footer {
-    padding: 9px !important; 
-    margin-top: 9px !important;
-    min-height: auto !important; /* Impede que ele fique alto demais */
-}
-
-body.kimks-body .ks-footer p {
-    font-size: 10px !important; /* Tamanho fixo em pixels para não ter erro */
-    line-height: 1.2 !important;
-    margin: 5px 0 !important;
-    color: rgba(255,255,255,0.7) !important;
-}
-
-/* Ajuste específico para Celular na Home */
-@media (max-width: 750px) {
-    body.kimks-body .ks-footer {
-        padding: 8px 5px !important;
-        background: rgba(0,0,0,0.95) !important; /* Garante fundo escuro */
-    }
-
-    /* Se houver algum botão ou link no rodapé da home */
-    body.kimks-body .ks-footer a {
-        font-size: 10px !important;
-    }
+@media (max-width: 768px) {
+  #cookie-banner {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto 0;
+    border-radius: 0;
+  }
 }
