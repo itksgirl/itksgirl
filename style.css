@@ -930,3 +930,44 @@ body.kimks-body .ks-footer {
         width: auto;
     }
 }
+/* Estilo para as páginas de matérias internas */
+.materia-main {
+    display: flex;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.materia-card {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #00ff9d; /* Verde Neon */
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
+}
+
+.materia-card h2 {
+    color: #fff;
+    font-family: 'Rubik Mono One', sans-serif;
+    margin-bottom: 20px;
+}
+
+.materia-card p {
+    color: #ccc;
+    line-height: 1.8;
+}
+
+.setup-list {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 255, 157, 0.05);
+    border-left: 4px solid #00ff9d;
+    list-style: none;
+}
+
+.setup-list li {
+    color: #fff;
+    margin-bottom: 12px;
+    font-family: 'Orbitron', sans-serif;
+}
