@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kim KS • Skate Jornal</title>
-  <!-- Mantém o link para o CSS compartilhado na raiz -->
+  <title>Kim KS | Skatista Profissional & Street Culture</title>
+  <meta name="description" content="Portal oficial do skatista Kim KS. Vida, manobras, vivência de rua e o lançamento da marca King of Scrawl.">
+  
   <link rel="stylesheet" href="../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 </head>
 
-<!-- Se você remover o vídeo do HTML, adicione 'no-video' à classe do body:
-     <body class="kimks-body no-video"> -->
 <body class="kimks-body">
 
-  <!-- Video de fundo (opcional). Se não quiser vídeo, remova este bloco e adicione 'no-video' ao body -->
   <video class="video-fundo" autoplay muted loop playsinline>
     <source src="../agua.mp4" type="video/mp4" />
     Seu navegador não suporta vídeos HTML5.
@@ -114,22 +112,29 @@
     <section id="materias" class="ks-section">
       <h2>📄 Matérias Recentes</h2>
       <ul class="ks-lista-materias">
-        <li><a class="materia-link" href="#"><strong>Skate no Centro</strong> — Como Kim KS transformou a Paulista em pista.</a></li>
-        <li><a class="materia-link" href="#"><strong>Street</strong> — A filosofia por trás do estilo dele.</a></li>
+        <li>
+          <a class="materia-link" href="nova-manobra/index.html">
+            <strong>Skate no Centro</strong> — Kim KS: A nova cara do street nacional e o manifesto King Of Scrawl.
+          </a>
+        </li>
+        <li>
+          <a class="materia-link" href="essencia-do-skate/index.html">
+            <strong>Street</strong> — A filosofia por trás do estilo e a vivência urbana livre.
+          </a>
+        </li>
       </ul>
     </section>
 
     <section id="entrevistas" class="ks-section">
       <h2>🎙️ Entrevistas Exclusivas</h2>
-      <p>Em breve: conversas reais com quem vive o underground e a cena.</p>
+      <p>Em breve: conversas reais com quem vive o underground e a cena do skate masculino.</p>
     </section>
   </main>
 
   <footer class="ks-footer" role="contentinfo">
-    <p>Portal Kim KS &copy; 2025 — Desenvolvido por It Ks Girl</p>
+    <p>Portal Kim KS &copy; 2025 — Lifestyle Masculino | Desenvolvido por It Ks Girl</p>
   </footer>
 
-  <!-- Carrossel controls/JS (isolado para esta página) -->
   <script>
     (function () {
       const slider = document.querySelector(".carrossel-slider");
@@ -172,7 +177,6 @@
         intervalId = setInterval(passarSequencial, 6000);
       }
 
-      // Inicia apenas se há slides
       if (slides.length > 0) {
         criarIndicadores();
         atualizarCarrossel();
