@@ -977,8 +977,8 @@ body.kimks-body .ks-footer {
 
 /* Alvo direto na classe da Home */
 body.kimks-body .ks-footer {
-    padding: 10px !important; 
-    margin-top: 10px !important;
+    padding: 9px !important; 
+    margin-top: 9px !important;
     min-height: auto !important; /* Impede que ele fique alto demais */
 }
 
@@ -990,7 +990,7 @@ body.kimks-body .ks-footer p {
 }
 
 /* Ajuste específico para Celular na Home */
-@media (max-width: 768px) {
+@media (max-width: 750px) {
     body.kimks-body .ks-footer {
         padding: 8px 5px !important;
         background: rgba(0,0,0,0.95) !important; /* Garante fundo escuro */
