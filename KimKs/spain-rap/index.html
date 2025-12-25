@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDICÃO ESPECIAL: SPAIN - RAP E RUA</title>
+  
+  <link rel="stylesheet" href="../../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  
+  <style>
+    .pagina-jornal {
+        background-color: #fff !important;
+        color: #1a1a1a !important;
+        font-family: 'Libre Baskerville', serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container-jornal {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        background: #fff;
+    }
+    .header-jornal {
+        text-align: center;
+        border-bottom: 4px double #1a1a1a;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+    }
+    .header-jornal h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin: 0;
+        text-transform: uppercase;
+    }
+    .sub-header {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+    .corpo-texto {
+        column-count: 2;
+        column-gap: 40px;
+        text-align: justify;
+        line-height: 1.6;
+    }
+    .capitular-jornal::first-letter {
+        float: left;
+        font-size: 5rem;
+        line-height: 0.7;
+        padding: 8px 10px 0 0;
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+    }
+    .pergunta-jornal {
+        font-weight: bold;
+        display: block;
+        margin-top: 20px;
+        text-transform: uppercase;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+
+    /* PLATAFORMAS COM CORES */
+    .box-plataformas {
+        margin-top: 40px;
+        border: 2px solid #000;
+        padding: 25px;
+        background: #fdfdfd;
+        break-inside: avoid;
+    }
+    .box-plataformas h4 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        margin-top: 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid #000;
+        padding-bottom: 10px;
+    }
+    .links-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 15px;
+    }
+    .link-item {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9rem;
+        padding: 12px;
+        text-align: center;
+        transition: 0.3s;
+        border-radius: 4px;
+        color: #fff !important;
+    }
+    .link-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .link-spotify { background-color: #1DB954; }
+    .link-soundcloud { background-color: #FF5500; }
+    .link-item:hover { opacity: 0.8; transform: scale(1.02); }
+
+    .galeria-jornal {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        border-top: 2px solid #000;
+        padding-top: 30px;
+    }
+    .galeria-jornal img {
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    /* ESTILO PLAYER DE ÁUDIO */
+    .audio-player-container {
+        margin-top: 40px;
+        padding: 20px;
+        background: #f4f4f4;
+        border: 1px solid #000;
+        text-align: center;
+    }
+
+    .menu-superior-jornal {
+        background: #000;
+        padding: 10px 0;
+        text-align: center;
+    }
+    .menu-superior-jornal a {
+        color: #fff;
+        margin: 0 15px;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7rem;
+    }
+
+    /* RODAPÉ ESTILIZADO */
+    .footer-jornal {
+        margin-top: 60px;
+        border-top: 4px double #1a1a1a;
+        padding-top: 30px;
+        text-align: center;
+    }
+    .footer-jornal p {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .botao-voltar {
+        display: inline-block;
+        background-color: #000;
+        color: #fff !important;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 0.8rem;
+        padding: 12px 40px;
+        border: 2px solid #000;
+        transition: 0.3s ease;
+    }
+    .botao-voltar:hover {
+        background-color: #fff;
+        color: #000 !important;
+    }
+
+    @media (max-width: 768px) { .corpo-texto { column-count: 1; } }
+  </style>
+</head>
+
+<body class="pagina-jornal">
+
+  <nav class="menu-superior-jornal">
+      <a href="../../#historia">HISTÓRIA</a>
+      <a href="../../#videos">VÍDEOS</a>
+      <a href="../../#materias">MATÉRIAS</a>
+      <a href="../../#entrevistas">ENTREVISTAS</a>
+  </nav>
+
+  <div class="container-jornal">
+      <header class="header-jornal">
+          <div class="sub-header">
+              <span>Edição Especial Underground</span>
+              <span>Rio de Janeiro, 2025</span>
+              <span>Portal Kim KS</span>
+          </div>
+          <h1>SPAIN & KIM KS</h1>
+      </header>
+
+      <main>
+          <h2 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 20px;">SPAIN: DO SUBÚRBIO À RESISTÊNCIA NO RAP UNDERGROUND</h2>
+          
+          <div class="corpo-texto">
+              <p class="capitular-jornal">
+                  O <strong>RAP</strong> sempre foi mais do que música. Para quem vive a <strong>RUA</strong>, ele é denúncia, sobrevivência e escolha. <strong>SPAIN</strong>, MC do underground carioca, carrega essa essência em cada verso. Nascido e criado em Brás de Pina, no subúrbio do Rio de Janeiro, o artista constrói sua trajetória com base na vivência real, na fé e na vontade de transformar a própria história.
+              </p>
+
+              <span class="pergunta-jornal">Kim KS — Pra quem ainda não te conhece, quem é o SPAIN?</span>
+              <p><strong>SPAIN:</strong> Eu sou o Spain, MC do Rio de Janeiro, nascido e criado no bairro de Brás de Pina. Hoje moro em Araruama. Sou cantor e compositor e conheci o Hip-Hop antes mesmo de me tornar artista do gênero.</p>
+
+              <span class="pergunta-jornal">Kim KS — O RAP, pra você, vai além da música?</span>
+              <p><strong>SPAIN:</strong> Com certeza. É uma ferramenta de resistência. Não é personagem, é realidade de <strong>RUA</strong>.</p>
+
+              <span class="pergunta-jornal">Kim KS — Qual mensagem você quer deixar com sua música?</span>
+              <p><strong>SPAIN:</strong> Que existe escolha. Que o talento pode salvar vidas. Minha música é verdade, é fé, é sobrevivência.</p>
+
+              <section class="box-plataformas">
+                  <h4>CONECTE-SE COM SPAIN</h4>
+                  <div class="links-container">
+                      <a href="https://www.instagram.com/_bigspain?igsh=MXYydnN1dDVmYXh1Nw==" target="_blank" class="link-item link-instagram">INSTAGRAM</a>
+                      <a href="https://open.spotify.com/" target="_blank" class="link-item link-spotify">SPOTIFY</a>
+                      <a href="https://on.soundcloud.com/fdAAW3qjz25XqFJD22" target="_blank" class="link-item link-soundcloud">SOUNDCLOUD</a>
+                  </div>
+              </section>
+          </div>
+
+          <section class="galeria-jornal">
+              <div>
+                  <img src="../../spain1.png" alt="Spain Rap">
+                  <p style="font-size: 0.7rem; font-style: italic;">Fig 1. Spain em performance.</p>
+              </div>
+              <div>
+                  <img src="../../spain2.png" alt="Spain Vivência">
+                  <p style="font-size: 0.7rem; font-style: italic;">Fig 2. Identidade visual.</p>
+              </div>
+              <div>
+                  <img src="../../spain3.png" alt="Spain MC">
+                  <p style="font-size: 0.7rem; font-style: italic;">Fig 3. Underground nacional.</p>
+              </div>
+              <div>
+                  <img src="../../spain4.png" alt="Spain Rap RJ">
+                  <p style="font-size: 0.7rem; font-style: italic;">Fig 4. Superação através da rima.</p>
+              </div>
+          </section>
+
+          <section class="audio-player-container">
+              <h4 style="font-family: 'Orbitron'; font-size: 0.8rem; margin-bottom: 15px;">OUÇA AGORA: FILHO DO VENTO - SPAIN</h4>
+              <audio controls style="width: 100%;">
+                  <source src="../../spain-rap.mp3" type="audio/mpeg">
+                  Seu navegador não suporta o player de áudio.
+              </audio>
+          </section>
+
+          <footer class="footer-jornal">
+              <p>Portal Kim KS © 2025 — Lifestyle Masculino | Rap & Rua<br>Desenvolvido por It Ks Girl</p>
+              
+              <a href="/KimKs/index.html" class="botao-voltar">VOLTAR AO PORTAL</a>
+          </footer>
+
+      </main>
+  </div>
+</body>
+</html>
