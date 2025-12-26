@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kim KS | Spain MC: A Voz da Superação</title>
-  
+    
   <link rel="stylesheet" href="../../style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* Estilos específicos para esta matéria de redação */
     .conteudo-redacao {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
         padding: 40px 20px;
         font-family: 'Montserrat', sans-serif;
@@ -20,7 +19,7 @@
     }
     .titulo-redacao {
         font-family: 'Orbitron', sans-serif;
-        color: var(--accent); /* Ciano/Verde Neon do seu root */
+        color: var(--accent);
         font-size: clamp(1.5rem, 4vw, 2.2rem);
         text-transform: uppercase;
         margin-bottom: 30px;
@@ -47,14 +46,23 @@
         background: rgba(255, 255, 255, 0.05);
         padding: 20px;
     }
-    .imagem-centro {
+    .imagem-lado-texto {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 30px 0;
+        align-items: flex-start;
+    }
+    .imagem-lado-texto img {
+        max-width: 300px;
         width: 100%;
-        max-width: 600px;
         border-radius: 12px;
-        display: block;
-        margin: 30px auto;
         border: 1px solid var(--accent);
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+    .texto-lado-imagem {
+        flex: 1;
+        color: #e0e0e0;
     }
   </style>
 </head>
@@ -68,8 +76,8 @@
   <header class="ks-header">
     <h1 class="ks-logo">KIM KS</h1>
     <nav class="ks-nav">
-      <a href="../../">HOME</a>
-      <a href="../../#materias">MATÉRIAS</a>
+      <a href="../">HOME</a>
+      <a href="../#materias">MATÉRIAS</a>
     </nav>
   </header>
 
@@ -78,45 +86,55 @@
       <h1 class="titulo-redacao">Spain MC: quando a vivência vira rap e a superação ganha voz</h1>
 
       <div class="conteudo-redacao">
-        <p class="paragrafo-redacao">
-            Nascido e criado em Brás de Pina, no subúrbio do Rio de Janeiro, <span class="destaque-spain">Spain MC</span> carrega nas rimas muito mais do que técnica ou estética musical. Sua trajetória é marcada por vivência real, escolhas difíceis e uma transformação que hoje se reflete em cada verso que escreve e canta.
-        </p>
 
-        <p class="paragrafo-redacao">
-            Antes mesmo de se reconhecer como artista, Spain já havia sido apresentado ao Hip-Hop — não como moda, mas como linguagem de sobrevivência. Foi ali que ele encontrou um espaço de expressão em meio às contradições e desafios das ruas onde cresceu. Há cerca de seis anos, decidiu seguir o rap como caminho, guiado pela intuição e pelo desejo de viver do próprio sonho, com um objetivo claro: construir um futuro melhor e ajudar sua família.
-        </p>
+        <div class="imagem-lado-texto">
+          <img src="../../mcspain.jpeg" alt="Spain MC">
+          <div class="texto-lado-imagem">
+            <p class="paragrafo-redacao">
+              Nascido e criado em Brás de Pina, no subúrbio do Rio de Janeiro, <span class="destaque-spain">Spain MC</span> carrega nas rimas muito mais do que técnica ou estética musical. Sua trajetória é marcada por vivência real, escolhas difíceis e uma transformação que hoje se reflete em cada verso que escreve e canta.
+            </p>
 
-        <img src="../../spain1.png" alt="Spain MC" class="imagem-centro">
-
-        <p class="paragrafo-redacao">
-            O rap, para Spain, nunca foi apenas música. Sempre foi protesto, posicionamento e defesa de ideias que o sistema insiste em silenciar. Suas composições nascem da realidade vivida nas ruas do Rio de Janeiro, carregando verdade, crítica social e sentimento. Cada flow traz marcas de um cotidiano que poucos conhecem de fato.
-        </p>
-
-        <div class="citacao-redacao">
-            Durante a juventude, Spain se envolveu com a pixação, um reflexo direto do ambiente urbano e da busca por identidade. Em seguida, acabou se aproximando do crime, um caminho comum para muitos jovens das periferias. Mas sua história não parou ali.
+            <p class="paragrafo-redacao">
+              Antes mesmo de se reconhecer como artista, Spain já havia sido apresentado ao Hip-Hop — não como moda, mas como linguagem de sobrevivência. Foi ali que ele encontrou um espaço de expressão em meio às contradições e desafios das ruas onde cresceu. Há cerca de seis anos, decidiu seguir o rap como caminho, guiado pela intuição e pelo desejo de viver do próprio sonho, com um objetivo claro: construir um futuro melhor e ajudar sua família.
+            </p>
+          </div>
         </div>
 
-        <p class="paragrafo-redacao">
-            Em um momento decisivo, a fé e uma nova oportunidade mudaram o rumo de sua vida. Spain se afastou da vida errada e encontrou na música uma forma de redenção. O rap passou a ser não só um meio de expressão, mas também uma ferramenta de transformação pessoal e espiritual.
-        </p>
+        <div class="imagem-lado-texto">
+          <img src="../../mcspain2.jpeg" alt="Spain MC">
+          <div class="texto-lado-imagem">
+            <p class="paragrafo-redacao">
+              O rap, para Spain, nunca foi apenas música. Sempre foi protesto, posicionamento e defesa de ideias que o sistema insiste em silenciar. Suas composições nascem da realidade vivida nas ruas do Rio de Janeiro, carregando verdade, crítica social e sentimento. Cada flow traz marcas de um cotidiano que poucos conhecem de fato.
+            </p>
 
-        <p class="paragrafo-redacao">
-            Atualmente morando em Araruama, na Região dos Lagos, Spain mantém viva a essência do subúrbio carioca que o formou. Suas músicas funcionam como relatos de superação, mensagens diretas para quem ainda se sente preso a ciclos de violência, exclusão e desesperança.
-        </p>
+            <div class="citacao-redacao">
+              Durante a juventude, Spain se envolveu com a pixação, um reflexo direto do ambiente urbano e da busca por identidade. Em seguida, acabou se aproximando do crime, um caminho comum para muitos jovens das periferias. Mas sua história não parou ali.
+            </div>
 
-        <p class="paragrafo-redacao" style="font-weight: 600; text-align: center; color: var(--accent);">
-            Spain MC representa a voz de quem viveu, caiu, levantou e decidiu contar sua história através da arte.
-        </p>
+            <p class="paragrafo-redacao">
+              Em um momento decisivo, a fé e uma nova oportunidade mudaram o rumo de sua vida. Spain se afastou da vida errada e encontrou na música uma forma de redenção. O rap passou a ser não só um meio de expressão, mas também uma ferramenta de transformação pessoal e espiritual.
+            </p>
 
-        <p class="paragrafo-redacao">
-            Seu rap não romantiza o erro, mas evidencia que a mudança é possível. É a prova de que, quando a vivência encontra propósito, a música se transforma em instrumento de resistência, fé e recomeço.
-            Este é o legado que Spain MC constrói, verso por verso, inspirando uma nova geração a acreditar no poder da transformação.
-        </p>
+            <p class="paragrafo-redacao">
+              Atualmente morando em Araruama, na Região dos Lagos, Spain mantém viva a essência do subúrbio carioca que o formou. Suas músicas funcionam como relatos de superação, mensagens diretas para quem ainda se sente preso a ciclos de violência, exclusão e desesperança.
+            </p>
+
+            <p class="paragrafo-redacao" style="font-weight: 600; text-align: center; color: var(--accent);">
+              Spain MC representa a voz de quem viveu, caiu, levantou e decidiu contar sua história através da arte.
+            </p>
+
+            <p class="paragrafo-redacao">
+              Seu rap não romantiza o erro, mas evidencia que a mudança é possível. É a prova de que, quando a vivência encontra propósito, a música se transforma em instrumento de resistência, fé e recomeço.
+              Este é o legado que Spain MC constrói, verso por verso, inspirando uma nova geração a acreditar no poder da transformação. Veja nossa entrevista exclusiva com o astro fixado no Portal Kim Ks. 
+            </p>
+          </div>
+        </div>
+
       </div>
     </article>
 
     <footer class="ks-footer">
-        <p>Portal Kim KS © 2025 — Lifestyle Masculino | Rap & Rua<br>Desenvolvido por It Ks Girl</p>
+        <p>Portal Kim KS © 2025 — Lifestyle Masculino | Rap & Rua<br>Desenvolvido & Redação por It Ks Girl</p>
         <a href="../index.html" class="ks-botao" style="margin-top: 15px; font-size: 0.7rem;">VOLTAR AO PORTAL</a>
     </footer>
   </main>
