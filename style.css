@@ -983,9 +983,16 @@ body.kimks-body .ks-footer {
     border-radius: 0;
   }
 }
-/* === CORREÇÃO DEFINITIVA FOOTER MOBILE === */
 @media (max-width: 768px) {
-  body {
-    padding-bottom: 140px; /* cria espaço REAL para o footer */
+  footer {
+    padding: 6px 8px;
+    font-size: 10px;
+    line-height: 1.2;
+  }
+}
+@media (max-width: 768px) {
+  body.kimks-body nav a {
+    font-size: 12px;
+    padding: 8px 12px;
   }
 }
