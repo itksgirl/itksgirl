@@ -988,7 +988,7 @@ body.kimks-body .ks-footer {
   body.kimks-body nav *,
   body.kimks-body .menu *,
   body.kimks-body .top-menu * {
-    font-size: 12px !important;
+    font-size: 8px !important;
     max-width: 100% !important;
     white-space: nowrap;
   }
