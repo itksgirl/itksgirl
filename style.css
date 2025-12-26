@@ -993,3 +993,36 @@ body.kimks-body .ks-footer {
     white-space: nowrap;
   }
 }
+@media (max-width: 768px) {
+
+  /* Header vira coluna */
+  .ks-header {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px;
+  }
+
+  /* Menu de links em linha */
+  .ks-nav {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    gap: 6px;
+  }
+
+  .ks-nav a {
+    font-size: 8px !important;
+    padding: 5px 8px !important;
+    white-space: nowrap;
+  }
+
+  /* KIM KS aparece embaixo */
+  .ks-logo {
+    display: block !important;
+    font-size: 12px !important;
+    margin-top: 4px !important;
+    text-align: center !important;
+    white-space: nowrap;
+  }
+}
