@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kim KS | Skatista Profissional & Street Culture</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #0a0a0a; /* fundo da home */
+      color: #fff;
+    }
+    header {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: #ff6600;
+    }
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    /* Seção da matéria */
+    .materia {
+      background-color: #0a0a0a;
+      color: #fff;
+      padding: 40px 0;
+      border-top: 1px solid #333;
+    }
+    .materia-container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
+    .materia-imagem img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .materia-legenda {
+      margin-top: 10px;
+      font-style: italic;
+      color: #ccc;
+      text-align: center;
+    }
+    .materia-texto h2 {
+      font-family: 'Arial Black', sans-serif;
+      color: #ff6600;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .materia-texto p {
+      font-size: 1.1em;
+      line-height: 1.6em;
+      margin-bottom: 15px;
+    }
+    .materia-link {
+      color: #ff6600;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .materia-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout desktop */
+    @media (min-width: 768px) {
+      .materia-container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .materia-imagem, .materia-texto {
+        flex: 1;
+      }
+      .materia-imagem {
+        margin-right: 30px;
+      }
+      .materia-texto h2 {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Kim KS | King of Scrawl
+  </header>
+
+  <main>
+    <!-- Matéria sobre Kim KS -->
+    <section class="materia">
+      <div class="materia-container">
+        <div class="materia-imagem">
+          <img src="kimksof.jpg" alt="Kim KS">
+          <div class="materia-legenda">street urbano de Kim KS</div>
+        </div>
+        <div class="materia-texto">
+          <h2>Kim KS: Da rua para o mundo</h2>
+          <p>
+            Kim KS, conhecido como o <strong>King of Scrawl</strong>, é um skatista carioca que está expandindo sua atuação além do esporte, levando a cultura urbana e o skate para novos horizontes. Sua trajetória inspira jovens do Brasil inteiro, mostrando que dedicação, talento e autenticidade podem abrir portas e transformar vidas.
+          </p>
+          <p>
+            Em destaque no portal Felipeh Campos, Kim KS demonstra como é possível unir paixão, arte e impacto social, conquistando espaço tanto nas pistas quanto na mídia. Sua história é prova de que o skate não é apenas um esporte, mas uma <strong>forma de expressão e resistência urbana</strong>.
+          </p>
+          <p>
+            <a href="https://felipehcampos.com.br/noticia/8761/skatista-carioca-amplia-atuacao-para-alem-do-esporte" target="_blank" class="materia-link">Leia a matéria completa no Felipeh Campos</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
