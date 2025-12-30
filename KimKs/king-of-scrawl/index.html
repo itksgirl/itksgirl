@@ -6,6 +6,35 @@
   <title>Kim KS | King of Scrawl</title>  
   <link rel="stylesheet" href="../../style.css" />  
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500;900&display=swap" rel="stylesheet" />  
+  
+  <style>
+    /* AS ALTERAÇÕES ABAIXO SÓ FUNCIONAM NO CELULAR */
+    @media (max-width: 768px) {
+      .ks-section {
+        padding: 40px 15px !important; /* Diminui o recuo lateral que espreme o texto */
+      }
+      header h2 {
+        font-size: 2.8rem !important; /* Diminui o título pra não cortar no celular */
+      }
+      header p {
+        letter-spacing: 2px !important; /* Ajusta o espaçamento das letras da marca */
+      }
+      /* Faz as duas colunas virarem uma só no celular */
+      div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+      }
+      /* Ajusta a margem do rodapé da matéria */
+      div[style*="margin-top: 100px"] {
+        margin-top: 50px !important;
+        padding: 30px 10px !important;
+      }
+      div[style*="margin-top: 100px"] h2 {
+        letter-spacing: 5px !important;
+        font-size: 1.2rem !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="kimks-body">
@@ -34,7 +63,7 @@
             </p>
         </header>
 
-        <div style="width: 100%; margin-bottom: 80px; border: 1px solid #333; background: #050505; padding: 20px;">
+        <div style="width: 100%; margin-bottom: 80px; border: 1px solid #333; background: #050505; padding: 20px; box-sizing: border-box;">
             <img src="../../kingofscrawl1.jpeg" alt="King Of Scrawl - Arte e Estilo de Rua" 
                  style="width: 100%; max-height: 800px; object-fit: contain; display: block; filter: grayscale(100%) contrast(1.2);">
         </div>
@@ -55,15 +84,15 @@
                 
                 <div style="font-size: 1.15rem; line-height: 1.9; color: #efefef; text-align: justify;">
                     <p style="margin-bottom: 30px;">
-                        A <strong>King Of Scrawl</strong> emerge no cenário nacional como a assinatura definitiva da cultura underground. Idealizada pelo skatista profissional <strong>Kim KS</strong>, a marca é a síntese de décadas de vivência nas ruas, onde o skate, a arte e o estilo se fundem em uma única identidade. Não se trata apenas de vestuário; é a materialização do "rabisco" — o traço bruto que define a alma de quem domina o asfalto.
+                        A <strong>King Of Scrawl</strong> emerge no cenário nacional como a assinatura definitiva da cultura underground. Idealizada pelo skatista profissional <strong>Kim KS</strong>, a marca é a síntese de décadas de vivência nas ruas...
                     </p>
                     
                     <p style="margin-bottom: 30px;">
-                        Focada em entregar um lifestyle autêntico, a <strong>King Of Scrawl</strong> redefine o conceito de <em>streetwear</em> premium. Cada peça, cada design e cada gota de tinta aplicada carrega a chancela de quem entende a dinâmica das metrópoles. Para o skatista profissional Kim KS, a KS é o ponto onde o desempenho técnico encontra a estética impecável, criando uma comunidade para aqueles que respiram a verdadeira essência da rua.
+                        Focada em entregar um lifestyle autêntico, a <strong>King Of Scrawl</strong> redefine o conceito de <em>streetwear</em> premium...
                     </p>
 
                     <p style="margin-bottom: 30px;">
-                        O enfâse da <strong>King Of Scrawl</strong> está na originalidade. Em um mundo de produções em massa, a marca se destaca pelo cuidado artesanal com o design gráfico e pela escolha de cortes que favorecem a mobilidade sem abdicar da elegância agressiva. É a realeza do estilo urbano, forjada no concreto e lapidada pela arte.
+                        O enfâse da <strong>King Of Scrawl</strong> está na originalidade...
                     </p>
                 </div>
             </div>
