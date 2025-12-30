@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <title>King Of Scrawl | Sticker Album Oficial</title>  
+  <link rel="stylesheet" href="../../style.css" />  
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@900&display=swap" rel="stylesheet" />  
+</head>
+
+<body class="kimks-body">
+  <video class="video-fundo" autoplay muted loop playsinline>  
+    <source src="../../agua.mp4" type="video/mp4" />  
+  </video>
+
+  <header class="ks-header">  
+    <nav class="ks-nav">  
+      <a href="../index.html">Home</a>
+      <a href="../index.html">Matéria</a>
+    </nav>  
+    <h1 class="ks-logo">KIM KS</h1>  
+  </header>
+
+  <main style="padding-top: 100px; position: relative; z-index: 10;">
+    <section class="ks-section" style="background: rgba(0,0,0,0.8); border-top: 2px solid var(--green); padding: 60px 20px;">
+      
+      <div style="text-align: center; margin-bottom: 50px;">
+          <h2 style="font-family: 'Rubik Mono One'; color: #fff; font-size: clamp(1.5rem, 5vw, 3rem);">STICKER <span style="color: var(--green);">ALBUM</span></h2>
+          <p style="font-family: 'Orbitron'; color: var(--green); letter-spacing: 3px;">COLEÇÃO OFICIAL KING OF SCRAWL</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
+          
+         <script>
+          // Script para gerar as imagens do 3 ao 23 com SEO focado em King Of Scrawl
+          const container = document.currentScript.parentElement;
+          for (let i = 3; i <= 23; i++) {
+            const div = document.createElement('div');
+            div.style.border = "1px solid #222";
+            div.style.padding = "10px";
+            div.style.background = "#050505";
+            div.style.textAlign = "center";
+            
+            div.innerHTML = `
+              <img src="../../imagens/kingofscrawl${i}.jpeg" 
+                   alt="King Of Scrawl - Figurinha Oficial Kim KS Art ${i}" 
+                   style="width: 100%; display: block; filter: contrast(1.1);">
+              <p style="font-family: 'Orbitron'; font-size: 0.6rem; color: var(--green); margin-top: 8px; text-transform: uppercase;">
+                King Of Scrawl #${i}
+              </p>
+            `;
+            container.appendChild(div);
+          }
+        </script>
+      </div>
+
+      <div style="margin-top: 60px; text-align: center; border-top: 1px solid #333; padding-top: 40px;">
+          <a href="https://br.pinterest.com/Kingofscrawl/" target="_blank" style="font-family: 'Orbitron'; color: #E60023; text-decoration: none; font-weight: 900; font-size: 1.2rem;">
+             📌 SALVAR NO PINTEREST
+          </a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="ks-footer">  
+    <p>Portal Kim KS &copy; 2025 — Lifestyle Masculino | Desenvolvido por It Ks Girl</p>  
+  </footer>
+</body>
+</html>
