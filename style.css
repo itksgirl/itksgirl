@@ -983,12 +983,12 @@ body.kimks-body .ks-footer {
     border-radius: 0;
   }
 /* FORÇAR REDUÇÃO DO TEXTO DO MENU (KIM KS) */
-@media (max-width: 768px) {
+@media (max-width: 770px) {
   body.kimks-body header *,
   body.kimks-body nav *,
   body.kimks-body .menu *,
   body.kimks-body .top-menu * {
-    font-size: 8px !important;
+    font-size: 6px !important;
     max-width: 100% !important;
     white-space: nowrap;
   }
