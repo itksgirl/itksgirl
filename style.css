@@ -1091,43 +1091,40 @@ body .btn-stickers {
     color: #000 !important;
     box-shadow: 0 0 20px #00ff9d !important;
 }
-/* FORÇAR FECHAMENTO DE BURACOS NO MOBILE */
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-}
+/* ELIMINAR O VÁCUO ENTRE HEADER E CONTEÚDO */
 
-/* 1. Cola o Header no topo e remove margem inferior */
-.ks-header {
-    margin-bottom: 0 !important;
-    padding-bottom: 5px !important;
-}
-
-/* 2. Remove o espaço gigante antes do texto "Underground" */
+/* 1. Remove qualquer altura mínima que centralize o conteúdo verticalmente */
 .ks-banner {
-    margin-top: -10px !important; /* Puxa o conteúdo para cima */
-    padding-top: 0 !important;
-    min-height: 100px !important; /* Impede que ele estique sozinho */
-}
-
-/* 3. Ajusta o texto do banner para ficar compacto */
-.ks-banner-text {
+    display: block !important;
+    min-height: auto !important; 
+    height: auto !important;
+    padding-top: 5px !important; /* Aproxima o texto do menu */
     margin-top: 0 !important;
-    padding: 10px !important;
 }
 
-/* 4. Aproxima a seção de História do banner */
-#historia.ks-section {
-    margin-top: 5px !important;
+/* 2. Remove margens que empurram o texto para baixo */
+.ks-banner-text {
+    margin: 0 auto !important;
+    padding: 10px 20px !important;
+    transform: none !important; /* Caso tenha algum translate centralizando */
+}
+
+/* 3. Força o main a começar no topo absoluto */
+#main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* Garante que comece de cima */
     padding-top: 0 !important;
 }
 
-/* 5. Garante que o vídeo de fundo não desloque o layout */
-.video-fundo {
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+/* 4. Ajuste para o cabeçalho não empurrar o resto */
+.ks-header {
+    position: relative !important;
+    z-index: 10;
+    margin-bottom: 0 !important;
+}
+
+/* 5. Se o espaço for causado por um flexbox no body */
+body.kimks-body {
+    display: block !important;
 }
