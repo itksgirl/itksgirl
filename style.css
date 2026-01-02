@@ -407,7 +407,6 @@ body.kimks-body {
   font-family: 'Orbitron', sans-serif;
   color: #f2f2f2;
   background: transparent;
-  min-height: 100vh;
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1090,47 +1089,4 @@ body .btn-stickers {
     background: #00ff9d !important;
     color: #000 !important;
     box-shadow: 0 0 20px #00ff9d !important;
-}
-/* FIX FINAL: REMOVER ESPAÇO CINZA E SUBIR CONTEÚDO */
-
-/* 1. Remove a altura de 100% que faz o site esticar no celular */
-html, body.kimks-body {
-    height: auto !important;
-    min-height: 0 !important;
-    display: block !important;
-}
-
-/* 2. Remove o espaço do container principal */
-#main-content {
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-}
-
-/* 3. Ajusta o Banner para não ser gigante e subir */
-.ks-banner {
-    display: block !important;
-    height: auto !important;
-    min-height: 0 !important;
-    padding: 20px 0 !important; /* Diminui o tamanho da caixa cinza */
-    margin-top: -80px !important; /* Puxa para cima para colar no menu */
-    margin-bottom: 0 !important;
-}
-
-/* 4. Garante que o texto dentro não tenha margens sobrando */
-.ks-banner-text {
-    margin: 0 !important;
-    padding: 10px !important;
-}
-
-/* 5. Ajuste para o vídeo não empurrar nada */
-.video-fundo {
-    position: fixed !important;
-    height: 100% !important;
-}
-
-/* 6. Aproxima a seção de baixo (História) */
-.ks-section {
-    margin-top: 0 !important;
-    padding-top: 10px !important;
 }
