@@ -830,6 +830,7 @@ body.kimks-body #main-content {
     margin: 10px !important;
   }
   .pagina-institucional {
+    margin-top: -75px !important;
     padding: 25px 16px;
     border-radius: 12px;
   }
@@ -987,7 +988,7 @@ body.kimks-body #main-content {
     border-radius: 0;
   }
 /* FORÇAR REDUÇÃO DO TEXTO DO MENU (KIM KS) */
-@media (max-width: 768git px) {
+@media (max-width: 768px) {
   body.kimks-body header *,
   body.kimks-body nav *,
   body.kimks-body .menu *,
