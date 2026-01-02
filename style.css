@@ -1091,3 +1091,44 @@ body .btn-stickers {
     color: #000 !important;
     box-shadow: 0 0 20px #00ff9d !important;
 }
+/* AJUSTE PARA ELIMINAR ESPAÇOS SOBRANDO NO MOBILE */
+
+/* 1. Remove espaços do corpo e da estrutura principal */
+body.kimks-body {
+    overflow-x: hidden;
+}
+
+.modern-main, #main-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* 2. Ajusta o Banner que está empurrando o conteúdo para baixo */
+.ks-banner {
+    min-height: auto !important; /* Remove altura mínima excessiva */
+    padding: 20px 0 !important;  /* Diminui o respiro interno */
+    margin-bottom: 0 !important;
+}
+
+/* 3. Ajusta o Header para não ocupar espaço desnecessário */
+.ks-header {
+    margin-bottom: 10px !important;
+}
+
+/* 4. Remove espaços do topo das seções */
+.ks-section {
+    margin-top: 10px !important;
+    padding-top: 10px !important;
+}
+
+/* Ajuste específico para as imagens dos prints */
+@media (max-width: 768px) {
+    .ks-banner-text {
+        padding: 15px !important;
+    }
+    
+    /* Remove aquele vácuo cinza que aparece no celular */
+    .video-fundo {
+        height: 100vh; /* Garante que o vídeo cubra o fundo sem criar buracos */
+    }
+}
