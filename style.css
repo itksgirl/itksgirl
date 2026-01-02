@@ -1091,44 +1091,43 @@ body .btn-stickers {
     color: #000 !important;
     box-shadow: 0 0 20px #00ff9d !important;
 }
-/* AJUSTE PARA ELIMINAR ESPAÇOS SOBRANDO NO MOBILE */
-
-/* 1. Remove espaços do corpo e da estrutura principal */
-body.kimks-body {
-    overflow-x: hidden;
+/* FORÇAR FECHAMENTO DE BURACOS NO MOBILE */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.modern-main, #main-content {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-}
-
-/* 2. Ajusta o Banner que está empurrando o conteúdo para baixo */
-.ks-banner {
-    min-height: auto !important; /* Remove altura mínima excessiva */
-    padding: 20px 0 !important;  /* Diminui o respiro interno */
-    margin-bottom: 0 !important;
-}
-
-/* 3. Ajusta o Header para não ocupar espaço desnecessário */
+/* 1. Cola o Header no topo e remove margem inferior */
 .ks-header {
-    margin-bottom: 10px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 5px !important;
 }
 
-/* 4. Remove espaços do topo das seções */
-.ks-section {
-    margin-top: 10px !important;
-    padding-top: 10px !important;
+/* 2. Remove o espaço gigante antes do texto "Underground" */
+.ks-banner {
+    margin-top: -10px !important; /* Puxa o conteúdo para cima */
+    padding-top: 0 !important;
+    min-height: 100px !important; /* Impede que ele estique sozinho */
 }
 
-/* Ajuste específico para as imagens dos prints */
-@media (max-width: 768px) {
-    .ks-banner-text {
-        padding: 15px !important;
-    }
-    
-    /* Remove aquele vácuo cinza que aparece no celular */
-    .video-fundo {
-        height: 100vh; /* Garante que o vídeo cubra o fundo sem criar buracos */
-    }
+/* 3. Ajusta o texto do banner para ficar compacto */
+.ks-banner-text {
+    margin-top: 0 !important;
+    padding: 10px !important;
+}
+
+/* 4. Aproxima a seção de História do banner */
+#historia.ks-section {
+    margin-top: 5px !important;
+    padding-top: 0 !important;
+}
+
+/* 5. Garante que o vídeo de fundo não desloque o layout */
+.video-fundo {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
