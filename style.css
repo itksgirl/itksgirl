@@ -508,7 +508,7 @@ body.kimks-body #main-content {
 
 body.kimks-body .ks-banner {
     margin: 10px 20px !important;   /* Diminuiu de 16px para 5px */
-    padding: 20px !important;  /* Diminuiu de 28px para 10px */
+    padding: 10px !important;  /* Diminuiu de 28px para 10px */
     background: rgba(0,0,0,0.55);
     border-radius: 12px;
     display: flex;
@@ -822,7 +822,13 @@ body.kimks-body .ks-footer {
 }
 /* ===== AJUSTES MOBILE – PÁGINAS INSTITUCIONAIS ===== */
 @media (max-width: 768px) {
-
+body.kimks-body #main-content {
+    margin-top: 60px !important;
+  }
+  body.kimks-body .ks-banner {
+    padding: 10px !important;
+    margin: 10px !important;
+  }
   .pagina-institucional {
     padding: 25px 16px;
     border-radius: 12px;
