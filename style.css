@@ -823,7 +823,7 @@ body.kimks-body .ks-footer {
 /* ===== AJUSTES MOBILE – PÁGINAS INSTITUCIONAIS ===== */
 @media (max-width: 768px) {
 body.kimks-body #main-content {
-    margin-top: -85px !important;
+    margin-top: -80px !important;
   }
   body.kimks-body .ks-banner {
     padding: 10px !important;
