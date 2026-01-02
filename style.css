@@ -647,7 +647,7 @@ body.kimks-body .ks-lista-materias li {
 
 body.kimks-body .materia-link {
   display: block;
-  color: #ff7faf;
+  color: #fffbfd;
   font-weight: 700;
   text-decoration: none;
   padding: 6px;
@@ -1029,4 +1029,65 @@ body.kimks-body .ks-footer {
     text-align: center !important;
     white-space: nowrap !important;
   }
+}
+/* ================================================================
+   APPLE TECH 2026 BUTTONS - ULTIMATE FIX
+   ================================================================ */
+
+body .btn-entrevista, 
+body .btn-stickers {
+    all: unset; /* Reseta qualquer estilo anterior que esteja atrapalhando */
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    margin-top: 15px;
+    cursor: pointer;
+    
+    /* Look Apple Glassmorphism */
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    
+    /* Borda e Texto */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    
+    /* Tipografia */
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* FORÇAR ESTILO APPLE 2026 */
+.btn-entrevista, .btn-stickers {
+    display: inline-block !important;
+    padding: 12px 25px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid #00ff9d !important;
+    border-radius: 8px !important;
+    color: #00ff9d !important;
+    font-family: 'Orbitron', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    margin-top: 15px !important;
+    transition: 0.3s !important;
+}
+
+.btn-entrevista:hover, .btn-stickers:hover {
+    background: #00ff9d !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px #00ff9d !important;
 }
