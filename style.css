@@ -830,9 +830,11 @@ body.kimks-body #main-content {
     margin: 10px !important;
   }
   .pagina-institucional {
-    padding-top: 0 !important;
+    margin-top: -75px !important; /* Puxa o bloco cinza para cima */
+    padding-top: 0 !important;    /* Remove o buraco cinza acima do título */
+    padding-bottom: 20px !important;
     border-radius: 12px;
-  }
+}
 
   .pagina-institucional h1 {
     font-size: 20px;
@@ -987,7 +989,7 @@ body.kimks-body #main-content {
     border-radius: 0;
   }
 /* FORÇAR REDUÇÃO DO TEXTO DO MENU (KIM KS) */
-@media (max-width: 768git px) {
+@media (max-width: 768px) {
   body.kimks-body header *,
   body.kimks-body nav *,
   body.kimks-body .menu *,
