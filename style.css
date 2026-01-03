@@ -830,8 +830,10 @@ body.kimks-body #main-content {
     margin: 10px !important;
   }
   .pagina-institucional {
-    margin-top: -75px !important;
-    padding: 25px 16px;
+    margin-top: -85px !important; /* Subimos só um pouco mais que 75 */
+    padding-top: 0  !important; /* removemos o "vazio" cinzento no topo */
+    padding-left: 16px;
+    padding-right: 16px; 
     border-radius: 12px;
   }
 
