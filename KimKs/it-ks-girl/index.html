@@ -8,6 +8,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />  
   
   <style>
+    @media (max-width: 600px) {
+    /* Diminui o título para não vazar da caixa */
+    .titulo-materia {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Dá espaço para o texto respirar e não ficar amontoado */
+    .caixa-materia-itks {
+        padding: 25px 15px !important;
+        margin: 15px 10px !important;
+    }
+
+    /* Ajusta o texto da matéria */
+    .caixa-materia-itks p {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Garante que o quadrado da foto não fique gigante */
+    .espaco-foto {
+        height: 250px !important;
+    }
+}
+
     /* FUNDO DO SITE */
     body {
         background-color: #121212 !important; 
