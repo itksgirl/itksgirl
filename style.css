@@ -830,7 +830,7 @@ body.kimks-body #main-content {
     margin: 10px !important;
   }
   .pagina-institucional {
-    padding: 25px 16px;
+    padding-top: 0 !important;
     border-radius: 12px;
   }
 
