@@ -6,7 +6,6 @@ const suggestionButtons = document.querySelectorAll(".suggestion-button");
 
 function criarMensagem(nome, texto, tipo) {
   const message = document.createElement("div");
-
   message.classList.add("message", tipo);
 
   const messageName = document.createElement("span");
@@ -18,7 +17,6 @@ function criarMensagem(nome, texto, tipo) {
 
   message.appendChild(messageName);
   message.appendChild(messageText);
-
   chatMessages.appendChild(message);
 
   message.scrollIntoView({
@@ -37,6 +35,30 @@ function mostrarAnalise() {
   );
 }
 
+async function buscarRespostaNaIA(pergunta) {
+  const response = await fetch("/api/chat", {
+    method: "POST",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      pergunta: pergunta
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(
+      data.erro || "Não foi possível obter uma resposta."
+    );
+  }
+
+  return data.resposta;
+}
+
 suggestionButtons.forEach((button) => {
   button.addEventListener("click", () => {
     userInput.value = button.dataset.question;
@@ -44,7 +66,7 @@ suggestionButtons.forEach((button) => {
   });
 });
 
-chatForm.addEventListener("submit", (event) => {
+chatForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const pergunta = userInput.value.trim();
@@ -60,16 +82,28 @@ chatForm.addEventListener("submit", (event) => {
 
   const mensagemDeAnalise = mostrarAnalise();
 
-  setTimeout(() => {
+  try {
+    const resposta = await buscarRespostaNaIA(pergunta);
+
     mensagemDeAnalise.remove();
 
     criarMensagem(
       "ITKs AI",
-      "A interface está funcionando perfeitamente. Na próxima etapa, conectaremos meu cérebro à API para que eu responda perguntas reais de programação.",
+      resposta,
+      "ai-message"
+    );
+  } catch (erro) {
+    mensagemDeAnalise.remove();
+
+    criarMensagem(
+      "ITKs AI",
+      "Ainda não consegui acessar meu cérebro. Verifique a conexão do servidor e tente novamente.",
       "ai-message"
     );
 
+    console.error("Erro ao consultar a IA:", erro);
+  } finally {
     sendButton.disabled = false;
     userInput.focus();
-  }, 1800);
+  }
 });

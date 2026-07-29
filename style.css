@@ -58,7 +58,7 @@ a {
 
 @keyframes marqueeMove {
   from {
-    transform: translateX(100%);
+    transform: translateX(15%);
   }
   to {
     transform: translateX(-100%);
@@ -257,8 +257,8 @@ a {
   }
 
   .hero-card {
-    min-height: 38vh;
-    padding: 20px;
+    min-height: 78vh;
+    padding: 24px;
   }
 
   .main-logo {
