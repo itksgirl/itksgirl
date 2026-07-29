@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -20,120 +21,304 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="ia-style.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="ia-style.css"
+  >
+
 </head>
 
 <body>
 
-  <header class="ai-header">
-    <a href="/" class="back-link" aria-label="Voltar para o site">
-      ←
-    </a>
+  <div class="app-layout">
 
-    <a href="/" class="ai-logo">
-      it ks girl
-    </a>
+    <aside class="sidebar" id="sidebar">
 
-    <span class="ai-status">
-      AI
-    </span>
-  </header>
+      <div class="sidebar-header">
 
-  <main class="ai-main">
+        <a href="/" class="sidebar-logo">
+          ITKs AI
+        </a>
 
-    <section class="intro-section">
-      <p class="intro-label">
-        ASSISTENTE DE PROGRAMAÇÃO
-      </p>
-
-      <h1>
-        ITKs AI
-      </h1>
-
-      <p class="intro-text">
-        Tire dúvidas, entenda códigos e aprenda programação
-        com explicações simples e passo a passo.
-      </p>
-    </section>
-
-    <section class="suggestions" aria-label="Sugestões de perguntas">
-
-      <button
-        class="suggestion-button"
-        data-question="Explique JavaScript para uma pessoa iniciante."
-      >
-        O que é JavaScript?
-      </button>
-
-      <button
-        class="suggestion-button"
-        data-question="Explique este código linha por linha."
-      >
-        Explicar um código
-      </button>
-
-      <button
-        class="suggestion-button"
-        data-question="Ajude-me a encontrar o erro no meu código."
-      >
-        Encontrar um erro
-      </button>
-
-    </section>
-
-    <section class="chat-card" aria-label="Conversa com a ITKs AI">
-
-      <div id="chat-messages" class="chat-messages">
-
-        <div class="message ai-message">
-          <span class="message-name">ITKs AI</span>
-
-          <p>
-            Olá! Eu sou uma assistente especializada em programação.
-            Envie uma dúvida ou cole um código para começarmos.
-          </p>
-        </div>
+        <button
+          type="button"
+          id="menu-close"
+          class="menu-close"
+          aria-label="Fechar menu lateral"
+        >
+          ✕
+        </button>
 
       </div>
 
-      <form id="chat-form" class="chat-form">
+      <button
+        type="button"
+        class="new-chat"
+        id="new-chat"
+      >
+        <span>＋</span>
+        Nova conversa
+      </button>
 
-        <label for="user-input" class="sr-only">
-          Digite sua dúvida de programação
-        </label>
+      <nav class="sidebar-menu" aria-label="Menu principal">
 
-        <textarea
-          id="user-input"
-          name="userMessage"
-          placeholder="Digite sua dúvida ou cole seu código..."
-          rows="4"
-          required
-        ></textarea>
+        <a href="#" class="sidebar-link active">
+          <span class="sidebar-icon">💬</span>
+          Conversas
+        </a>
 
-        <div class="form-footer">
-          <span class="input-hint">
-            Somente assuntos de programação
-          </span>
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">📁</span>
+          Projetos
+        </a>
 
-          <button type="submit" id="send-button">
-            Enviar
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">💻</span>
+          Códigos
+        </a>
+
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">📚</span>
+          Aprender
+        </a>
+
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">⭐</span>
+          Favoritos
+        </a>
+
+      </nav>
+
+      <div class="conversation-history">
+
+        <p class="history-title">
+          Recentes
+        </p>
+
+        <button
+          type="button"
+          class="history-item"
+        >
+          Primeira conversa
+        </button>
+
+        <button
+          type="button"
+          class="history-item"
+        >
+          Aprender JavaScript
+        </button>
+
+        <button
+          type="button"
+          class="history-item"
+        >
+          Encontrar erro no CSS
+        </button>
+
+      </div>
+
+      <div class="sidebar-footer">
+
+        <button
+          type="button"
+          class="sidebar-settings"
+        >
+          ⚙️ Configurações
+        </button>
+
+      </div>
+
+    </aside>
+
+    <div
+      class="sidebar-overlay"
+      id="sidebar-overlay"
+    ></div>
+
+    <div class="main-content">
+
+      <header class="ai-header">
+
+        <div class="header-left">
+
+          <button
+            type="button"
+            id="menu-button"
+            class="menu-button"
+            aria-label="Abrir menu lateral"
+          >
+            ☰
           </button>
+
+          <a
+            href="/"
+            class="back-link"
+            aria-label="Voltar para o site"
+          >
+            ←
+          </a>
+
         </div>
 
-      </form>
+        <a href="/" class="ai-logo">
+          it ks girl
+        </a>
 
-    </section>
+        <div class="header-right">
 
-    <p class="ai-warning">
-      A ITKs AI pode cometer erros. Confira informações importantes.
-    </p>
+          <span class="ai-status">
+            AI
+          </span>
 
-  </main>
+        </div>
 
-  <footer class="ai-footer">
-    <p>IT KS GIRL © 2026</p>
-  </footer>
+      </header>
+
+      <main class="ai-main">
+
+        <section class="intro-section">
+
+          <p class="intro-label">
+            ASSISTENTE DE PROGRAMAÇÃO
+          </p>
+
+          <h1>
+            ITKs AI
+          </h1>
+
+          <p class="intro-text">
+            Tire dúvidas, entenda códigos e aprenda programação
+            com explicações simples e passo a passo.
+          </p>
+
+        </section>
+
+        <section
+          class="suggestions"
+          aria-label="Sugestões de perguntas"
+        >
+
+          <button
+            type="button"
+            class="suggestion-button"
+            data-question="Explique JavaScript para uma pessoa iniciante."
+          >
+            O que é JavaScript?
+          </button>
+
+          <button
+            type="button"
+            class="suggestion-button"
+            data-question="Explique este código linha por linha."
+          >
+            Explicar um código
+          </button>
+
+          <button
+            type="button"
+            class="suggestion-button"
+            data-question="Ajude-me a encontrar o erro no meu código."
+          >
+            Encontrar um erro
+          </button>
+
+        </section>
+
+        <section
+          class="chat-card"
+          aria-label="Conversa com a ITKs AI"
+        >
+
+          <div
+            id="chat-messages"
+            class="chat-messages"
+          >
+
+            <div class="message ai-message">
+
+              <span class="message-name">
+                ITKs AI
+              </span>
+
+              <p>
+                Olá! Eu sou uma assistente especializada em programação.
+                Envie uma dúvida ou cole um código para começarmos.
+              </p>
+
+            </div>
+
+          </div>
+
+          <form
+            id="chat-form"
+            class="chat-form"
+          >
+
+            <label
+              for="user-input"
+              class="sr-only"
+            >
+              Digite sua dúvida de programação
+            </label>
+
+            <textarea
+              id="user-input"
+              name="userMessage"
+              placeholder="Digite sua dúvida ou cole seu código..."
+              rows="5"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            ></textarea>
+
+            <div class="form-footer">
+
+              <span class="input-hint">
+                Somente assuntos de programação
+              </span>
+
+              <button
+                type="submit"
+                id="send-button"
+              >
+                Enviar
+              </button>
+
+            </div>
+
+          </form>
+
+        </section>
+
+        <p class="ai-warning">
+          A ITKs AI pode cometer erros. Sempre valide códigos importantes.
+        </p>
+
+      </main>
+
+      <footer class="ai-footer">
+
+        <p>
+          IT KS GIRL © 2026
+        </p>
+
+      </footer>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 
   <script src="ia-script.js"></script>
+
 </body>
 </html>
