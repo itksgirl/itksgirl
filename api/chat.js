@@ -30,10 +30,10 @@ export default async function handler(req, res) {
     const data = await response.json();
 
 if (!response.ok) {
-  console.error("Erro OpenAI:", data);
+  console.log("Resposta completa da OpenAI:", JSON.stringify(data));
 
-  return res.status(response.status).json({
-    erro: data.error?.message || "Erro desconhecido na OpenAI"
+  return res.status(500).json({
+    erro: JSON.stringify(data)
   });
 }
 
