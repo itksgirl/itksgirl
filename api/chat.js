@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
+        model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
@@ -29,9 +29,17 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    res.status(200).json({
-      resposta: data.choices[0].message.content
-    });
+if (!response.ok) {
+  console.error("Erro OpenAI:", data);
+
+  return res.status(response.status).json({
+    erro: data.error?.message || "Erro desconhecido na OpenAI"
+  });
+}
+
+res.status(200).json({
+  resposta: data.choices[0].message.content
+});
 
   } catch (error) {
     console.error(error);
