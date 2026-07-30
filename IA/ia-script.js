@@ -1,3 +1,5 @@
+import { supabase } from "./supabase-config.js";
+
 const chatForm = document.getElementById("chat-form");
 const userInput = document.getElementById("user-input");
 const chatMessages = document.getElementById("chat-messages");

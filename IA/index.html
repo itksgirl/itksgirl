@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
 
   <meta
     name="description"
-    content="ITKs AI — assistente especializado em programação."
+    content="ITKs AI — assistente de programação para aprender, analisar códigos e solucionar dúvidas."
+  >
+
+  <meta
+    name="theme-color"
+    content="#f7f4f4"
   >
 
   <title>ITKs AI | Assistente de Programação</title>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
@@ -28,30 +43,49 @@
 
   <link
     rel="stylesheet"
-    href="ia-style.css"
+    href="./ia-style.css"
   >
-
 </head>
 
 <body>
 
   <div class="app-layout">
 
-    <aside class="sidebar" id="sidebar">
+    <!-- MENU LATERAL -->
+    <aside
+      class="sidebar"
+      id="sidebar"
+      aria-label="Menu lateral"
+    >
 
       <div class="sidebar-header">
 
-        <a href="/" class="sidebar-logo">
-          ITKs AI
+        <a
+          href="/"
+          class="sidebar-logo"
+          aria-label="Voltar para o site It Ks Girl"
+        >
+          <span class="sidebar-logo-mark" aria-hidden="true">
+            I
+          </span>
+
+          <span class="sidebar-logo-text">
+            ITKs AI
+          </span>
         </a>
 
         <button
           type="button"
           id="menu-close"
-          class="menu-close"
+          class="icon-button menu-close"
           aria-label="Fechar menu lateral"
         >
-          ✕
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
         </button>
 
       </div>
@@ -61,86 +95,254 @@
         class="new-chat"
         id="new-chat"
       >
-        <span>＋</span>
-        Nova conversa
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+
+        <span>Nova conversa</span>
       </button>
 
-      <nav class="sidebar-menu" aria-label="Menu principal">
+      <nav
+        class="sidebar-menu"
+        aria-label="Navegação principal"
+      >
 
-        <a href="#" class="sidebar-link active">
-          <span class="sidebar-icon">💬</span>
-          Conversas
+        <a
+          href="#"
+          class="sidebar-link active"
+          aria-current="page"
+        >
+          <svg
+            class="sidebar-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M5 5h14v10H9l-4 4V5z"></path>
+          </svg>
+
+          <span>Conversas</span>
         </a>
 
-        <a href="#" class="sidebar-link">
-          <span class="sidebar-icon">📁</span>
-          Projetos
+        <a
+          href="#"
+          class="sidebar-link"
+        >
+          <svg
+            class="sidebar-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M3 7h7l2 2h9v10H3V7z"></path>
+          </svg>
+
+          <span>Projetos</span>
         </a>
 
-        <a href="#" class="sidebar-link">
-          <span class="sidebar-icon">💻</span>
-          Códigos
+        <a
+          href="#"
+          class="sidebar-link"
+        >
+          <svg
+            class="sidebar-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M8 9l-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"></path>
+          </svg>
+
+          <span>Códigos</span>
         </a>
 
-        <a href="#" class="sidebar-link">
-          <span class="sidebar-icon">📚</span>
-          Aprender
+        <a
+          href="#"
+          class="sidebar-link"
+        >
+          <svg
+            class="sidebar-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M4 5h7v14H4zM13 5h7v14h-7z"></path>
+          </svg>
+
+          <span>Aprender</span>
         </a>
 
-        <a href="#" class="sidebar-link">
-          <span class="sidebar-icon">⭐</span>
-          Favoritos
+        <a
+          href="#"
+          class="sidebar-link"
+        >
+          <svg
+            class="sidebar-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3z"></path>
+          </svg>
+
+          <span>Favoritos</span>
         </a>
 
       </nav>
 
-      <div class="conversation-history">
+      <section
+        class="conversation-history"
+        aria-labelledby="history-title"
+      >
 
-        <p class="history-title">
-          Recentes
-        </p>
+        <div class="history-header">
 
-        <button
-          type="button"
-          class="history-item"
+          <p
+            class="history-title"
+            id="history-title"
+          >
+            Recentes
+          </p>
+
+        </div>
+
+        <div
+          class="history-list"
+          id="history-list"
         >
-          Primeira conversa
-        </button>
 
-        <button
-          type="button"
-          class="history-item"
-        >
-          Aprender JavaScript
-        </button>
+          <p
+            class="history-empty"
+            id="history-empty"
+          >
+            Suas conversas aparecerão aqui.
+          </p>
 
-        <button
-          type="button"
-          class="history-item"
-        >
-          Encontrar erro no CSS
-        </button>
+        </div>
 
-      </div>
+      </section>
 
       <div class="sidebar-footer">
 
+        <!-- USUÁRIO DESCONECTADO -->
         <button
           type="button"
-          class="sidebar-settings"
+          class="sidebar-account-button"
+          id="sidebar-login-button"
         >
-          ⚙️ Configurações
+          <span
+            class="account-avatar account-avatar-guest"
+            aria-hidden="true"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"></path>
+            </svg>
+          </span>
+
+          <span class="account-details">
+            <strong>Entrar</strong>
+            <small>Salvar conversas e preferências</small>
+          </span>
+
+          <svg
+            class="account-chevron"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M9 6l6 6-6 6"></path>
+          </svg>
         </button>
+
+        <!-- USUÁRIO CONECTADO -->
+        <div
+          class="sidebar-user"
+          id="sidebar-user"
+          hidden
+        >
+
+          <button
+            type="button"
+            class="sidebar-account-button"
+            id="account-menu-button"
+            aria-expanded="false"
+            aria-controls="account-menu"
+          >
+            <span
+              class="account-avatar"
+              id="account-avatar"
+              aria-hidden="true"
+            >
+              U
+            </span>
+
+            <span class="account-details">
+              <strong id="account-name">
+                Usuário
+              </strong>
+
+              <small id="account-email">
+                conta conectada
+              </small>
+            </span>
+
+            <svg
+              class="account-chevron"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
+          </button>
+
+          <div
+            class="account-menu"
+            id="account-menu"
+            hidden
+          >
+
+            <button
+              type="button"
+              id="profile-button"
+            >
+              Minha conta
+            </button>
+
+            <button
+              type="button"
+              id="settings-button"
+            >
+              Configurações
+            </button>
+
+            <div class="account-menu-divider"></div>
+
+            <button
+              type="button"
+              id="logout-button"
+              class="logout-button"
+            >
+              Sair
+            </button>
+
+          </div>
+
+        </div>
 
       </div>
 
     </aside>
 
-    <div
+
+    <!-- FUNDO DO MENU NO MOBILE -->
+    <button
+      type="button"
       class="sidebar-overlay"
       id="sidebar-overlay"
-    ></div>
+      aria-label="Fechar menu lateral"
+      tabindex="-1"
+    ></button>
 
+
+    <!-- CONTEÚDO PRINCIPAL -->
     <div class="main-content">
 
       <header class="ai-header">
@@ -150,35 +352,66 @@
           <button
             type="button"
             id="menu-button"
-            class="menu-button"
+            class="icon-button menu-button"
             aria-label="Abrir menu lateral"
           >
-            ☰
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M4 7h16M4 12h16M4 17h16"></path>
+            </svg>
           </button>
 
           <a
             href="/"
-            class="back-link"
+            class="icon-button back-link"
             aria-label="Voltar para o site"
           >
-            ←
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M15 18l-6-6 6-6"></path>
+            </svg>
           </a>
 
         </div>
 
-        <a href="/" class="ai-logo">
+        <a
+          href="/"
+          class="ai-logo"
+          aria-label="It Ks Girl"
+        >
           it ks girl
         </a>
 
         <div class="header-right">
 
-          <span class="ai-status">
-            AI
-          </span>
+          <button
+            type="button"
+            class="header-login-button"
+            id="header-login-button"
+          >
+            Entrar
+          </button>
+
+          <button
+            type="button"
+            class="header-user-button"
+            id="header-user-button"
+            aria-label="Abrir conta"
+            hidden
+          >
+            <span id="header-user-initial">
+              U
+            </span>
+          </button>
 
         </div>
 
       </header>
+
 
       <main class="ai-main">
 
@@ -194,10 +427,11 @@
 
           <p class="intro-text">
             Tire dúvidas, entenda códigos e aprenda programação
-            com explicações simples e passo a passo.
+            com explicações claras e passo a passo.
           </p>
 
         </section>
+
 
         <section
           class="suggestions"
@@ -209,7 +443,14 @@
             class="suggestion-button"
             data-question="Explique JavaScript para uma pessoa iniciante."
           >
-            O que é JavaScript?
+            <span>O que é JavaScript?</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
           </button>
 
           <button
@@ -217,7 +458,14 @@
             class="suggestion-button"
             data-question="Explique este código linha por linha."
           >
-            Explicar um código
+            <span>Explicar um código</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
           </button>
 
           <button
@@ -225,10 +473,18 @@
             class="suggestion-button"
             data-question="Ajude-me a encontrar o erro no meu código."
           >
-            Encontrar um erro
+            <span>Encontrar um erro</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M9 6l6 6-6 6"></path>
+            </svg>
           </button>
 
         </section>
+
 
         <section
           class="chat-card"
@@ -238,22 +494,36 @@
           <div
             id="chat-messages"
             class="chat-messages"
+            aria-live="polite"
+            aria-relevant="additions"
           >
 
             <div class="message ai-message">
 
-              <span class="message-name">
-                ITKs AI
-              </span>
+              <div
+                class="message-avatar"
+                aria-hidden="true"
+              >
+                AI
+              </div>
 
-              <p>
-                Olá! Eu sou uma assistente especializada em programação.
-                Envie uma dúvida ou cole um código para começarmos.
-              </p>
+              <div class="message-content">
+
+                <span class="message-name">
+                  ITKs AI
+                </span>
+
+                <p>
+                  Olá. Sou uma assistente especializada em programação.
+                  Envie uma dúvida ou cole um código para começarmos.
+                </p>
+
+              </div>
 
             </div>
 
           </div>
+
 
           <form
             id="chat-form"
@@ -267,28 +537,52 @@
               Digite sua dúvida de programação
             </label>
 
-            <textarea
-              id="user-input"
-              name="userMessage"
-              placeholder="Digite sua dúvida ou cole seu código..."
-              rows="5"
-              autocomplete="off"
-              spellcheck="false"
-              required
-            ></textarea>
+            <div class="composer">
 
-            <div class="form-footer">
-
-              <span class="input-hint">
-                Somente assuntos de programação. Se você estiver passando por uma situação de perigo, violência ou precisar desabafar, também posso orientar você a buscar ajuda de forma segura. Fora desses assuntos, minha atuação é limitada.
-              </span>
+              <textarea
+                id="user-input"
+                name="userMessage"
+                placeholder="Digite sua dúvida ou cole seu código"
+                rows="1"
+                maxlength="4000"
+                autocomplete="off"
+                autocapitalize="sentences"
+                spellcheck="true"
+                required
+              ></textarea>
 
               <button
                 type="submit"
                 id="send-button"
+                class="send-button"
+                aria-label="Enviar mensagem"
+                disabled
               >
-                Enviar
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M12 19V5M6 11l6-6 6 6"></path>
+                </svg>
               </button>
+
+            </div>
+
+            <div class="form-footer">
+
+              <p class="input-hint">
+                A ITKs AI é especializada em programação. Em situações de
+                risco, violência ou sofrimento, ela pode apresentar
+                orientações de segurança e encaminhamento.
+              </p>
+
+              <span
+                class="character-counter"
+                id="character-counter"
+                aria-live="polite"
+              >
+                0 / 4000
+              </span>
 
             </div>
 
@@ -296,11 +590,13 @@
 
         </section>
 
+
         <p class="ai-warning">
-          A ITKs AI pode cometer erros. Sempre valide códigos importantes.
+          A ITKs AI pode cometer erros. Revise códigos e decisões importantes.
         </p>
 
       </main>
+
 
       <footer class="ai-footer">
 
@@ -308,28 +604,503 @@
           IT KS GIRL © 2026
         </p>
 
+        <nav aria-label="Links institucionais">
+          <a href="/privacidade/">
+            Privacidade
+          </a>
+
+          <a href="/sobre/">
+            Sobre
+          </a>
+        </nav>
+
       </footer>
 
     </div>
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <!-- MODAL DE AUTENTICAÇÃO -->
+  <div
+    class="auth-modal"
+    id="auth-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="auth-title"
+    hidden
+  >
 
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css"
-/>
+    <button
+      type="button"
+      class="auth-backdrop"
+      id="auth-backdrop"
+      aria-label="Fechar janela de autenticação"
+      tabindex="-1"
+    ></button>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <section class="auth-panel">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+      <div class="auth-panel-header">
 
-<script src="ia-script.js"></script>
+        <div class="auth-brand">
+
+          <span
+            class="auth-brand-mark"
+            aria-hidden="true"
+          >
+            I
+          </span>
+
+          <span>
+            ITKs AI
+          </span>
+
+        </div>
+
+        <button
+          type="button"
+          class="icon-button auth-close"
+          id="auth-close"
+          aria-label="Fechar"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6L6 18"></path>
+          </svg>
+        </button>
+
+      </div>
+
+
+      <div
+        class="auth-view"
+        id="auth-main-view"
+      >
+
+        <div class="auth-introduction">
+
+          <p class="auth-eyebrow">
+            SUA CONTA
+          </p>
+
+          <h2 id="auth-title">
+            Continue na ITKs AI
+          </h2>
+
+          <p>
+            Entre para salvar conversas, acessar seu histórico
+            e continuar seus estudos em qualquer dispositivo.
+          </p>
+
+        </div>
+
+
+        <div
+          class="auth-tabs"
+          role="tablist"
+          aria-label="Entrar ou criar conta"
+        >
+
+          <button
+            type="button"
+            class="auth-tab active"
+            id="login-tab"
+            role="tab"
+            aria-selected="true"
+            aria-controls="login-panel"
+          >
+            Entrar
+          </button>
+
+          <button
+            type="button"
+            class="auth-tab"
+            id="register-tab"
+            role="tab"
+            aria-selected="false"
+            aria-controls="register-panel"
+          >
+            Criar conta
+          </button>
+
+        </div>
+
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <div
+          class="auth-tab-panel"
+          id="login-panel"
+          role="tabpanel"
+          aria-labelledby="login-tab"
+        >
+
+          <form
+            class="auth-form"
+            id="login-form"
+            novalidate
+          >
+
+            <div class="auth-field">
+
+              <label for="login-email">
+                E-mail
+              </label>
+
+              <input
+                type="email"
+                id="login-email"
+                name="email"
+                placeholder="voce@exemplo.com"
+                maxlength="254"
+                autocomplete="email"
+                inputmode="email"
+                required
+              >
+
+            </div>
+
+            <div class="auth-field">
+
+              <div class="auth-field-header">
+
+                <label for="login-password">
+                  Senha
+                </label>
+
+                <button
+                  type="button"
+                  class="text-button"
+                  id="forgot-password-button"
+                >
+                  Esqueci minha senha
+                </button>
+
+              </div>
+
+              <div class="password-wrapper">
+
+                <input
+                  type="password"
+                  id="login-password"
+                  name="password"
+                  placeholder="Digite sua senha"
+                  minlength="8"
+                  maxlength="72"
+                  autocomplete="current-password"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-password-toggle="login-password"
+                  aria-label="Mostrar senha"
+                >
+                  <svg
+                    class="eye-open"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+
+              </div>
+
+            </div>
+
+            <p
+              class="auth-message"
+              id="login-message"
+              aria-live="polite"
+            ></p>
+
+            <button
+              type="submit"
+              class="auth-submit"
+              id="login-submit"
+            >
+              Entrar
+            </button>
+
+          </form>
+
+        </div>
+
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <div
+          class="auth-tab-panel"
+          id="register-panel"
+          role="tabpanel"
+          aria-labelledby="register-tab"
+          hidden
+        >
+
+          <form
+            class="auth-form"
+            id="register-form"
+            novalidate
+          >
+
+            <div class="auth-field">
+
+              <label for="register-name">
+                Nome
+              </label>
+
+              <input
+                type="text"
+                id="register-name"
+                name="displayName"
+                placeholder="Como você quer ser chamado"
+                minlength="2"
+                maxlength="80"
+                autocomplete="name"
+                required
+              >
+
+            </div>
+
+            <div class="auth-field">
+
+              <label for="register-email">
+                E-mail
+              </label>
+
+              <input
+                type="email"
+                id="register-email"
+                name="email"
+                placeholder="voce@exemplo.com"
+                maxlength="254"
+                autocomplete="email"
+                inputmode="email"
+                required
+              >
+
+            </div>
+
+            <div class="auth-field">
+
+              <label for="register-password">
+                Senha
+              </label>
+
+              <div class="password-wrapper">
+
+                <input
+                  type="password"
+                  id="register-password"
+                  name="password"
+                  placeholder="Crie uma senha segura"
+                  minlength="8"
+                  maxlength="72"
+                  autocomplete="new-password"
+                  aria-describedby="password-requirements"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  data-password-toggle="register-password"
+                  aria-label="Mostrar senha"
+                >
+                  <svg
+                    class="eye-open"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                  </svg>
+                </button>
+
+              </div>
+
+              <p
+                class="field-hint"
+                id="password-requirements"
+              >
+                Use pelo menos 8 caracteres.
+              </p>
+
+            </div>
+
+            <div class="auth-consent">
+
+              <input
+                type="checkbox"
+                id="register-terms"
+                name="terms"
+                required
+              >
+
+              <label for="register-terms">
+                Li e concordo com a
+                <a
+                  href="/privacidade/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Política de Privacidade
+                </a>.
+              </label>
+
+            </div>
+
+            <p
+              class="auth-message"
+              id="register-message"
+              aria-live="polite"
+            ></p>
+
+            <button
+              type="submit"
+              class="auth-submit"
+              id="register-submit"
+            >
+              Criar conta
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <!-- RECUPERAÇÃO DE SENHA -->
+      <div
+        class="auth-view"
+        id="password-reset-view"
+        hidden
+      >
+
+        <button
+          type="button"
+          class="auth-back-button"
+          id="password-reset-back"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+
+          <span>Voltar</span>
+        </button>
+
+        <div class="auth-introduction">
+
+          <p class="auth-eyebrow">
+            RECUPERAR ACESSO
+          </p>
+
+          <h2>
+            Redefina sua senha
+          </h2>
+
+          <p>
+            Informe o e-mail da sua conta. Enviaremos um link
+            seguro para você criar uma nova senha.
+          </p>
+
+        </div>
+
+        <form
+          class="auth-form"
+          id="password-reset-form"
+          novalidate
+        >
+
+          <div class="auth-field">
+
+            <label for="password-reset-email">
+              E-mail
+            </label>
+
+            <input
+              type="email"
+              id="password-reset-email"
+              name="email"
+              placeholder="voce@exemplo.com"
+              maxlength="254"
+              autocomplete="email"
+              inputmode="email"
+              required
+            >
+
+          </div>
+
+          <p
+            class="auth-message"
+            id="password-reset-message"
+            aria-live="polite"
+          ></p>
+
+          <button
+            type="submit"
+            class="auth-submit"
+            id="password-reset-submit"
+          >
+            Enviar link
+          </button>
+
+        </form>
+
+      </div>
+
+
+      <p class="auth-security-note">
+        Sua senha é processada com segurança pelo sistema de autenticação
+        e não fica visível para a ITKs AI.
+      </p>
+
+    </section>
+
+  </div>
+
+
+  <!-- ALERTAS VISUAIS -->
+  <div
+    class="toast-container"
+    id="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+
+  <!-- BIBLIOTECAS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+    defer
+  ></script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"
+    defer
+  ></script>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"
+    defer
+  ></script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script
+    type="module"
+    src="./ia-script.js"
+  ></script>
 
 </body>
 </html>
-
