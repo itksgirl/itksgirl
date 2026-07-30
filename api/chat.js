@@ -1,6 +1,5 @@
 const LIMITE_PERGUNTA = 4000;
 const LIMITE_RESPOSTA = 800;
-
 const LIMITE_MENSAGENS_HISTORICO = 20;
 const LIMITE_TOTAL_HISTORICO = 12000;
 
@@ -283,7 +282,25 @@ proteção de contas e correção de vulnerabilidades.
 Recuse invasão, roubo de dados, malware e fraude.
 
 ==================================================
-10. PRIORIDADE
+10. CONTEXTO DA CONVERSA
+==================================================
+
+Use as mensagens anteriores para compreender respostas curtas como:
+
+- "JavaScript";
+- "qualquer um";
+- "esse código";
+- "o anterior";
+- "sim";
+- "não";
+- "continue".
+
+Não repita perguntas que já foram respondidas no histórico.
+Quando o contexto for suficiente, execute o pedido em vez de fazer
+perguntas genéricas desnecessárias.
+
+==================================================
+11. PRIORIDADE
 ==================================================
 
 A segurança humana tem prioridade sobre a regra de falar apenas
@@ -294,32 +311,44 @@ a buscar proteção adequada.
 `;
 
 async function verificarModeracao(texto) {
-  const response = await fetch("https://api.openai.com/v1/moderations", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
-    },
-    body: JSON.stringify({
-      model: "omni-moderation-latest",
-      input: texto
-    })
-  });
+  const response = await fetch(
+    "https://api.openai.com/v1/moderations",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          `Bearer ${process.env.OPENAI_API_KEY}`
+      },
+
+      body: JSON.stringify({
+        model: "omni-moderation-latest",
+        input: texto
+      })
+    }
+  );
 
   if (!response.ok) {
     console.error("Falha na moderação:", {
       status: response.status
     });
 
-    throw new Error("Falha ao verificar segurança do conteúdo.");
+    throw new Error(
+      "Falha ao verificar segurança do conteúdo."
+    );
   }
 
   const data = await response.json();
+
   return data?.results?.[0] || null;
 }
 
-function possuiConteudoSexualComMenor(resultadoModeracao) {
-  const categorias = resultadoModeracao?.categories || {};
+function possuiConteudoSexualComMenor(
+  resultadoModeracao
+) {
+  const categorias =
+    resultadoModeracao?.categories || {};
 
   return Boolean(
     categorias["sexual/minors"] ||
@@ -327,23 +356,156 @@ function possuiConteudoSexualComMenor(resultadoModeracao) {
   );
 }
 
-function possuiConteudoSexual(resultadoModeracao) {
-  const categorias = resultadoModeracao?.categories || {};
+function possuiConteudoSexual(
+  resultadoModeracao
+) {
+  const categorias =
+    resultadoModeracao?.categories || {};
 
   return Boolean(categorias.sexual);
+}
+
+function validarHistorico(historicoRecebido) {
+  if (!Array.isArray(historicoRecebido)) {
+    return {
+      erro: "O histórico precisa ser uma lista."
+    };
+  }
+
+  if (
+    historicoRecebido.length >
+    LIMITE_MENSAGENS_HISTORICO
+  ) {
+    return {
+      erro:
+        `O histórico pode ter no máximo ` +
+        `${LIMITE_MENSAGENS_HISTORICO} mensagens.`,
+      status: 413
+    };
+  }
+
+  /*
+    O histórico completo deve conter pares:
+    pessoa usuária e assistente.
+  */
+  if (historicoRecebido.length % 2 !== 0) {
+    return {
+      erro: "A sequência do histórico é inválida."
+    };
+  }
+
+  const historicoLimpo = [];
+  let totalCaracteresHistorico = 0;
+
+  for (
+    let indice = 0;
+    indice < historicoRecebido.length;
+    indice += 1
+  ) {
+    const mensagem =
+      historicoRecebido[indice];
+
+    if (
+      !mensagem ||
+      typeof mensagem !== "object" ||
+      Array.isArray(mensagem)
+    ) {
+      return {
+        erro:
+          "O histórico contém uma mensagem inválida."
+      };
+    }
+
+    const camposPermitidos = [
+      "role",
+      "content"
+    ];
+
+    const camposRecebidos =
+      Object.keys(mensagem);
+
+    const possuiCampoInesperado =
+      camposRecebidos.some(
+        (campo) =>
+          !camposPermitidos.includes(campo)
+      );
+
+    if (possuiCampoInesperado) {
+      return {
+        erro:
+          "O histórico contém campos não permitidos."
+      };
+    }
+
+    const roleEsperado =
+      indice % 2 === 0
+        ? "user"
+        : "assistant";
+
+    if (mensagem.role !== roleEsperado) {
+      return {
+        erro:
+          "A sequência das mensagens é inválida."
+      };
+    }
+
+    if (typeof mensagem.content !== "string") {
+      return {
+        erro:
+          "O conteúdo do histórico precisa ser texto."
+      };
+    }
+
+    const contentLimpo =
+      mensagem.content.trim();
+
+    if (
+      contentLimpo.length === 0 ||
+      contentLimpo.length > LIMITE_PERGUNTA
+    ) {
+      return {
+        erro:
+          "O histórico contém uma mensagem com tamanho inválido."
+      };
+    }
+
+    totalCaracteresHistorico +=
+      contentLimpo.length;
+
+    historicoLimpo.push({
+      role: mensagem.role,
+      content: contentLimpo
+    });
+  }
+
+  if (
+    totalCaracteresHistorico >
+    LIMITE_TOTAL_HISTORICO
+  ) {
+    return {
+      erro:
+        "O histórico da conversa ficou muito grande.",
+      status: 413
+    };
+  }
+
+  return {
+    historicoLimpo
+  };
 }
 
 export default async function handler(req, res) {
   res.setHeader("Allow", "POST");
 
-  // Impede que navegador e intermediários guardem conversas em cache.
   res.setHeader(
     "Cache-Control",
     "no-store, no-cache, must-revalidate, private"
   );
 
-  // Reduz interpretação indevida do conteúdo.
-  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader(
+    "X-Content-Type-Options",
+    "nosniff"
+  );
 
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -351,7 +513,8 @@ export default async function handler(req, res) {
     });
   }
 
-  const contentType = req.headers["content-type"] || "";
+  const contentType =
+    req.headers["content-type"] || "";
 
   if (!contentType.includes("application/json")) {
     return res.status(415).json({
@@ -360,120 +523,56 @@ export default async function handler(req, res) {
   }
 
   if (!process.env.OPENAI_API_KEY) {
-    console.error("OPENAI_API_KEY não foi configurada.");
+    console.error(
+      "OPENAI_API_KEY não foi configurada."
+    );
 
     return res.status(500).json({
-      erro: "O serviço está temporariamente indisponível."
+      erro:
+        "O serviço está temporariamente indisponível."
     });
   }
 
   try {
     const body = req.body;
 
-    if (!body || typeof body !== "object" || Array.isArray(body)) {
+    if (
+      !body ||
+      typeof body !== "object" ||
+      Array.isArray(body)
+    ) {
       return res.status(400).json({
         erro: "Requisição inválida."
       });
     }
 
-    const camposPermitidos = ["pergunta", "historico"];
-    const camposRecebidos = Object.keys(body);
+    const camposPermitidos = [
+      "pergunta",
+      "historico"
+    ];
 
-    const possuiCampoInesperado = camposRecebidos.some(
-      (campo) => !camposPermitidos.includes(campo)
-    );
+    const camposRecebidos =
+      Object.keys(body);
+
+    const possuiCampoInesperado =
+      camposRecebidos.some(
+        (campo) =>
+          !camposPermitidos.includes(campo)
+      );
 
     if (possuiCampoInesperado) {
       return res.status(400).json({
-        erro: "A requisição contém campos não permitidos."
+        erro:
+          "A requisição contém campos não permitidos."
       });
     }
 
-    const historicoRecebido = body.historico ?? [];
+    const pergunta = body.pergunta;
 
-if (!Array.isArray(historicoRecebido)) {
-  return res.status(400).json({
-    erro: "O histórico precisa ser uma lista."
-  });
-}
-
-if (
-  historicoRecebido.length >
-  LIMITE_MENSAGENS_HISTORICO
-) {
-  return res.status(413).json({
-    erro:
-      `O histórico pode ter no máximo ` +
-      `${LIMITE_MENSAGENS_HISTORICO} mensagens.`
-  });
-}
-
-const historicoLimpo = [];
-
-let totalCaracteresHistorico = 0;
-
-for (const mensagem of historicoRecebido) {
-  if (
-    !mensagem ||
-    typeof mensagem !== "object" ||
-    Array.isArray(mensagem)
-  ) {
-    return res.status(400).json({
-      erro: "O histórico contém uma mensagem inválida."
-    });
-  }
-
-  const role = mensagem.role;
-  const content = mensagem.content;
-
-  if (
-    role !== "user" &&
-    role !== "assistant"
-  ) {
-    return res.status(400).json({
-      erro: "O histórico contém um tipo de mensagem inválido."
-    });
-  }
-
-  if (typeof content !== "string") {
-    return res.status(400).json({
-      erro: "O conteúdo do histórico precisa ser um texto."
-    });
-  }
-
-  const contentLimpo = content.trim();
-
-  if (
-    contentLimpo.length === 0 ||
-    contentLimpo.length > LIMITE_PERGUNTA
-  ) {
-    return res.status(400).json({
-      erro: "O histórico contém uma mensagem com tamanho inválido."
-    });
-  }
-
-  totalCaracteresHistorico += contentLimpo.length;
-
-  historicoLimpo.push({
-    role,
-    content: contentLimpo
-  });
-}
-
-if (
-  totalCaracteresHistorico >
-  LIMITE_TOTAL_HISTORICO
-) {
-  return res.status(413).json({
-    erro: "O histórico da conversa ficou muito grande."
-  });
-}
-
-const pergunta = body.pergunta;
-    
     if (typeof pergunta !== "string") {
       return res.status(400).json({
-        erro: "A pergunta precisa ser um texto."
+        erro:
+          "A pergunta precisa ser um texto."
       });
     }
 
@@ -485,40 +584,57 @@ const pergunta = body.pergunta;
       });
     }
 
-    if (perguntaLimpa.length > LIMITE_PERGUNTA) {
+    if (
+      perguntaLimpa.length >
+      LIMITE_PERGUNTA
+    ) {
       return res.status(413).json({
-        erro: `A pergunta pode ter no máximo ${LIMITE_PERGUNTA} caracteres.`
+        erro:
+          `A pergunta pode ter no máximo ` +
+          `${LIMITE_PERGUNTA} caracteres.`
       });
     }
 
-    /*
-      PRIMEIRA CAMADA DE SEGURANÇA:
-      verifica o conteúdo enviado antes de chamar o modelo principal.
-    */
-    const moderacaoEntrada = await verificarModeracao(perguntaLimpa);
+    const resultadoHistorico =
+      validarHistorico(
+        body.historico ?? []
+      );
+
+    if (resultadoHistorico.erro) {
+      return res
+        .status(resultadoHistorico.status || 400)
+        .json({
+          erro: resultadoHistorico.erro
+        });
+    }
+
+    const historicoLimpo =
+      resultadoHistorico.historicoLimpo;
 
     /*
-      Conteúdo sexual envolvendo menores recebe imediatamente
-      uma resposta protetiva.
-
-      Isso não acusa o usuário de crime.
-      Também serve para casos em que uma criança tenta relatar
-      exposição sexual ou exploração.
+      Primeira camada de segurança:
+      verifica a mensagem atual antes
+      de chamar o modelo principal.
     */
-    if (possuiConteudoSexualComMenor(moderacaoEntrada)) {
+    const moderacaoEntrada =
+      await verificarModeracao(perguntaLimpa);
+
+    if (
+      possuiConteudoSexualComMenor(
+        moderacaoEntrada
+      )
+    ) {
       return res.status(200).json({
-        resposta: MENSAGEM_CONTEUDO_BLOQUEADO
+        resposta:
+          MENSAGEM_CONTEUDO_BLOQUEADO
       });
     }
 
-    /*
-      Conteúdo sexual adulto também é bloqueado, pois não pertence
-      ao escopo da ITKs AI.
-
-      A exceção de abuso e violência continua descrita no prompt.
-      O modelo deve acolher relatos sem fornecer conteúdo explícito.
-    */
-    if (possuiConteudoSexual(moderacaoEntrada)) {
+    if (
+      possuiConteudoSexual(
+        moderacaoEntrada
+      )
+    ) {
       return res.status(200).json({
         resposta:
           "Não posso produzir ou participar de conteúdo sexual. " +
@@ -532,23 +648,30 @@ const pergunta = body.pergunta;
       "https://api.openai.com/v1/chat/completions",
       {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+          Authorization:
+            `Bearer ${process.env.OPENAI_API_KEY}`
         },
+
         body: JSON.stringify({
           model: "gpt-4o-mini",
+
           messages: [
             {
               role: "system",
               content: PROMPT_DO_SISTEMA
             },
+
             ...historicoLimpo,
+
             {
               role: "user",
               content: perguntaLimpa
             }
           ],
+
           max_tokens: LIMITE_RESPOSTA,
           temperature: 0.3
         })
@@ -560,10 +683,13 @@ const pergunta = body.pergunta;
     try {
       data = await response.json();
     } catch {
-      console.error("A OpenAI retornou uma resposta que não era JSON.");
+      console.error(
+        "A OpenAI retornou uma resposta que não era JSON."
+      );
 
       return res.status(502).json({
-        erro: "A IA retornou uma resposta inválida."
+        erro:
+          "A IA retornou uma resposta inválida."
       });
     }
 
@@ -576,38 +702,55 @@ const pergunta = body.pergunta;
 
       if (response.status === 429) {
         return res.status(429).json({
-          erro: "Muitas solicitações. Aguarde um pouco e tente novamente."
+          erro:
+            "Muitas solicitações. Aguarde um pouco e tente novamente."
         });
       }
 
       return res.status(502).json({
-        erro: "Não foi possível obter uma resposta da IA."
+        erro:
+          "Não foi possível obter uma resposta da IA."
       });
     }
 
-    const resposta = data?.choices?.[0]?.message?.content;
-
-    if (typeof resposta !== "string" || resposta.trim().length === 0) {
-      console.error("A OpenAI não retornou conteúdo válido.");
-
-      return res.status(502).json({
-        erro: "A IA não conseguiu gerar uma resposta."
-      });
-    }
-
-    const respostaLimpa = resposta.trim();
-
-    /*
-      SEGUNDA CAMADA DE SEGURANÇA:
-      verifica a própria resposta da IA antes de entregá-la.
-    */
-    const moderacaoSaida = await verificarModeracao(respostaLimpa);
+    const resposta =
+      data?.choices?.[0]?.message?.content;
 
     if (
-      possuiConteudoSexualComMenor(moderacaoSaida) ||
-      possuiConteudoSexual(moderacaoSaida)
+      typeof resposta !== "string" ||
+      resposta.trim().length === 0
     ) {
-      console.error("Resposta bloqueada pela moderação de saída.");
+      console.error(
+        "A OpenAI não retornou conteúdo válido."
+      );
+
+      return res.status(502).json({
+        erro:
+          "A IA não conseguiu gerar uma resposta."
+      });
+    }
+
+    const respostaLimpa =
+      resposta.trim();
+
+    /*
+      Segunda camada de segurança:
+      verifica a resposta antes de entregá-la.
+    */
+    const moderacaoSaida =
+      await verificarModeracao(respostaLimpa);
+
+    if (
+      possuiConteudoSexualComMenor(
+        moderacaoSaida
+      ) ||
+      possuiConteudoSexual(
+        moderacaoSaida
+      )
+    ) {
+      console.error(
+        "Resposta bloqueada pela moderação de saída."
+      );
 
       return res.status(200).json({
         resposta:
@@ -621,13 +764,17 @@ const pergunta = body.pergunta;
       resposta: respostaLimpa
     });
   } catch (error) {
-    console.error("Erro interno em /api/chat:", {
-      nome: error?.name,
-      mensagem: error?.message
-    });
+    console.error(
+      "Erro interno em /api/chat:",
+      {
+        nome: error?.name,
+        mensagem: error?.message
+      }
+    );
 
     return res.status(500).json({
-      erro: "Ocorreu um erro interno. Tente novamente mais tarde."
+      erro:
+        "Ocorreu um erro interno. Tente novamente mais tarde."
     });
   }
 }
