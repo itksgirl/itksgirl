@@ -1,6 +1,9 @@
 const LIMITE_PERGUNTA = 4000;
 const LIMITE_RESPOSTA = 800;
 
+const LIMITE_MENSAGENS_HISTORICO = 20;
+const LIMITE_TOTAL_HISTORICO = 12000;
+
 const MENSAGEM_CONTEUDO_BLOQUEADO = `
 Não posso ajudar com esse tipo de conteúdo.
 
@@ -373,7 +376,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const camposPermitidos = ["pergunta"];
+    const camposPermitidos = ["pergunta", "historico"];
     const camposRecebidos = Object.keys(body);
 
     const possuiCampoInesperado = camposRecebidos.some(
@@ -386,8 +389,88 @@ export default async function handler(req, res) {
       });
     }
 
-    const pergunta = body.pergunta;
+    const historicoRecebido = body.historico ?? [];
 
+if (!Array.isArray(historicoRecebido)) {
+  return res.status(400).json({
+    erro: "O histórico precisa ser uma lista."
+  });
+}
+
+if (
+  historicoRecebido.length >
+  LIMITE_MENSAGENS_HISTORICO
+) {
+  return res.status(413).json({
+    erro:
+      `O histórico pode ter no máximo ` +
+      `${LIMITE_MENSAGENS_HISTORICO} mensagens.`
+  });
+}
+
+const historicoLimpo = [];
+
+let totalCaracteresHistorico = 0;
+
+for (const mensagem of historicoRecebido) {
+  if (
+    !mensagem ||
+    typeof mensagem !== "object" ||
+    Array.isArray(mensagem)
+  ) {
+    return res.status(400).json({
+      erro: "O histórico contém uma mensagem inválida."
+    });
+  }
+
+  const role = mensagem.role;
+  const content = mensagem.content;
+
+  if (
+    role !== "user" &&
+    role !== "assistant"
+  ) {
+    return res.status(400).json({
+      erro: "O histórico contém um tipo de mensagem inválido."
+    });
+  }
+
+  if (typeof content !== "string") {
+    return res.status(400).json({
+      erro: "O conteúdo do histórico precisa ser um texto."
+    });
+  }
+
+  const contentLimpo = content.trim();
+
+  if (
+    contentLimpo.length === 0 ||
+    contentLimpo.length > LIMITE_PERGUNTA
+  ) {
+    return res.status(400).json({
+      erro: "O histórico contém uma mensagem com tamanho inválido."
+    });
+  }
+
+  totalCaracteresHistorico += contentLimpo.length;
+
+  historicoLimpo.push({
+    role,
+    content: contentLimpo
+  });
+}
+
+if (
+  totalCaracteresHistorico >
+  LIMITE_TOTAL_HISTORICO
+) {
+  return res.status(413).json({
+    erro: "O histórico da conversa ficou muito grande."
+  });
+}
+
+const pergunta = body.pergunta;
+    
     if (typeof pergunta !== "string") {
       return res.status(400).json({
         erro: "A pergunta precisa ser um texto."
@@ -460,6 +543,7 @@ export default async function handler(req, res) {
               role: "system",
               content: PROMPT_DO_SISTEMA
             },
+            ...historicoLimpo,
             {
               role: "user",
               content: perguntaLimpa

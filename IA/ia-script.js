@@ -15,6 +15,7 @@ const LIMITE_PERGUNTA = 4000;
 const TEMPO_MAXIMO_REQUISICAO = 60000;
 
 let requisicaoEmAndamento = false;
+let historicoMensagens = [];
 
 // =========================
 // VERIFICAÇÃO DOS ELEMENTOS
@@ -224,8 +225,6 @@ function mostrarMensagemInicial() {
 
 💻 Posso ajudar com programação, desenvolvimento web, tecnologia e inteligência artificial.
 
-🛡️ Também posso acolher desabafos e orientar em situações de perigo, violência ou emergência, indicando os serviços de apoio adequados.
-
 Digite sua dúvida ou cole seu código para começarmos.`,
     "ai-message"
   );
@@ -237,8 +236,8 @@ Digite sua dúvida ou cole seu código para começarmos.`,
 
 function iniciarNovaConversa() {
   if (requisicaoEmAndamento) return;
-
-  /*
+  historicoDaConversa = [];
+ /*
     innerHTML é usado apenas para apagar elementos
     já existentes, e não para inserir conteúdo do usuário.
   */
@@ -276,7 +275,7 @@ function mostrarAnalise() {
 // CONSULTA À IA
 // =========================
 
-async function buscarRespostaNaIA(pergunta) {
+async function buscarRespostaNaIA(pergunta, historico) {
   const controller = new AbortController();
 
   const temporizador = setTimeout(() => {
@@ -293,7 +292,8 @@ async function buscarRespostaNaIA(pergunta) {
       },
 
       body: JSON.stringify({
-        pergunta
+        pergunta,
+        historico
       }),
 
       signal: controller.signal,
@@ -393,7 +393,7 @@ chatForm.addEventListener("submit", async (event) => {
   const mensagemDeAnalise = mostrarAnalise();
 
   try {
-    const resposta = await buscarRespostaNaIA(pergunta);
+    const resposta = await buscarRespostaNaIA(pergunta, historicoDaConversa);
 
     mensagemDeAnalise.remove();
 
@@ -402,7 +402,19 @@ chatForm.addEventListener("submit", async (event) => {
       resposta,
       "ai-message"
     );
-  } catch (erro) {
+    
+    historicoDaConversa.push(
+  {
+    role: "user",
+    content: pergunta
+  },
+  {
+    role: "assistant",
+    content: resposta
+  }
+);
+  
+} catch (erro) {
     mensagemDeAnalise.remove();
 
     const requisicaoExpirou =
