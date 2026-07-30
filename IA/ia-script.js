@@ -11,6 +11,26 @@ const menuClose = document.getElementById("menu-close");
 const sidebarOverlay = document.getElementById("sidebar-overlay");
 const newChatButton = document.getElementById("new-chat");
 
+const LIMITE_PERGUNTA = 4000;
+const TEMPO_MAXIMO_REQUISICAO = 60000;
+
+let requisicaoEmAndamento = false;
+
+// =========================
+// VERIFICAÇÃO DOS ELEMENTOS
+// =========================
+
+if (
+  !chatForm ||
+  !userInput ||
+  !chatMessages ||
+  !sendButton
+) {
+  throw new Error(
+    "A interface da ITKs AI não foi carregada corretamente."
+  );
+}
+
 // =========================
 // BARRA LATERAL
 // =========================
@@ -56,19 +76,81 @@ document.addEventListener("keydown", (event) => {
 // =========================
 
 function atualizarBotaoEnviar() {
-  sendButton.disabled = userInput.value.trim() === "";
+  const pergunta = userInput.value.trim();
+
+  sendButton.disabled =
+    pergunta.length === 0 ||
+    pergunta.length > LIMITE_PERGUNTA ||
+    requisicaoEmAndamento;
 }
 
 userInput.addEventListener("input", atualizarBotaoEnviar);
 
-// Enter envia
-// Shift + Enter quebra linha
+// Enter envia.
+// Shift + Enter cria uma nova linha.
 userInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && !event.shiftKey) {
+  if (
+    event.key === "Enter" &&
+    !event.shiftKey &&
+    !requisicaoEmAndamento
+  ) {
     event.preventDefault();
     chatForm.requestSubmit();
   }
 });
+
+// =========================
+// MARKDOWN SEGURO
+// =========================
+
+function criarHtmlSeguro(texto) {
+  const markedDisponivel =
+    typeof window.marked !== "undefined" &&
+    typeof window.marked.parse === "function";
+
+  const domPurifyDisponivel =
+    typeof window.DOMPurify !== "undefined" &&
+    typeof window.DOMPurify.sanitize === "function";
+
+  if (!markedDisponivel || !domPurifyDisponivel) {
+    return null;
+  }
+
+  const htmlGerado = window.marked.parse(texto, {
+    gfm: true,
+    breaks: true
+  });
+
+  return window.DOMPurify.sanitize(htmlGerado, {
+    USE_PROFILES: {
+      html: true
+    },
+
+    // Impede elementos desnecessários ou perigosos.
+    FORBID_TAGS: [
+      "script",
+      "style",
+      "iframe",
+      "object",
+      "embed",
+      "form",
+      "input",
+      "button",
+      "textarea",
+      "select",
+      "option",
+      "video",
+      "audio"
+    ],
+
+    // Impede atributos capazes de executar ações perigosas.
+    FORBID_ATTR: [
+      "style",
+      "srcdoc",
+      "formaction"
+    ]
+  });
+}
 
 // =========================
 // CRIAR MENSAGEM
@@ -82,8 +164,37 @@ function criarMensagem(nome, texto, tipo) {
   messageName.classList.add("message-name");
   messageName.textContent = nome;
 
-  const messageText = document.createElement("p");
-  messageText.textContent = texto;
+  const messageText = document.createElement("div");
+  messageText.classList.add("message-text");
+
+  const textoSeguro =
+    typeof texto === "string"
+      ? texto
+      : "Não foi possível exibir esta mensagem.";
+
+  const deveRenderizarMarkdown =
+    tipo === "ai-message";
+
+  if (deveRenderizarMarkdown) {
+    const htmlSeguro = criarHtmlSeguro(textoSeguro);
+
+    if (htmlSeguro !== null) {
+      messageText.innerHTML = htmlSeguro;
+    } else {
+      /*
+        Se Marked ou DOMPurify não carregarem,
+        a mensagem aparece como texto comum.
+        Assim, nenhum HTML é executado.
+      */
+      messageText.textContent = textoSeguro;
+    }
+  } else {
+    /*
+      Mensagens do usuário e mensagens de carregamento
+      nunca são inseridas como HTML.
+    */
+    messageText.textContent = textoSeguro;
+  }
 
   message.appendChild(messageName);
   message.appendChild(messageText);
@@ -105,7 +216,13 @@ function criarMensagem(nome, texto, tipo) {
 function mostrarMensagemInicial() {
   criarMensagem(
     "ITKs AI",
-    "Olá! Eu sou uma assistente especializada em programação. Envie uma dúvida ou cole um código para começarmos.",
+    `Olá! 👋 Eu sou a **ITKs AI**.
+
+💻 Posso ajudar com programação, desenvolvimento web, tecnologia e inteligência artificial.
+
+🛡️ Também posso acolher desabafos e orientar em situações de perigo, violência ou emergência, indicando os serviços de apoio adequados.
+
+Digite sua dúvida ou cole seu código para começarmos.`,
     "ai-message"
   );
 }
@@ -115,21 +232,28 @@ function mostrarMensagemInicial() {
 // =========================
 
 function iniciarNovaConversa() {
-  chatMessages.innerHTML = "";
+  if (requisicaoEmAndamento) return;
+
+  /*
+    innerHTML é usado apenas para apagar elementos
+    já existentes, e não para inserir conteúdo do usuário.
+  */
+  chatMessages.replaceChildren();
 
   userInput.value = "";
 
   atualizarBotaoEnviar();
-
   mostrarMensagemInicial();
-
   fecharSidebar();
 
   userInput.focus();
 }
 
 if (newChatButton) {
-  newChatButton.addEventListener("click", iniciarNovaConversa);
+  newChatButton.addEventListener(
+    "click",
+    iniciarNovaConversa
+  );
 }
 
 // =========================
@@ -149,27 +273,62 @@ function mostrarAnalise() {
 // =========================
 
 async function buscarRespostaNaIA(pergunta) {
-  const response = await fetch("/api/chat", {
-    method: "POST",
+  const controller = new AbortController();
 
-    headers: {
-      "Content-Type": "application/json"
-    },
+  const temporizador = setTimeout(() => {
+    controller.abort();
+  }, TEMPO_MAXIMO_REQUISICAO);
 
-    body: JSON.stringify({
-      pergunta
-    })
-  });
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
 
-  const data = await response.json();
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
 
-  if (!response.ok) {
-    throw new Error(
-      data.erro || "Não foi possível obter uma resposta."
-    );
+      body: JSON.stringify({
+        pergunta
+      }),
+
+      signal: controller.signal,
+
+      /*
+        Como futuramente poderá existir login,
+        mantém cookies restritos ao mesmo site.
+      */
+      credentials: "same-origin"
+    });
+
+    const contentType =
+      response.headers.get("content-type") || "";
+
+    if (!contentType.includes("application/json")) {
+      throw new Error("Resposta inválida do servidor.");
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        typeof data?.erro === "string"
+          ? data.erro
+          : "Não foi possível obter uma resposta."
+      );
+    }
+
+    if (
+      typeof data?.resposta !== "string" ||
+      data.resposta.trim().length === 0
+    ) {
+      throw new Error("A IA retornou uma resposta vazia.");
+    }
+
+    return data.resposta.trim();
+  } finally {
+    clearTimeout(temporizador);
   }
-
-  return data.resposta;
 }
 
 // =========================
@@ -178,10 +337,17 @@ async function buscarRespostaNaIA(pergunta) {
 
 suggestionButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    userInput.value = button.dataset.question;
+    const perguntaSugerida =
+      button.dataset.question?.trim();
+
+    if (!perguntaSugerida) return;
+
+    userInput.value = perguntaSugerida.slice(
+      0,
+      LIMITE_PERGUNTA
+    );
 
     atualizarBotaoEnviar();
-
     userInput.focus();
   });
 });
@@ -193,9 +359,24 @@ suggestionButtons.forEach((button) => {
 chatForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  if (requisicaoEmAndamento) return;
+
   const pergunta = userInput.value.trim();
 
   if (!pergunta) return;
+
+  if (pergunta.length > LIMITE_PERGUNTA) {
+    criarMensagem(
+      "ITKs AI",
+      `A pergunta pode ter no máximo ${LIMITE_PERGUNTA} caracteres.`,
+      "ai-message"
+    );
+
+    return;
+  }
+
+  requisicaoEmAndamento = true;
+  atualizarBotaoEnviar();
 
   criarMensagem(
     "Você",
@@ -204,8 +385,6 @@ chatForm.addEventListener("submit", async (event) => {
   );
 
   userInput.value = "";
-
-  atualizarBotaoEnviar();
 
   const mensagemDeAnalise = mostrarAnalise();
 
@@ -222,16 +401,31 @@ chatForm.addEventListener("submit", async (event) => {
   } catch (erro) {
     mensagemDeAnalise.remove();
 
+    const requisicaoExpirou =
+      erro instanceof DOMException &&
+      erro.name === "AbortError";
+
+    const mensagemDeErro = requisicaoExpirou
+      ? "A resposta demorou mais do que o esperado. Aguarde um pouco e tente novamente."
+      : "Ainda não consegui acessar meu cérebro. Verifique a conexão do servidor e tente novamente.";
+
     criarMensagem(
       "ITKs AI",
-      "Ainda não consegui acessar meu cérebro. Verifique a conexão do servidor e tente novamente.",
+      mensagemDeErro,
       "ai-message"
     );
 
-    console.error(erro);
+    /*
+      Não exibimos detalhes internos do erro
+      no console público do navegador.
+    */
+    console.error(
+      "Falha ao obter resposta da ITKs AI."
+    );
   } finally {
-    atualizarBotaoEnviar();
+    requisicaoEmAndamento = false;
 
+    atualizarBotaoEnviar();
     userInput.focus();
   }
 });
