@@ -23,6 +23,91 @@ const TEMPO_MAXIMO_REQUISICAO = 60000;
 let requisicaoEmAndamento = false;
 let historicoDaConversa = [];
 
+// =========================================================
+// AUTENTICAÇÃO — ELEMENTOS
+// =========================================================
+
+const authModal = document.getElementById("auth-modal");
+const authBackdrop = document.getElementById("auth-backdrop");
+const authClose = document.getElementById("auth-close");
+
+const headerLoginButton = document.getElementById("header-login-button");
+const sidebarLoginButton = document.getElementById("sidebar-login-button");
+
+const loginTab = document.getElementById("login-tab");
+const registerTab = document.getElementById("register-tab");
+
+const loginPanel = document.getElementById("login-panel");
+const registerPanel = document.getElementById("register-panel");
+
+
+// =========================================================
+// AUTENTICAÇÃO — ABRIR E FECHAR MODAL
+// =========================================================
+
+function abrirModalAutenticacao() {
+  if (!authModal) return;
+
+  authModal.hidden = false;
+  document.body.classList.add("modal-open");
+
+  loginTab?.focus();
+}
+
+function fecharModalAutenticacao() {
+  if (!authModal) return;
+
+  authModal.hidden = true;
+  document.body.classList.remove("modal-open");
+}
+
+
+// =========================================================
+// AUTENTICAÇÃO — TROCAR ENTRE LOGIN E CADASTRO
+// =========================================================
+
+function mostrarLogin() {
+  loginTab?.classList.add("active");
+  registerTab?.classList.remove("active");
+
+  loginTab?.setAttribute("aria-selected", "true");
+  registerTab?.setAttribute("aria-selected", "false");
+
+  if (loginPanel) loginPanel.hidden = false;
+  if (registerPanel) registerPanel.hidden = true;
+}
+
+function mostrarCadastro() {
+  registerTab?.classList.add("active");
+  loginTab?.classList.remove("active");
+
+  registerTab?.setAttribute("aria-selected", "true");
+  loginTab?.setAttribute("aria-selected", "false");
+
+  if (registerPanel) registerPanel.hidden = false;
+  if (loginPanel) loginPanel.hidden = true;
+}
+
+
+// =========================================================
+// AUTENTICAÇÃO — EVENTOS
+// =========================================================
+
+headerLoginButton?.addEventListener("click", abrirModalAutenticacao);
+sidebarLoginButton?.addEventListener("click", abrirModalAutenticacao);
+
+authClose?.addEventListener("click", fecharModalAutenticacao);
+authBackdrop?.addEventListener("click", fecharModalAutenticacao);
+
+loginTab?.addEventListener("click", mostrarLogin);
+registerTab?.addEventListener("click", mostrarCadastro);
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && authModal && !authModal.hidden) {
+    fecharModalAutenticacao();
+  }
+});
+
 // =========================
 // VERIFICAÇÃO DOS ELEMENTOS
 // =========================
