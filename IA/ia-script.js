@@ -180,6 +180,10 @@ function criarMensagem(nome, texto, tipo) {
 
     if (htmlSeguro !== null) {
       messageText.innerHTML = htmlSeguro;
+     
+      messageText.querySelectorAll("pre code").forEach((bloco) => {
+  hljs.highlightElement(bloco);
+});
     } else {
       /*
         Se Marked ou DOMPurify não carregarem,
