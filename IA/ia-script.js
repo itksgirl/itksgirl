@@ -1,38 +1,63 @@
 import { supabase } from "./supabase-config.js";
 
+// =========================================================
+// ELEMENTOS DO CHAT
+// =========================================================
+
 const chatForm = document.getElementById("chat-form");
 const userInput = document.getElementById("user-input");
 const chatMessages = document.getElementById("chat-messages");
 const sendButton = document.getElementById("send-button");
+const characterCounter = document.getElementById("character-counter");
+
 const suggestionButtons = document.querySelectorAll(
   ".suggestion-button"
 );
 
-// Elementos da barra lateral
+// =========================================================
+// ELEMENTOS DA SIDEBAR
+// =========================================================
+
 const sidebar = document.getElementById("sidebar");
 const menuButton = document.getElementById("menu-button");
 const menuClose = document.getElementById("menu-close");
 const sidebarOverlay = document.getElementById("sidebar-overlay");
 const newChatButton = document.getElementById("new-chat");
 
-const LIMITE_PERGUNTA = 4000;
-const LIMITE_MENSAGENS_HISTORICO = 20;
-const LIMITE_TOTAL_HISTORICO = 12000;
-const TEMPO_MAXIMO_REQUISICAO = 60000;
-
-let requisicaoEmAndamento = false;
-let historicoDaConversa = [];
-
 // =========================================================
-// AUTENTICAÇÃO — ELEMENTOS
+// ELEMENTOS DE AUTENTICAÇÃO
 // =========================================================
 
 const authModal = document.getElementById("auth-modal");
 const authBackdrop = document.getElementById("auth-backdrop");
 const authClose = document.getElementById("auth-close");
 
-const headerLoginButton = document.getElementById("header-login-button");
-const sidebarLoginButton = document.getElementById("sidebar-login-button");
+const headerLoginButton = document.getElementById(
+  "header-login-button"
+);
+
+const headerUserButton = document.getElementById(
+  "header-user-button"
+);
+
+const headerUserInitial = document.getElementById(
+  "header-user-initial"
+);
+
+const sidebarLoginButton = document.getElementById(
+  "sidebar-login-button"
+);
+
+const sidebarUser = document.getElementById("sidebar-user");
+const accountMenuButton = document.getElementById(
+  "account-menu-button"
+);
+
+const accountMenu = document.getElementById("account-menu");
+const accountAvatar = document.getElementById("account-avatar");
+const accountName = document.getElementById("account-name");
+const accountEmail = document.getElementById("account-email");
+const logoutButton = document.getElementById("logout-button");
 
 const loginTab = document.getElementById("login-tab");
 const registerTab = document.getElementById("register-tab");
@@ -40,77 +65,77 @@ const registerTab = document.getElementById("register-tab");
 const loginPanel = document.getElementById("login-panel");
 const registerPanel = document.getElementById("register-panel");
 
+const loginForm = document.getElementById("login-form");
+const loginEmail = document.getElementById("login-email");
+const loginPassword = document.getElementById("login-password");
+const loginSubmit = document.getElementById("login-submit");
+const loginMessage = document.getElementById("login-message");
+
+const registerForm = document.getElementById("register-form");
+const registerName = document.getElementById("register-name");
+const registerEmail = document.getElementById("register-email");
+const registerPassword = document.getElementById(
+  "register-password"
+);
+
+const registerTerms = document.getElementById("register-terms");
+const registerSubmit = document.getElementById("register-submit");
+const registerMessage = document.getElementById(
+  "register-message"
+);
+
+const authMainView = document.getElementById("auth-main-view");
+const passwordResetView = document.getElementById(
+  "password-reset-view"
+);
+
+const forgotPasswordButton = document.getElementById(
+  "forgot-password-button"
+);
+
+const passwordResetBack = document.getElementById(
+  "password-reset-back"
+);
+
+const passwordResetForm = document.getElementById(
+  "password-reset-form"
+);
+
+const passwordResetEmail = document.getElementById(
+  "password-reset-email"
+);
+
+const passwordResetSubmit = document.getElementById(
+  "password-reset-submit"
+);
+
+const passwordResetMessage = document.getElementById(
+  "password-reset-message"
+);
+
+const passwordToggleButtons = document.querySelectorAll(
+  "[data-password-toggle]"
+);
+
+const toastContainer = document.getElementById("toast-container");
 
 // =========================================================
-// AUTENTICAÇÃO — ABRIR E FECHAR MODAL
+// LIMITES E ESTADO
 // =========================================================
 
-function abrirModalAutenticacao() {
-  if (!authModal) return;
+const LIMITE_PERGUNTA = 4000;
+const LIMITE_MENSAGENS_HISTORICO = 20;
+const LIMITE_TOTAL_HISTORICO = 12000;
+const TEMPO_MAXIMO_REQUISICAO = 60000;
 
-  authModal.hidden = false;
-  document.body.classList.add("modal-open");
-
-  loginTab?.focus();
-}
-
-function fecharModalAutenticacao() {
-  if (!authModal) return;
-
-  authModal.hidden = true;
-  document.body.classList.remove("modal-open");
-}
-
+let requisicaoEmAndamento = false;
+let autenticacaoEmAndamento = false;
+let historicoDaConversa = [];
+let usuarioAtual = null;
 
 // =========================================================
-// AUTENTICAÇÃO — TROCAR ENTRE LOGIN E CADASTRO
+// VERIFICAÇÃO DA INTERFACE
 // =========================================================
-
-function mostrarLogin() {
-  loginTab?.classList.add("active");
-  registerTab?.classList.remove("active");
-
-  loginTab?.setAttribute("aria-selected", "true");
-  registerTab?.setAttribute("aria-selected", "false");
-
-  if (loginPanel) loginPanel.hidden = false;
-  if (registerPanel) registerPanel.hidden = true;
-}
-
-function mostrarCadastro() {
-  registerTab?.classList.add("active");
-  loginTab?.classList.remove("active");
-
-  registerTab?.setAttribute("aria-selected", "true");
-  loginTab?.setAttribute("aria-selected", "false");
-
-  if (registerPanel) registerPanel.hidden = false;
-  if (loginPanel) loginPanel.hidden = true;
-}
-
-
-// =========================================================
-// AUTENTICAÇÃO — EVENTOS
-// =========================================================
-
-headerLoginButton?.addEventListener("click", abrirModalAutenticacao);
-sidebarLoginButton?.addEventListener("click", abrirModalAutenticacao);
-
-authClose?.addEventListener("click", fecharModalAutenticacao);
-authBackdrop?.addEventListener("click", fecharModalAutenticacao);
-
-loginTab?.addEventListener("click", mostrarLogin);
-registerTab?.addEventListener("click", mostrarCadastro);
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && authModal && !authModal.hidden) {
-    fecharModalAutenticacao();
-  }
-});
-
-// =========================
-// VERIFICAÇÃO DOS ELEMENTOS
-// =========================
 
 if (
   !chatForm ||
@@ -123,9 +148,140 @@ if (
   );
 }
 
-// =========================
-// BARRA LATERAL
-// =========================
+// =========================================================
+// FUNÇÕES UTILITÁRIAS
+// =========================================================
+
+function obterInicial(texto) {
+  if (typeof texto !== "string") {
+    return "U";
+  }
+
+  const textoLimpo = texto.trim();
+
+  if (!textoLimpo) {
+    return "U";
+  }
+
+  return textoLimpo.charAt(0).toUpperCase();
+}
+
+function obterNomeUsuario(user) {
+  const nomeMetadata =
+    user?.user_metadata?.display_name ||
+    user?.user_metadata?.full_name ||
+    user?.user_metadata?.name;
+
+  if (
+    typeof nomeMetadata === "string" &&
+    nomeMetadata.trim()
+  ) {
+    return nomeMetadata.trim().slice(0, 80);
+  }
+
+  const email = user?.email;
+
+  if (typeof email === "string" && email.includes("@")) {
+    return email.split("@")[0].slice(0, 80);
+  }
+
+  return "Usuário";
+}
+
+function limparMensagemStatus(elemento) {
+  if (!elemento) return;
+
+  elemento.textContent = "";
+  elemento.classList.remove("success");
+}
+
+function mostrarMensagemStatus(
+  elemento,
+  texto,
+  tipo = "error"
+) {
+  if (!elemento) return;
+
+  elemento.textContent = texto;
+  elemento.classList.toggle(
+    "success",
+    tipo === "success"
+  );
+}
+
+function mostrarToast(texto, tipo = "") {
+  if (!toastContainer || !texto) return;
+
+  const toast = document.createElement("div");
+
+  toast.className = "toast";
+
+  if (tipo === "success" || tipo === "error") {
+    toast.classList.add(tipo);
+  }
+
+  toast.textContent = texto;
+
+  toastContainer.appendChild(toast);
+
+  window.setTimeout(() => {
+    toast.remove();
+  }, 4500);
+}
+
+function traduzirErroAutenticacao(error) {
+  const mensagem =
+    typeof error?.message === "string"
+      ? error.message.toLowerCase()
+      : "";
+
+  if (
+    mensagem.includes("invalid login credentials") ||
+    mensagem.includes("invalid credentials")
+  ) {
+    return "E-mail ou senha incorretos.";
+  }
+
+  if (mensagem.includes("email not confirmed")) {
+    return "Confirme seu e-mail antes de entrar.";
+  }
+
+  if (mensagem.includes("user already registered")) {
+    return "Já existe uma conta cadastrada com este e-mail.";
+  }
+
+  if (mensagem.includes("password should be")) {
+    return "A senha precisa ter pelo menos 8 caracteres.";
+  }
+
+  if (mensagem.includes("rate limit")) {
+    return "Muitas tentativas. Aguarde um pouco e tente novamente.";
+  }
+
+  if (mensagem.includes("network")) {
+    return "Não foi possível conectar ao serviço de autenticação.";
+  }
+
+  return "Não foi possível concluir a operação. Tente novamente.";
+}
+
+function definirBotaoCarregando(
+  botao,
+  carregando,
+  textoNormal,
+  textoCarregando
+) {
+  if (!botao) return;
+
+  botao.disabled = carregando;
+  botao.textContent = carregando
+    ? textoCarregando
+    : textoNormal;
+}
+
+// =========================================================
+// SIDEBAR
+// =========================================================
 
 function abrirSidebar() {
   if (!sidebar || !sidebarOverlay) return;
@@ -142,30 +298,677 @@ function fecharSidebar() {
   sidebar.classList.remove("open");
   sidebarOverlay.classList.remove("active");
 
-  document.body.style.overflow = "";
+  if (!authModal || authModal.hidden) {
+    document.body.style.overflow = "";
+  }
 }
 
-if (menuButton) {
-  menuButton.addEventListener("click", abrirSidebar);
+menuButton?.addEventListener("click", abrirSidebar);
+menuClose?.addEventListener("click", fecharSidebar);
+sidebarOverlay?.addEventListener("click", fecharSidebar);
+
+// =========================================================
+// MODAL DE AUTENTICAÇÃO
+// =========================================================
+
+function mostrarTelaPrincipalAutenticacao() {
+  if (authMainView) {
+    authMainView.hidden = false;
+  }
+
+  if (passwordResetView) {
+    passwordResetView.hidden = true;
+  }
 }
 
-if (menuClose) {
-  menuClose.addEventListener("click", fecharSidebar);
+function mostrarTelaRecuperacaoSenha() {
+  if (authMainView) {
+    authMainView.hidden = true;
+  }
+
+  if (passwordResetView) {
+    passwordResetView.hidden = false;
+  }
+
+  limparMensagemStatus(passwordResetMessage);
+
+  if (
+    passwordResetEmail &&
+    loginEmail?.value.trim()
+  ) {
+    passwordResetEmail.value =
+      loginEmail.value.trim();
+  }
 }
 
-if (sidebarOverlay) {
-  sidebarOverlay.addEventListener("click", fecharSidebar);
+function mostrarLogin() {
+  loginTab?.classList.add("active");
+  registerTab?.classList.remove("active");
+
+  loginTab?.setAttribute("aria-selected", "true");
+  registerTab?.setAttribute("aria-selected", "false");
+
+  if (loginPanel) {
+    loginPanel.hidden = false;
+  }
+
+  if (registerPanel) {
+    registerPanel.hidden = true;
+  }
+
+  limparMensagemStatus(loginMessage);
+  limparMensagemStatus(registerMessage);
 }
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    fecharSidebar();
+function mostrarCadastro() {
+  registerTab?.classList.add("active");
+  loginTab?.classList.remove("active");
+
+  registerTab?.setAttribute("aria-selected", "true");
+  loginTab?.setAttribute("aria-selected", "false");
+
+  if (registerPanel) {
+    registerPanel.hidden = false;
+  }
+
+  if (loginPanel) {
+    loginPanel.hidden = true;
+  }
+
+  limparMensagemStatus(loginMessage);
+  limparMensagemStatus(registerMessage);
+}
+
+function abrirModalAutenticacao() {
+  if (!authModal) return;
+
+  mostrarTelaPrincipalAutenticacao();
+  mostrarLogin();
+
+  authModal.hidden = false;
+  document.body.classList.add("modal-open");
+}
+
+function fecharModalAutenticacao() {
+  if (!authModal || autenticacaoEmAndamento) return;
+
+  authModal.hidden = true;
+  document.body.classList.remove("modal-open");
+
+  if (!sidebar?.classList.contains("open")) {
+    document.body.style.overflow = "";
+  }
+
+  limparMensagemStatus(loginMessage);
+  limparMensagemStatus(registerMessage);
+  limparMensagemStatus(passwordResetMessage);
+}
+
+headerLoginButton?.addEventListener(
+  "click",
+  abrirModalAutenticacao
+);
+
+sidebarLoginButton?.addEventListener(
+  "click",
+  abrirModalAutenticacao
+);
+
+authClose?.addEventListener(
+  "click",
+  fecharModalAutenticacao
+);
+
+authBackdrop?.addEventListener(
+  "click",
+  fecharModalAutenticacao
+);
+
+loginTab?.addEventListener("click", mostrarLogin);
+registerTab?.addEventListener("click", mostrarCadastro);
+
+forgotPasswordButton?.addEventListener(
+  "click",
+  mostrarTelaRecuperacaoSenha
+);
+
+passwordResetBack?.addEventListener(
+  "click",
+  mostrarTelaPrincipalAutenticacao
+);
+
+// =========================================================
+// MOSTRAR E OCULTAR SENHA
+// =========================================================
+
+passwordToggleButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const inputId = button.dataset.passwordToggle;
+
+    if (!inputId) return;
+
+    const input = document.getElementById(inputId);
+
+    if (!(input instanceof HTMLInputElement)) {
+      return;
+    }
+
+    const senhaVisivel = input.type === "text";
+
+    input.type = senhaVisivel
+      ? "password"
+      : "text";
+
+    button.setAttribute(
+      "aria-label",
+      senhaVisivel
+        ? "Mostrar senha"
+        : "Ocultar senha"
+    );
+  });
+});
+
+// =========================================================
+// INTERFACE DO USUÁRIO CONECTADO
+// =========================================================
+
+function fecharMenuConta() {
+  if (!accountMenu || !accountMenuButton) return;
+
+  accountMenu.hidden = true;
+
+  accountMenuButton.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+}
+
+function alternarMenuConta() {
+  if (!accountMenu || !accountMenuButton) return;
+
+  const vaiAbrir = accountMenu.hidden;
+
+  accountMenu.hidden = !vaiAbrir;
+
+  accountMenuButton.setAttribute(
+    "aria-expanded",
+    String(vaiAbrir)
+  );
+}
+
+function atualizarInterfaceAutenticacao(user) {
+  usuarioAtual = user || null;
+
+  const conectado = Boolean(usuarioAtual);
+
+  if (headerLoginButton) {
+    headerLoginButton.hidden = conectado;
+  }
+
+  if (headerUserButton) {
+    headerUserButton.hidden = !conectado;
+  }
+
+  if (sidebarLoginButton) {
+    sidebarLoginButton.hidden = conectado;
+  }
+
+  if (sidebarUser) {
+    sidebarUser.hidden = !conectado;
+  }
+
+  if (!conectado) {
+    fecharMenuConta();
+    return;
+  }
+
+  const nome = obterNomeUsuario(usuarioAtual);
+  const email =
+    typeof usuarioAtual.email === "string"
+      ? usuarioAtual.email
+      : "Conta conectada";
+
+  const inicial = obterInicial(nome);
+
+  if (headerUserInitial) {
+    headerUserInitial.textContent = inicial;
+  }
+
+  if (accountAvatar) {
+    accountAvatar.textContent = inicial;
+  }
+
+  if (accountName) {
+    accountName.textContent = nome;
+  }
+
+  if (accountEmail) {
+    accountEmail.textContent = email;
+  }
+}
+
+accountMenuButton?.addEventListener(
+  "click",
+  alternarMenuConta
+);
+
+headerUserButton?.addEventListener("click", () => {
+  abrirSidebar();
+
+  if (accountMenu && accountMenuButton) {
+    accountMenu.hidden = false;
+
+    accountMenuButton.setAttribute(
+      "aria-expanded",
+      "true"
+    );
   }
 });
 
-// =========================
-// BOTÃO ENVIAR
-// =========================
+document.addEventListener("click", (event) => {
+  if (!accountMenu || accountMenu.hidden) return;
+
+  const alvo = event.target;
+
+  if (!(alvo instanceof Node)) return;
+
+  if (
+    accountMenu.contains(alvo) ||
+    accountMenuButton?.contains(alvo) ||
+    headerUserButton?.contains(alvo)
+  ) {
+    return;
+  }
+
+  fecharMenuConta();
+});
+
+// =========================================================
+// LOGIN
+// =========================================================
+
+loginForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+
+    if (autenticacaoEmAndamento) return;
+
+    limparMensagemStatus(loginMessage);
+
+    const email = loginEmail?.value.trim() || "";
+    const password = loginPassword?.value || "";
+
+    if (!email || !password) {
+      mostrarMensagemStatus(
+        loginMessage,
+        "Preencha o e-mail e a senha."
+      );
+
+      return;
+    }
+
+    if (password.length < 8) {
+      mostrarMensagemStatus(
+        loginMessage,
+        "A senha precisa ter pelo menos 8 caracteres."
+      );
+
+      return;
+    }
+
+    autenticacaoEmAndamento = true;
+
+    definirBotaoCarregando(
+      loginSubmit,
+      true,
+      "Entrar",
+      "Entrando..."
+    );
+
+    try {
+      const { data, error } =
+        await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data?.session || !data?.user) {
+        throw new Error(
+          "A sessão não foi criada."
+        );
+      }
+
+      atualizarInterfaceAutenticacao(data.user);
+
+      loginForm.reset();
+      fecharModalAutenticacao();
+
+      mostrarToast(
+        "Você entrou na sua conta.",
+        "success"
+      );
+    } catch (error) {
+      mostrarMensagemStatus(
+        loginMessage,
+        traduzirErroAutenticacao(error)
+      );
+    } finally {
+      autenticacaoEmAndamento = false;
+
+      definirBotaoCarregando(
+        loginSubmit,
+        false,
+        "Entrar",
+        "Entrando..."
+      );
+    }
+  }
+);
+
+// =========================================================
+// CADASTRO
+// =========================================================
+
+registerForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+
+    if (autenticacaoEmAndamento) return;
+
+    limparMensagemStatus(registerMessage);
+
+    const nome = registerName?.value.trim() || "";
+    const email = registerEmail?.value.trim() || "";
+    const password = registerPassword?.value || "";
+    const aceitouTermos =
+      registerTerms?.checked === true;
+
+    if (nome.length < 2) {
+      mostrarMensagemStatus(
+        registerMessage,
+        "Digite um nome com pelo menos 2 caracteres."
+      );
+
+      return;
+    }
+
+    if (!email) {
+      mostrarMensagemStatus(
+        registerMessage,
+        "Digite um endereço de e-mail válido."
+      );
+
+      return;
+    }
+
+    if (password.length < 8) {
+      mostrarMensagemStatus(
+        registerMessage,
+        "A senha precisa ter pelo menos 8 caracteres."
+      );
+
+      return;
+    }
+
+    if (!aceitouTermos) {
+      mostrarMensagemStatus(
+        registerMessage,
+        "Você precisa aceitar a Política de Privacidade."
+      );
+
+      return;
+    }
+
+    autenticacaoEmAndamento = true;
+
+    definirBotaoCarregando(
+      registerSubmit,
+      true,
+      "Criar conta",
+      "Criando conta..."
+    );
+
+    try {
+      const redirectTo =
+        `${window.location.origin}${window.location.pathname}`;
+
+      const { data, error } =
+        await supabase.auth.signUp({
+          email,
+          password,
+
+          options: {
+            emailRedirectTo: redirectTo,
+
+            data: {
+              display_name: nome
+            }
+          }
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data?.user) {
+        throw new Error(
+          "O cadastro não retornou um usuário."
+        );
+      }
+
+      registerForm.reset();
+
+      if (data.session) {
+        atualizarInterfaceAutenticacao(data.user);
+        fecharModalAutenticacao();
+
+        mostrarToast(
+          "Sua conta foi criada.",
+          "success"
+        );
+
+        return;
+      }
+
+      mostrarMensagemStatus(
+        registerMessage,
+        "Conta criada. Verifique seu e-mail para confirmar o cadastro.",
+        "success"
+      );
+    } catch (error) {
+      mostrarMensagemStatus(
+        registerMessage,
+        traduzirErroAutenticacao(error)
+      );
+    } finally {
+      autenticacaoEmAndamento = false;
+
+      definirBotaoCarregando(
+        registerSubmit,
+        false,
+        "Criar conta",
+        "Criando conta..."
+      );
+    }
+  }
+);
+
+// =========================================================
+// RECUPERAÇÃO DE SENHA
+// =========================================================
+
+passwordResetForm?.addEventListener(
+  "submit",
+  async (event) => {
+    event.preventDefault();
+
+    if (autenticacaoEmAndamento) return;
+
+    limparMensagemStatus(passwordResetMessage);
+
+    const email =
+      passwordResetEmail?.value.trim() || "";
+
+    if (!email) {
+      mostrarMensagemStatus(
+        passwordResetMessage,
+        "Digite o e-mail da sua conta."
+      );
+
+      return;
+    }
+
+    autenticacaoEmAndamento = true;
+
+    definirBotaoCarregando(
+      passwordResetSubmit,
+      true,
+      "Enviar link",
+      "Enviando..."
+    );
+
+    try {
+      const redirectTo =
+        `${window.location.origin}${window.location.pathname}`;
+
+      const { error } =
+        await supabase.auth.resetPasswordForEmail(
+          email,
+          {
+            redirectTo
+          }
+        );
+
+      if (error) {
+        throw error;
+      }
+
+      mostrarMensagemStatus(
+        passwordResetMessage,
+        "Se existir uma conta com este e-mail, você receberá o link de recuperação.",
+        "success"
+      );
+    } catch (error) {
+      mostrarMensagemStatus(
+        passwordResetMessage,
+        traduzirErroAutenticacao(error)
+      );
+    } finally {
+      autenticacaoEmAndamento = false;
+
+      definirBotaoCarregando(
+        passwordResetSubmit,
+        false,
+        "Enviar link",
+        "Enviando..."
+      );
+    }
+  }
+);
+
+// =========================================================
+// LOGOUT
+// =========================================================
+
+logoutButton?.addEventListener(
+  "click",
+  async () => {
+    if (autenticacaoEmAndamento) return;
+
+    autenticacaoEmAndamento = true;
+    logoutButton.disabled = true;
+
+    try {
+      const { error } =
+        await supabase.auth.signOut();
+
+      if (error) {
+        throw error;
+      }
+
+      atualizarInterfaceAutenticacao(null);
+      fecharMenuConta();
+      fecharSidebar();
+
+      mostrarToast(
+        "Você saiu da sua conta.",
+        "success"
+      );
+    } catch {
+      mostrarToast(
+        "Não foi possível sair da conta.",
+        "error"
+      );
+    } finally {
+      autenticacaoEmAndamento = false;
+      logoutButton.disabled = false;
+    }
+  }
+);
+
+// =========================================================
+// LEITURA DA SESSÃO
+// =========================================================
+
+async function carregarSessaoInicial() {
+  try {
+    const { data, error } =
+      await supabase.auth.getSession();
+
+    if (error) {
+      throw error;
+    }
+
+    atualizarInterfaceAutenticacao(
+      data?.session?.user || null
+    );
+  } catch {
+    atualizarInterfaceAutenticacao(null);
+
+    console.error(
+      "Não foi possível carregar a sessão da conta."
+    );
+  }
+}
+
+supabase.auth.onAuthStateChange(
+  (_event, session) => {
+    atualizarInterfaceAutenticacao(
+      session?.user || null
+    );
+  }
+);
+
+// =========================================================
+// CONTADOR E ALTURA DO CAMPO
+// =========================================================
+
+function atualizarContador() {
+  const quantidade = userInput.value.length;
+
+  if (characterCounter) {
+    characterCounter.textContent =
+      `${quantidade} / ${LIMITE_PERGUNTA}`;
+  }
+}
+
+function ajustarAlturaTextarea() {
+  userInput.style.height = "auto";
+
+  const novaAltura = Math.min(
+    userInput.scrollHeight,
+    190
+  );
+
+  userInput.style.height =
+    `${Math.max(novaAltura, 38)}px`;
+}
 
 function atualizarBotaoEnviar() {
   const pergunta = userInput.value.trim();
@@ -174,26 +977,33 @@ function atualizarBotaoEnviar() {
     pergunta.length === 0 ||
     pergunta.length > LIMITE_PERGUNTA ||
     requisicaoEmAndamento;
+
+  atualizarContador();
+  ajustarAlturaTextarea();
 }
 
-userInput.addEventListener("input", atualizarBotaoEnviar);
+userInput.addEventListener(
+  "input",
+  atualizarBotaoEnviar
+);
 
-// Enter envia.
-// Shift + Enter cria uma nova linha.
-userInput.addEventListener("keydown", (event) => {
-  if (
-    event.key === "Enter" &&
-    !event.shiftKey &&
-    !requisicaoEmAndamento
-  ) {
-    event.preventDefault();
-    chatForm.requestSubmit();
+userInput.addEventListener(
+  "keydown",
+  (event) => {
+    if (
+      event.key === "Enter" &&
+      !event.shiftKey &&
+      !requisicaoEmAndamento
+    ) {
+      event.preventDefault();
+      chatForm.requestSubmit();
+    }
   }
-});
+);
 
-// =========================
+// =========================================================
 // MARKDOWN SEGURO
-// =========================
+// =========================================================
 
 function criarHtmlSeguro(texto) {
   const markedDisponivel =
@@ -237,19 +1047,19 @@ function criarHtmlSeguro(texto) {
     FORBID_ATTR: [
       "style",
       "srcdoc",
-      "formaction"
+      "formaction",
+      "onerror",
+      "onclick",
+      "onload"
     ]
   });
 }
 
-// =========================
-// DESTAQUE DOS CÓDIGOS
-// =========================
-
 function destacarBlocosDeCodigo(elemento) {
   const highlightDisponivel =
     typeof window.hljs !== "undefined" &&
-    typeof window.hljs.highlightElement === "function";
+    typeof window.hljs.highlightElement ===
+      "function";
 
   if (!highlightDisponivel) return;
 
@@ -260,92 +1070,148 @@ function destacarBlocosDeCodigo(elemento) {
     });
 }
 
-// =========================
-// CRIAR MENSAGEM
-// =========================
+// =========================================================
+// ROLAGEM DO CHAT
+// =========================================================
+
+function estaPertoDoFinalDoChat() {
+  const distanciaDoFinal =
+    chatMessages.scrollHeight -
+    chatMessages.scrollTop -
+    chatMessages.clientHeight;
+
+  return distanciaDoFinal < 120;
+}
+
+function rolarChatParaFinal(forcar = false) {
+  if (!forcar && !estaPertoDoFinalDoChat()) {
+    return;
+  }
+
+  window.requestAnimationFrame(() => {
+    chatMessages.scrollTop =
+      chatMessages.scrollHeight;
+  });
+}
+
+// =========================================================
+// CRIAÇÃO DAS MENSAGENS
+// =========================================================
 
 function criarMensagem(nome, texto, tipo) {
+  const estavaPertoDoFinal =
+    estaPertoDoFinalDoChat();
+
   const message = document.createElement("div");
-  message.classList.add("message", tipo);
+  message.classList.add("message");
+
+  const mensagemUsuario =
+    tipo === "user-message";
+
+  if (mensagemUsuario) {
+    message.classList.add("user-message");
+  } else {
+    message.classList.add("ai-message");
+
+    if (tipo === "loading-message") {
+      message.classList.add("loading-message");
+    }
+  }
+
+  const avatar = document.createElement("div");
+  avatar.classList.add("message-avatar");
+  avatar.setAttribute("aria-hidden", "true");
+  avatar.textContent = mensagemUsuario
+    ? "VC"
+    : "AI";
+
+  const content = document.createElement("div");
+  content.classList.add("message-content");
 
   const messageName = document.createElement("span");
   messageName.classList.add("message-name");
   messageName.textContent = nome;
 
-  const messageText = document.createElement("div");
-  messageText.classList.add("message-text");
+  const messageBody = document.createElement("div");
+  messageBody.classList.add("message-body");
 
   const textoSeguro =
     typeof texto === "string"
       ? texto
       : "Não foi possível exibir esta mensagem.";
 
-  const deveRenderizarMarkdown =
-    tipo === "ai-message";
-
-  if (deveRenderizarMarkdown) {
-    const htmlSeguro = criarHtmlSeguro(textoSeguro);
+  if (!mensagemUsuario && tipo !== "loading-message") {
+    const htmlSeguro =
+      criarHtmlSeguro(textoSeguro);
 
     if (htmlSeguro !== null) {
-      messageText.innerHTML = htmlSeguro;
-      destacarBlocosDeCodigo(messageText);
+      messageBody.innerHTML = htmlSeguro;
+      destacarBlocosDeCodigo(messageBody);
     } else {
-      messageText.textContent = textoSeguro;
+      const paragraph =
+        document.createElement("p");
+
+      paragraph.textContent = textoSeguro;
+      messageBody.appendChild(paragraph);
     }
   } else {
-    /*
-      Mensagens da pessoa usuária e de carregamento
-      são sempre tratadas como texto puro.
-    */
-    messageText.textContent = textoSeguro;
+    const paragraph =
+      document.createElement("p");
+
+    paragraph.textContent = textoSeguro;
+    messageBody.appendChild(paragraph);
   }
 
-  message.appendChild(messageName);
-  message.appendChild(messageText);
+  content.appendChild(messageName);
+  content.appendChild(messageBody);
+
+  message.appendChild(avatar);
+  message.appendChild(content);
 
   chatMessages.appendChild(message);
 
-  message.scrollIntoView({
-    behavior: "smooth",
-    block: "end"
-  });
+  if (estavaPertoDoFinal) {
+    rolarChatParaFinal(true);
+  }
 
   return message;
 }
 
-// =========================
+// =========================================================
 // MENSAGEM INICIAL
-// =========================
+// =========================================================
 
 function mostrarMensagemInicial() {
   criarMensagem(
     "ITKs AI",
-    "Olá! Eu sou uma assistente especializada em programação. Envie uma dúvida ou cole um código para começarmos.",
+    "Olá. Sou uma assistente especializada em programação. Envie uma dúvida ou cole um código para começarmos.",
     "ai-message"
   );
 }
 
-// =========================
-// CONTROLE DO HISTÓRICO
-// =========================
+// =========================================================
+// HISTÓRICO LOCAL
+// =========================================================
 
 function calcularTotalCaracteres(historico) {
-  return historico.reduce((total, mensagem) => {
-    return total + mensagem.content.length;
-  }, 0);
+  return historico.reduce(
+    (total, mensagem) => {
+      return total + mensagem.content.length;
+    },
+    0
+  );
 }
 
 function limitarHistorico(historico) {
-  const historicoLimitado = historico
-    .slice(-LIMITE_MENSAGENS_HISTORICO);
+  const historicoLimitado =
+    historico.slice(
+      -LIMITE_MENSAGENS_HISTORICO
+    );
 
-  /*
-    Remove mensagens antigas em pares:
-    uma mensagem da pessoa e uma resposta da IA.
-  */
   while (
-    calcularTotalCaracteres(historicoLimitado) >
-      LIMITE_TOTAL_HISTORICO &&
+    calcularTotalCaracteres(
+      historicoLimitado
+    ) > LIMITE_TOTAL_HISTORICO &&
     historicoLimitado.length >= 2
   ) {
     historicoLimitado.splice(0, 2);
@@ -366,57 +1232,53 @@ function registrarInteracao(pergunta, resposta) {
     }
   );
 
-  historicoDaConversa = limitarHistorico(
-    historicoDaConversa
-  );
+  historicoDaConversa =
+    limitarHistorico(
+      historicoDaConversa
+    );
 }
 
-// =========================
+// =========================================================
 // NOVA CONVERSA
-// =========================
+// =========================================================
 
 function iniciarNovaConversa() {
   if (requisicaoEmAndamento) return;
 
   historicoDaConversa = [];
 
-  /*
-    Apaga somente os elementos já existentes.
-    Nenhum conteúdo externo é inserido com innerHTML.
-  */
   chatMessages.replaceChildren();
 
   userInput.value = "";
+  userInput.style.height = "auto";
 
   atualizarBotaoEnviar();
   mostrarMensagemInicial();
   fecharSidebar();
 
-  userInput.focus();
+  chatMessages.scrollTop = 0;
 }
 
-if (newChatButton) {
-  newChatButton.addEventListener(
-    "click",
-    iniciarNovaConversa
-  );
-}
+newChatButton?.addEventListener(
+  "click",
+  iniciarNovaConversa
+);
 
-// =========================
-// MENSAGEM DE ESPERA
-// =========================
+// =========================================================
+// RESPOSTA DE CARREGAMENTO
+// =========================================================
 
 function mostrarAnalise() {
   return criarMensagem(
     "ITKs AI",
-    "ITKs AI está analisando...",
+    "Analisando",
     "loading-message"
   );
 }
 
-// =========================
-// CONSULTA À IA
-// =========================
+// =========================================================
+// CONSULTA À API
+// =========================================================
 
 async function buscarRespostaNaIA(
   pergunta,
@@ -424,9 +1286,12 @@ async function buscarRespostaNaIA(
 ) {
   const controller = new AbortController();
 
-  const temporizador = setTimeout(() => {
-    controller.abort();
-  }, TEMPO_MAXIMO_REQUISICAO);
+  const temporizador = window.setTimeout(
+    () => {
+      controller.abort();
+    },
+    TEMPO_MAXIMO_REQUISICAO
+  );
 
   try {
     const response = await fetch("/api/chat", {
@@ -449,7 +1314,9 @@ async function buscarRespostaNaIA(
     const contentType =
       response.headers.get("content-type") || "";
 
-    if (!contentType.includes("application/json")) {
+    if (
+      !contentType.includes("application/json")
+    ) {
       throw new Error(
         "O servidor retornou uma resposta inválida."
       );
@@ -476,13 +1343,13 @@ async function buscarRespostaNaIA(
 
     return data.resposta.trim();
   } finally {
-    clearTimeout(temporizador);
+    window.clearTimeout(temporizador);
   }
 }
 
-// =========================
-// BOTÕES DE SUGESTÃO
-// =========================
+// =========================================================
+// SUGESTÕES
+// =========================================================
 
 suggestionButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -493,24 +1360,20 @@ suggestionButtons.forEach((button) => {
 
     if (!perguntaSugerida) return;
 
-    userInput.value = perguntaSugerida.slice(
-      0,
-      LIMITE_PERGUNTA
-    );
+    userInput.value =
+      perguntaSugerida.slice(
+        0,
+        LIMITE_PERGUNTA
+      );
 
     atualizarBotaoEnviar();
-
-    /*
-      O botão agora envia a pergunta,
-      em vez de apenas preencher o campo.
-    */
     chatForm.requestSubmit();
   });
 });
 
-// =========================
-// ENVIO DA MENSAGEM
-// =========================
+// =========================================================
+// ENVIO DO CHAT
+// =========================================================
 
 chatForm.addEventListener(
   "submit",
@@ -519,11 +1382,15 @@ chatForm.addEventListener(
 
     if (requisicaoEmAndamento) return;
 
-    const pergunta = userInput.value.trim();
+    const pergunta =
+      userInput.value.trim();
 
     if (!pergunta) return;
 
-    if (pergunta.length > LIMITE_PERGUNTA) {
+    if (
+      pergunta.length >
+      LIMITE_PERGUNTA
+    ) {
       criarMensagem(
         "ITKs AI",
         `A pergunta pode ter no máximo ${LIMITE_PERGUNTA} caracteres.`,
@@ -543,18 +1410,19 @@ chatForm.addEventListener(
     );
 
     userInput.value = "";
+    userInput.style.height = "auto";
 
-    const mensagemDeAnalise = mostrarAnalise();
+    atualizarContador();
+
+    const mensagemDeAnalise =
+      mostrarAnalise();
 
     try {
-      /*
-        Envia somente as mensagens anteriores.
-        A pergunta atual é adicionada pelo backend.
-      */
-      const resposta = await buscarRespostaNaIA(
-        pergunta,
-        historicoDaConversa
-      );
+      const resposta =
+        await buscarRespostaNaIA(
+          pergunta,
+          historicoDaConversa
+        );
 
       mensagemDeAnalise.remove();
 
@@ -568,40 +1436,59 @@ chatForm.addEventListener(
         pergunta,
         resposta
       );
-    } catch (erro) {
+    } catch (error) {
       mensagemDeAnalise.remove();
 
       const requisicaoExpirou =
-        erro instanceof DOMException &&
-        erro.name === "AbortError";
+        error instanceof DOMException &&
+        error.name === "AbortError";
 
-      const mensagemDeErro = requisicaoExpirou
-        ? "A resposta demorou mais do que o esperado. Aguarde um pouco e tente novamente."
-        : "Ainda não consegui acessar meu cérebro. Verifique a conexão do servidor e tente novamente.";
+      const mensagem =
+        requisicaoExpirou
+          ? "A resposta demorou mais do que o esperado. Aguarde um pouco e tente novamente."
+          : "Ainda não consegui acessar o serviço da ITKs AI. Tente novamente em alguns instantes.";
 
       criarMensagem(
         "ITKs AI",
-        mensagemDeErro,
+        mensagem,
         "ai-message"
       );
 
-      /*
-        Não exibe detalhes internos no navegador.
-      */
       console.error(
         "Falha ao obter resposta da ITKs AI."
       );
     } finally {
       requisicaoEmAndamento = false;
-
       atualizarBotaoEnviar();
-      userInput.focus();
     }
   }
 );
 
-// =========================
+// =========================================================
+// TECLA ESCAPE
+// =========================================================
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+    if (event.key !== "Escape") return;
+
+    if (
+      authModal &&
+      !authModal.hidden
+    ) {
+      fecharModalAutenticacao();
+      return;
+    }
+
+    fecharMenuConta();
+    fecharSidebar();
+  }
+);
+
+// =========================================================
 // ESTADO INICIAL
-// =========================
+// =========================================================
 
 atualizarBotaoEnviar();
+carregarSessaoInicial();
