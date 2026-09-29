@@ -1,4 +1,5 @@
 import { supabase } from "./supabase-config.js";
+import { criarHistorico } from "./ia-history.js";
 
 // =========================================================
 // ELEMENTOS DO CHAT
@@ -132,6 +133,69 @@ let requisicaoEmAndamento = false;
 let autenticacaoEmAndamento = false;
 let historicoDaConversa = [];
 let usuarioAtual = null;
+let carregandoConversa = false;
+let sessaoCarregada = false;
+const memoria = criarHistorico({
+  supabase,
+  lista: document.getElementById("history-list"),
+  renderizar: { abrir: abrirConversaSalva },
+  avisar: texto => mostrarToast(texto, "error")
+});
+
+async function abrirConversaSalva(id) {
+  if (requisicaoEmAndamento || carregandoConversa) return;
+  const ctx = memoria.contexto();
+  carregandoConversa = true;
+  atualizarBotaoEnviar();
+  try {
+    const mensagens = await memoria.abrir(id);
+    if (!mensagens) return;
+    chatMessages.replaceChildren();
+    for (const mensagem of mensagens) {
+      criarMensagem(mensagem.role === "user" ? "Você" : "ITKs AI",
+        mensagem.content, mensagem.role === "user" ? "user-message" : "ai-message");
+    }
+    historicoDaConversa = limitarHistorico(mensagens.map(({ role, content }) => ({ role, content })));
+    if (!mensagens.length) mostrarMensagemInicial();
+    userInput.value = "";
+    fecharSidebar();
+    rolarChatParaFinal(true);
+  } catch {
+    if (memoria.atual(ctx)) mostrarToast("Não foi possível abrir esta conversa. Tente novamente.", "error");
+  } finally {
+    carregandoConversa = false;
+    atualizarBotaoEnviar();
+  }
+}
+
+const socialButtons = document.querySelectorAll("[data-social-provider]");
+const socialNames = { google: "Google", facebook: "Facebook", apple: "Apple", azure: "Microsoft" };
+socialButtons.forEach(button => {
+  button.addEventListener("click", async () => {
+    if (autenticacaoEmAndamento || requisicaoEmAndamento || !sessaoCarregada) return;
+    const provider = button.dataset.socialProvider;
+    if (!Object.hasOwn(socialNames, provider)) return;
+    const label = button.querySelector(".social-label");
+    const normal = label.textContent;
+    autenticacaoEmAndamento = true;
+    socialButtons.forEach(item => { item.disabled = true; });
+    button.setAttribute("aria-busy", "true");
+    label.textContent = "Abrindo " + socialNames[provider] + "...";
+    try {
+      const options = { redirectTo: window.location.origin + window.location.pathname };
+      if (provider === "azure") options.scopes = "email";
+      const { error } = await supabase.auth.signInWithOAuth({ provider, options });
+      if (error) throw error;
+    } catch {
+      mostrarToast("Não foi possível entrar com " + socialNames[provider] + ". Tente novamente em instantes.", "error");
+    } finally {
+      autenticacaoEmAndamento = false;
+      socialButtons.forEach(item => { item.disabled = false; });
+      button.removeAttribute("aria-busy");
+      label.textContent = normal;
+    }
+  });
+});
 
 // =========================================================
 // VERIFICAÇÃO DA INTERFACE
@@ -341,7 +405,32 @@ function mostrarTelaRecuperacaoSenha() {
   }
 }
 
+const loginPasswordStep = document.getElementById("login-password-step");
+let etapaSenha = false;
+
+function atualizarEtapaLogin() {
+  if (loginPasswordStep) loginPasswordStep.hidden = !etapaSenha;
+  if (loginPassword) loginPassword.disabled = !etapaSenha;
+  if (loginSubmit) {
+    loginSubmit.textContent = etapaSenha ? "Entrar" : "Continuar";
+    loginSubmit.disabled = autenticacaoEmAndamento || !loginEmail?.validity.valid;
+  }
+}
+
+function reiniciarEtapaLogin() {
+  etapaSenha = false;
+  if (loginPassword) { loginPassword.value = ""; loginPassword.type = "password"; }
+  document.querySelector('[data-password-toggle="login-password"]')?.setAttribute("aria-label", "Mostrar senha");
+  atualizarEtapaLogin();
+}
+
+loginEmail?.addEventListener("input", () => {
+  reiniciarEtapaLogin();
+  limparMensagemStatus(loginMessage);
+});
+
 function mostrarLogin() {
+  reiniciarEtapaLogin();
   loginTab?.classList.add("active");
   registerTab?.classList.remove("active");
 
@@ -498,6 +587,14 @@ function alternarMenuConta() {
 
 function atualizarInterfaceAutenticacao(user) {
   usuarioAtual = user || null;
+  sessaoCarregada = true;
+  if (memoria.trocarUsuario(usuarioAtual?.id || null)) {
+    historicoDaConversa = [];
+    chatMessages.replaceChildren();
+    mostrarMensagemInicial();
+    userInput.value = "";
+  }
+  atualizarBotaoEnviar();
 
   const conectado = Boolean(usuarioAtual);
 
@@ -597,6 +694,18 @@ loginForm?.addEventListener(
     limparMensagemStatus(loginMessage);
 
     const email = loginEmail?.value.trim() || "";
+    if (loginEmail) loginEmail.value = email;
+    if (!email || !loginEmail.validity.valid) {
+      mostrarMensagemStatus(loginMessage, "Digite um e-mail válido.");
+      loginEmail?.focus();
+      return;
+    }
+    if (!etapaSenha) {
+      etapaSenha = true;
+      atualizarEtapaLogin();
+      loginPassword?.focus();
+      return;
+    }
     const password = loginPassword?.value || "";
 
     if (!email || !password) {
@@ -646,6 +755,7 @@ loginForm?.addEventListener(
       atualizarInterfaceAutenticacao(data.user);
 
       loginForm.reset();
+      autenticacaoEmAndamento = false;
       fecharModalAutenticacao();
 
       mostrarToast(
@@ -666,6 +776,7 @@ loginForm?.addEventListener(
         "Entrar",
         "Entrando..."
       );
+      atualizarEtapaLogin();
     }
   }
 );
@@ -736,7 +847,7 @@ registerForm?.addEventListener(
 
     try {
       const redirectTo =
-        `${window.location.origin}${window.location.pathname}`;
+        "https://itks.com.br/AI/?confirmado=1";
 
       const { data, error } =
         await supabase.auth.signUp({
@@ -766,6 +877,7 @@ registerForm?.addEventListener(
 
       if (data.session) {
         atualizarInterfaceAutenticacao(data.user);
+        autenticacaoEmAndamento = false;
         fecharModalAutenticacao();
 
         mostrarToast(
@@ -976,7 +1088,7 @@ function atualizarBotaoEnviar() {
   sendButton.disabled =
     pergunta.length === 0 ||
     pergunta.length > LIMITE_PERGUNTA ||
-    requisicaoEmAndamento;
+    requisicaoEmAndamento || carregandoConversa || !sessaoCarregada;
 
   atualizarContador();
   ajustarAlturaTextarea();
@@ -1118,12 +1230,13 @@ function criarMensagem(nome, texto, tipo) {
     }
   }
 
-  const avatar = document.createElement("div");
-  avatar.classList.add("message-avatar");
-  avatar.setAttribute("aria-hidden", "true");
-  avatar.textContent = mensagemUsuario
-    ? "VC"
-    : "AI";
+  if (!mensagemUsuario) {
+    const avatar = document.createElement("div");
+    avatar.classList.add("message-avatar");
+    avatar.setAttribute("aria-hidden", "true");
+    avatar.textContent = "AI";
+    message.appendChild(avatar);
+  }
 
   const content = document.createElement("div");
   content.classList.add("message-content");
@@ -1165,7 +1278,6 @@ function criarMensagem(nome, texto, tipo) {
   content.appendChild(messageName);
   content.appendChild(messageBody);
 
-  message.appendChild(avatar);
   message.appendChild(content);
 
   chatMessages.appendChild(message);
@@ -1243,7 +1355,8 @@ function registrarInteracao(pergunta, resposta) {
 // =========================================================
 
 function iniciarNovaConversa() {
-  if (requisicaoEmAndamento) return;
+  if (requisicaoEmAndamento || carregandoConversa) return;
+  memoria.nova();
 
   historicoDaConversa = [];
 
@@ -1380,7 +1493,7 @@ chatForm.addEventListener(
   async (event) => {
     event.preventDefault();
 
-    if (requisicaoEmAndamento) return;
+    if (requisicaoEmAndamento || carregandoConversa || !sessaoCarregada) return;
 
     const pergunta =
       userInput.value.trim();
@@ -1400,6 +1513,7 @@ chatForm.addEventListener(
       return;
     }
 
+    const contextoEnvio = memoria.contexto();
     requisicaoEmAndamento = true;
     atualizarBotaoEnviar();
 
@@ -1424,6 +1538,7 @@ chatForm.addEventListener(
           historicoDaConversa
         );
 
+      if (!memoria.atual(contextoEnvio)) return;
       mensagemDeAnalise.remove();
 
       criarMensagem(
@@ -1436,7 +1551,9 @@ chatForm.addEventListener(
         pergunta,
         resposta
       );
+      await memoria.salvar(contextoEnvio, pergunta, resposta);
     } catch (error) {
+      if (!memoria.atual(contextoEnvio)) return;
       mensagemDeAnalise.remove();
 
       const requisicaoExpirou =
@@ -1492,3 +1609,10 @@ document.addEventListener(
 
 atualizarBotaoEnviar();
 carregarSessaoInicial();
+const retornoOAuth = new URLSearchParams(window.location.hash.slice(1));
+if (retornoOAuth.has("error")) {
+  mostrarToast("O login não foi concluído. Tente entrar novamente.", "error");
+  window.history.replaceState(null, "", window.location.pathname + window.location.search);
+}
+
+reiniciarEtapaLogin();
