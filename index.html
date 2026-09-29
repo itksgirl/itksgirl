@@ -2,50 +2,183 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT KS GIRL | Código, Design & Criatividade</title>
 
-  <link rel="manifest" href="manifest.json">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
+  <title>
+    IT KS GIRL | Programação, Desenvolvimento Web e Inteligência Artificial
+  </title>
+
+  <meta
+    name="description"
+    content="IT KS GIRL é uma marca de tecnologia que produz conteúdos sobre programação, desenvolvimento web, inteligência artificial, design e criatividade digital. A marca também desenvolve a ITKs AI, uma inteligência artificial especializada em programação."
+  >
+
+  <link
+    rel="canonical"
+    href="https://itksgirl.com/"
+  >
+
+  <link
+    rel="manifest"
+    href="/manifest.json"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/kimdourado.png"
+  >
+
+  <!-- Informações para compartilhamento -->
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IT KS GIRL">
+
+  <meta
+    property="og:title"
+    content="IT KS GIRL | Programação, Desenvolvimento Web e Inteligência Artificial"
+  >
+
+  <meta
+    property="og:description"
+    content="Conteúdos sobre programação, desenvolvimento web, inteligência artificial, design e criatividade digital."
+  >
+
+  <meta
+    property="og:url"
+    content="https://itksgirl.com/"
+  >
+
+  <!-- Informações estruturadas para o Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://itksgirl.com/#organization",
+        "name": "IT KS GIRL",
+        "alternateName": [
+          "It Ks Girl",
+          "itksgirl",
+          "@itksgirl"
+        ],
+        "url": "https://itksgirl.com/",
+        "description": "Marca de tecnologia dedicada à programação, ao desenvolvimento web, à inteligência artificial, ao design e à criatividade digital.",
+        "founder": {
+          "@type": "Person",
+          "name": "Débora Narsson"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://itksgirl.com/#website",
+        "name": "IT KS GIRL",
+        "url": "https://itksgirl.com/",
+        "inLanguage": "pt-BR",
+        "publisher": {
+          "@id": "https://itksgirl.com/#organization"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://itksgirl.com/IA/#application",
+        "name": "ITKs AI",
+        "url": "https://itksgirl.com/IA/",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web",
+        "description": "Inteligência artificial especializada em programação, criada pela marca IT KS GIRL.",
+        "creator": {
+          "@id": "https://itksgirl.com/#organization"
+        },
+        "isPartOf": {
+          "@id": "https://itksgirl.com/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Serviço de aplicativo -->
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(function() { console.log("Serviço de App ativo!"); })
-        .catch(function(err) { console.log("Erro no App:", err); });
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then(function () {
+          console.log("Serviço de App ativo!");
+        })
+        .catch(function (err) {
+          console.log("Erro no App:", err);
+        });
     }
   </script>
 
-  <link rel="icon" type="image/png" href="/kimdourado.png">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Fontes e estilos -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-  <script src="/cookie-script.js" defer></script>
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  >
+
+  <script
+    src="/cookie-script.js"
+    defer
+  ></script>
 </head>
 
 <body class="modern-body">
 
   <div class="top-announcement">
-  <div class="marquee-track">
-    <span>CURADORIA DE ESTILO, CÓDIGO E CULTURA DIGITAL.</span>
-    <span>PROGRAMAÇÃO PARA INICIANTES.</span>
-    <span>DESIGN • TECNOLOGIA • CRIATIVIDADE.</span>
-    <span>IT KS GIRL.</span>
+    <div class="marquee-track">
+      <span>CURADORIA DE ESTILO, CÓDIGO E CULTURA DIGITAL.</span>
+      <span>PROGRAMAÇÃO PARA INICIANTES.</span>
+      <span>DESIGN • TECNOLOGIA • CRIATIVIDADE.</span>
+      <span>IT KS GIRL.</span>
+    </div>
   </div>
-</div>
 
   <header class="rhode-header">
-    <button class="menu-btn" aria-label="Abrir menu">
+    <button
+      class="menu-btn"
+      type="button"
+      aria-label="Abrir menu"
+    >
       <i class="fas fa-bars"></i>
     </button>
 
-    <a href="/" class="main-logo">it ks girl</a>
+    <a
+      href="/"
+      class="main-logo"
+      aria-label="Página inicial da IT KS GIRL"
+    >
+      it ks girl
+    </a>
 
     <div class="header-icons">
-      <a href="#conteudos" aria-label="Pesquisar conteúdos">
+      <a
+        href="#conteudos"
+        aria-label="Ir para os conteúdos"
+      >
         <i class="fas fa-search"></i>
       </a>
-      <a href="KimKs/" aria-label="Kim KS">
+
+      <a
+        href="/KimKs/"
+        aria-label="Conhecer Kim KS"
+      >
         <i class="fas fa-code"></i>
       </a>
     </div>
@@ -53,70 +186,325 @@
 
   <main class="rhode-main">
 
+    <!-- Capa principal -->
     <section class="hero-card">
       <div class="hero-overlay"></div>
 
       <div class="hero-content">
-        <p class="hero-label">PROGRAMAÇÃO • DESIGN • CÓDIGO</p>
+        <p class="hero-label">
+          PROGRAMAÇÃO • DESIGN • CÓDIGO
+        </p>
+
         <h1>Criando no digital.</h1>
-        <a href="/IA/" class="hero-button">CONHEÇA A ITKs AI</a>
+
+        <a
+          href="/IA/"
+          class="hero-button"
+        >
+          CONHEÇA A ITKs AI
+        </a>
       </div>
     </section>
 
-    <section id="conteudos" class="topic-row">
+    <!-- Conteúdos principais -->
+    <section
+      id="conteudos"
+      class="topic-row"
+    >
       <article class="topic-card">
-        <span class="topic-tag">for beginners</span>
+        <span class="topic-tag">
+          for beginners
+        </span>
+
         <h2>programação</h2>
-        <p>Conteúdos simples para quem está começando no mundo da tecnologia.</p>
+
+        <p>
+          Conteúdos simples para quem está começando no mundo da tecnologia.
+        </p>
+
+        <a
+          href="/programacao/"
+          class="topic-button"
+        >
+          Ver programação
+        </a>
       </article>
 
       <article class="topic-card">
-        <span class="topic-tag">creative code</span>
+        <span class="topic-tag">
+          creative code
+        </span>
+
         <h2>código</h2>
-        <p>HTML, CSS, GitHub e pequenos projetos explicados de forma leve.</p>
+
+        <p>
+          HTML, CSS, JavaScript, GitHub e projetos de desenvolvimento web.
+        </p>
+
+        <a
+          href="/desenvolvimento-web/"
+          class="topic-button"
+        >
+          Desenvolvimento Web
+        </a>
       </article>
 
       <article class="topic-card">
-        <span class="topic-tag">visual identity</span>
+        <span class="topic-tag">
+          visual identity
+        </span>
+
         <h2>design</h2>
-        <p>Tipografia, estética, sites bonitos e identidade visual feminina.</p>
+
+        <p>
+          Tipografia, estética, sites bonitos e criatividade digital.
+        </p>
+
+        <a
+          href="/design/"
+          class="topic-button"
+        >
+          Ver design
+        </a>
       </article>
     </section>
 
+    <!-- Apresentação da marca -->
     <section class="about-card">
-      <p class="section-kicker">IT KS GIRL</p>
-      <h2>Um espaço para aprender, criar e testar ideias.</h2>
+      <p class="section-kicker">
+        IT KS GIRL
+      </p>
+
+      <h2>
+        Um espaço para aprender, criar e testar ideias.
+      </h2>
+
       <p>
         Aqui não é sobre saber tudo. É sobre começar, experimentar e transformar
         tecnologia em algo mais bonito, acessível e criativo.
       </p>
     </section>
 
+    <!-- Links principais -->
     <section class="link-grid">
-      <a href="#conteudos" class="large-link">conteúdos</a>
-      <a href="KimKs/" class="large-link">kim ks</a>
-      <a href="/sobre/" class="large-link">sobre</a>
-      <a href="/privacidade/" class="large-link">privacidade</a>
+      <a
+        href="#conteudos"
+        class="large-link"
+      >
+        conteúdos
+      </a>
+
+      <a
+        href="/KimKs/"
+        class="large-link"
+      >
+        kim ks
+      </a>
+
+      <a
+        href="/sobre/"
+        class="large-link"
+      >
+        sobre
+      </a>
+
+      <a
+        href="/privacidade/"
+        class="large-link"
+      >
+        privacidade
+      </a>
+    </section>
+
+    <!-- Descrição discreta para visitantes e mecanismos de busca -->
+    <section
+      class="brand-summary"
+      aria-labelledby="brand-summary-title"
+      style="
+        max-width: 900px;
+        margin: 48px auto 24px;
+        padding: 24px 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+        color: #555;
+        font-size: 0.88rem;
+        line-height: 1.7;
+      "
+    >
+      <h2
+        id="brand-summary-title"
+        style="
+          margin: 0 0 12px;
+          color: #222;
+          font-size: 1rem;
+          font-weight: 600;
+        "
+      >
+        Sobre a IT KS GIRL
+      </h2>
+
+      <p style="margin: 0 0 10px;">
+        <strong>IT KS GIRL</strong> é uma marca de tecnologia dedicada a
+        conteúdos de programação, desenvolvimento web, inteligência artificial,
+        design e criatividade digital.
+      </p>
+
+      <p style="margin: 0 0 10px;">
+        Entre os projetos da marca está a <strong>ITKs AI</strong>,
+        uma inteligência artificial especializada em programação.
+        O perfil oficial da marca nas redes sociais é
+        <strong>@itksgirl</strong>.
+      </p>
+
+      <p style="margin: 0;">
+        Criada por <strong>Débora Narsson</strong>.
+
+        <a
+          href="/sobre/"
+          style="
+            color: inherit;
+            text-decoration: underline;
+          "
+        >
+          Conheça a marca
+        </a>.
+      </p>
     </section>
 
   </main>
 
+  <!-- Rodapé institucional -->
   <footer class="modern-footer">
-    <p>IT KS GIRL ©️ 2026</p>
+
+    <p class="footer-copyright">
+      <strong>IT KS GIRL</strong> © 2026
+    </p>
+
+    <nav
+      class="footer-links"
+      aria-label="Links institucionais"
+    >
+      <a href="/termos/">
+        Termos
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/privacidade/">
+        Privacidade
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/seguranca/">
+        Segurança
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/status/">
+        Status
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/contato/">
+        Contato
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <button
+        id="gerenciar-cookies"
+        class="footer-cookie-button"
+        type="button"
+      >
+        Gerenciar cookies
+      </button>
+    </nav>
+
+    <nav
+      class="footer-topics"
+      aria-label="Áreas da IT KS GIRL"
+    >
+      <a href="/programacao/">
+        Programação
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/desenvolvimento-web/">
+        Desenvolvimento Web
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/inteligencia-artificial/">
+        Inteligência Artificial
+      </a>
+
+      <span aria-hidden="true">•</span>
+
+      <a href="/IA/">
+        ITKs AI
+      </a>
+    </nav>
+
   </footer>
 
-  <div id="cookie-banner" style="display: none;">
+  <!-- Banner de cookies -->
+  <div
+    id="cookie-banner"
+    style="display: none;"
+  >
     <div class="cookie-content">
       <p>
-        Utilizamos cookies para otimizar a navegação. Para mais informações, acesse a nossa 
-        <a href="/privacidade/" class="cookie-link">Política de Privacidade</a>.
+        Utilizamos cookies para otimizar a navegação. Para mais informações,
+        acesse a nossa
+
+        <a
+          href="/privacidade/"
+          class="cookie-link"
+        >
+          Política de Privacidade
+        </a>.
       </p>
 
       <div class="cookie-buttons">
-        <button id="aceitar-cookies" class="btn-aceitar">Aceitar</button>
-        <button id="continuar-sem-cookies" class="btn-rejeitar">Continuar sem aceitar</button>
+        <button
+          id="aceitar-cookies"
+          class="btn-aceitar"
+          type="button"
+        >
+          Aceitar
+        </button>
+
+        <button
+          id="continuar-sem-cookies"
+          class="btn-rejeitar"
+          type="button"
+        >
+          Continuar sem aceitar
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Reabre o banner pelo botão do rodapé -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const botaoGerenciarCookies =
+        document.getElementById("gerenciar-cookies");
+
+      const bannerCookies =
+        document.getElementById("cookie-banner");
+
+      if (botaoGerenciarCookies && bannerCookies) {
+        botaoGerenciarCookies.addEventListener("click", function () {
+          bannerCookies.style.display = "block";
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
