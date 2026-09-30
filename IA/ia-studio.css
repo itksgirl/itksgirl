@@ -75,3 +75,14 @@ html[data-chat-font=large] .message-content p{font-size:18px}
 .design-preview span{font-size:9px;letter-spacing:.15em}.design-preview strong{font-size:23px;max-width:210px;line-height:1.2}.design-preview-blocks{height:28px;border-top:2px solid currentColor;border-bottom:1px solid currentColor;opacity:.3}
 .design-preview.study{background:#e5ece6;color:#314c3a}.design-preview.product{background:#292c3b;color:#f4e7db}.design-preview.dashboard{background:#e8e8f4;color:#43416d}
 .sidebar-menu{min-height:120px;max-height:52dvh;overflow-y:auto;flex-shrink:1;overscroll-behavior:contain}
+/* Workspace-first chat: reserve the viewport for messages and code. */
+.main-content:has(.chat-card:not([hidden])){height:100dvh;min-height:0;overflow:hidden}
+.ai-main{width:100%;max-width:none;padding:24px 32px 12px}
+.ai-main:has(.chat-card:not([hidden])){display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+.ai-main .intro-section{max-width:none;flex-shrink:0}.intro-section h1{font-size:clamp(25px,3vw,38px);line-height:1.2}.intro-label,.intro-text{display:none}
+.suggestions{margin-top:16px;flex-shrink:0}.suggestion-button{min-height:44px;padding:8px 12px}
+.ai-main .chat-card{max-width:none;flex:1;min-height:0;display:flex;flex-direction:column;margin-top:12px;border-radius:0;overflow:hidden}
+.ai-main .chat-messages,.chat-active .chat-messages{flex:1;min-height:0;max-height:none;padding:20px 4px;overscroll-behavior:contain}
+.chat-form{flex-shrink:0;margin:0}.message-content,.message-body{min-width:0}.message-body pre{white-space:pre;overflow-x:auto}.message-body pre code{font-size:13px}
+.ai-warning{font-size:10px;margin:6px 0 0;flex-shrink:0}.main-content:has(.chat-card:not([hidden]))>.ai-footer{display:none}.project-context{max-width:none;flex-shrink:0}
+@media(max-width:700px){.ai-main{padding:10px 10px calc(8px + env(safe-area-inset-bottom,0px))}.ai-main .intro-section h1{font-size:23px}.suggestions{display:none}.ai-main .chat-card{margin-top:8px}.ai-main .chat-messages{padding:10px 2px}.chat-form{padding:8px;border-radius:14px}.form-footer,.attachment-bar small{display:none}.attachment-bar{gap:6px;padding-bottom:3px}.ai-warning{font-size:9px;line-height:1.4}.code-toolbar{padding:6px;gap:4px;flex-wrap:wrap}.code-toolbar .studio-button{padding:6px 8px;font-size:10px}.message{margin-bottom:20px}.message-body pre{padding:12px}.ai-header{min-height:54px;padding-top:6px;padding-bottom:6px}.request-status{margin:2px 0;min-height:0}}

@@ -357,7 +357,7 @@ export default async function handler(req,res){
       const choice=chunk.choices?.[0];if(choice?.finish_reason)finishReason=choice.finish_reason;
       const text=choice?.delta?.content;if(typeof text!=='string')continue;full+=text;pending+=text;
       if(full.length>30000)throw new Error('Resposta grande demais. Peça uma etapa menor.');
-      if(pending.length>=900&&(/[\n.!?]\s*$/.test(pending)||pending.length>=1800))await release();
+      if(pending.length>=(verified?900:240)&&(/[\n.!?]\s*$/.test(pending)||pending.length>=(verified?1800:480)))await release();
     }
     if(!finishReason)throw new Error('A conexão foi interrompida antes de concluir a resposta.');
     if(finishReason==='content_filter')throw new Error('Não foi possível exibir esta resposta.');
@@ -367,3 +367,5 @@ export default async function handler(req,res){
   }catch(e){if(!res.destroyed){const message=controller.signal.aborted?'A resposta foi interrompida ou excedeu o tempo. Tente uma pergunta menor.':e.message||'Não foi possível concluir a resposta.';if(opened){emit({type:'error',text:message});complete=true;res.end();}else{complete=true;res.status(502).json({erro:message});}}}
   finally{clearTimeout(timer);res.off?.('close',disconnect);controller.abort();}
 }
+
+
