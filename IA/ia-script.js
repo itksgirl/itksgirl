@@ -1122,7 +1122,7 @@ userInput.addEventListener(
   (event) => {
     if (
       event.key === "Enter" &&
-      !event.shiftKey &&
+      !event.shiftKey && document.documentElement.dataset.enterSend !== "false" &&
       !requisicaoEmAndamento && !event.isComposing
     ) {
       event.preventDefault();

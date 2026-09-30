@@ -1,3 +1,4 @@
+import { createAccount } from './ia-account.js';
 import { tracks, resources, projectIdeas, starters } from './ia-resources.js';
 
 const ext = {javascript:'js',typescript:'ts',python:'py',java:'java',html:'html',css:'css',sql:'sql',json:'json',bash:'sh',shell:'sh',c:'c',cpp:'cpp',csharp:'cs',markdown:'md',text:'txt'};
@@ -13,6 +14,7 @@ function link(label,url) { const a=el('a',label,'studio-link'); a.href=url; a.ta
 function isSafeURL(url) { try { return new URL(url).protocol==='https:'; } catch { return false; } }
 
 export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getConversation}) {
+  const account=createAccount({supabase,notify,closeSidebar});
   let user=null, version=0, items=[], view='conversas', selectedProject=null, loading=false, loadError=false;
   const pending=new Set();
   const main=document.querySelector('.ai-main');
@@ -107,9 +109,7 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
     message.querySelector('.message-content')?.append(actions);
     message.querySelectorAll('pre code').forEach((block,i)=>{const language=[...block.classList].find(c=>c.startsWith('language-'))?.slice(9)||'text';const code=block.textContent;const preceding=block.parentElement.previousElementSibling?.textContent||'';const hinted=preceding.match(/(?:^|\s)([\w.-]+\.(?:html|css|js|ts|py|java|json|sql|md|txt|c|cpp|cs))\b/)?.[1];const name=hinted||(language==='java'?((code.match(/public\s+class\s+(\w+)/)?.[1]||'Main')+'.java'):filenameFor(language,i+1));const toolbar=group(el('span',name,'studio-meta'),button('Copiar',()=>copy(code)),button('Baixar',()=>downloadFile(name,code)),button('Salvar código',async e=>{const b=e.currentTarget;b.disabled=true;try{if(await save('snippet',name,{filename:name,language,content:code})){notify('Salvo em Códigos.','success');b.textContent='Salvo';}}finally{b.disabled=false;}}));toolbar.classList.add('code-toolbar');block.parentElement.before(toolbar);});
   }
-  document.getElementById('profile-button')?.addEventListener('click',()=>{navigate('favoritos');panel.prepend(el('p',`Conta: ${user?.email||'Visitante'}`,'studio-note'));});
-  document.getElementById('settings-button')?.addEventListener('click',()=>{navigate('aprender');panel.prepend(el('p','Seus projetos e favoritos são privados por conta. Para solicitar exclusão, consulte a Política de Privacidade no rodapé.','studio-note'));});
-  return {navigate,decorate,setUser(next){if(next?.id===user?.id)return;version++;user=next;items=[];selectedProject=null;loading=false;loadError=false;pending.clear();refreshBanner();if(view!=='conversas')render();if(user)setTimeout(reload,0);},context(){const p=items.find(x=>x.id===selectedProject);return p?`Projeto: ${p.title}\nObjetivo: ${p.payload.description||''}\nTarefas:\n${(p.payload.tasks||[]).map(t=>`${t.done?'Concluída':'Pendente'}: ${t.text}`).join('\n')}`.slice(0,8000):'';}};
+  return {navigate,decorate,setUser(next){account.setUser(next);if(next?.id===user?.id){user=next;return;}version++;user=next;items=[];selectedProject=null;loading=false;loadError=false;pending.clear();refreshBanner();if(view!=='conversas')render();if(user)setTimeout(reload,0);},context(){const p=items.find(x=>x.id===selectedProject);return p?`Projeto: ${p.title}\nObjetivo: ${p.payload.description||''}\nTarefas:\n${(p.payload.tasks||[]).map(t=>`${t.done?'Concluída':'Pendente'}: ${t.text}`).join('\n')}`.slice(0,8000):'';}};
 }
 
 const scripts=new Map();
