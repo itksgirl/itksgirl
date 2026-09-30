@@ -535,5 +535,13 @@ dialog.querySelectorAll('.search-suggestions button').forEach(b=>b.addEventListe
 document.getElementById('home-search-form').addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q){input.value='';input.reportValidity();return;}if(e.submitter?.value==='web'){window.open('https://www.google.com/search?q='+encodeURIComponent(q+' programação'),'_blank','noopener,noreferrer');}else{location.assign('/IA/?pergunta='+encodeURIComponent(q)+'#conversas');}});
 })();
 </script>
+<script>
+(()=>{
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+ if(reduced.matches||!('IntersectionObserver' in window))return;
+ const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;const card=entry.target;observer.unobserve(card);if(reduced.matches)continue;card.classList.add('home-card-arriving');card.addEventListener('animationend',()=>card.classList.remove('home-card-arriving'),{once:true});}},{threshold:0.15});
+ document.querySelectorAll('.topic-card-link,.large-link').forEach(card=>observer.observe(card));
+})();
+</script>
 </body>
 </html>

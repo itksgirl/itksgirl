@@ -49,3 +49,11 @@
 .topic-card.topic-card-link{container-type:inline-size}
 .topic-card-link h2{font-size:clamp(24px,3vw,42px);white-space:nowrap;overflow-wrap:normal;word-break:normal;letter-spacing:-.045em;line-height:1.15}
 @supports(font-size:1cqi){.topic-card-link h2{font-size:clamp(20px,11.5cqi,48px)}}
+/* Motion signals for clickable home cards. */
+.topic-card-link,.large-link{transition:transform .22s ease,box-shadow .22s ease,background-color .22s ease;touch-action:manipulation}
+@media(hover:hover) and (pointer:fine){.topic-card-link:hover,.large-link:hover{transform:translateY(-6px);box-shadow:0 14px 28px #44333c16,inset 0 0 0 1px #bba5b3}}
+.topic-card-link:active,.large-link:active{transform:scale(.985);box-shadow:inset 0 0 0 2px #a88c9e}
+.large-link:focus-visible{outline:3px solid #896579;outline-offset:4px}
+@keyframes home-card-arrive{from{opacity:.35;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:no-preference){.home-card-arriving{animation:home-card-arrive .5s ease both}}
+@media(prefers-reduced-motion:reduce){.topic-card-link,.large-link{transition:none!important;animation:none!important;transform:none!important}}
