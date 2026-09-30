@@ -1100,6 +1100,7 @@ function ajustarAlturaTextarea() {
 }
 
 function atualizarBotaoEnviar() {
+  if(userInput.value.trim())document.body.classList.add("chat-drafting");
   const pergunta = userInput.value.trim();
 
   sendButton.disabled =
@@ -1305,7 +1306,7 @@ function criarMensagem(nome, texto, tipo) {
 // MENSAGEM INICIAL
 // =========================================================
 
-function mostrarMensagemInicial() { document.body.classList.remove("chat-active"); }
+function mostrarMensagemInicial() { document.body.classList.remove("chat-active", "chat-drafting"); }
 
 // =========================================================
 // HISTÓRICO LOCAL
