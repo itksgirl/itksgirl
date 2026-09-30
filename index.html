@@ -155,9 +155,9 @@
     <button
       class="menu-btn"
       type="button"
-      aria-label="Abrir menu"
+      aria-label="Abrir menu" aria-controls="home-menu" aria-expanded="false"
     >
-      <i class="fas fa-bars"></i>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
     </button>
 
     <a
@@ -510,5 +510,31 @@
     });
   </script>
 
+
+<dialog id="home-menu" aria-labelledby="home-menu-title">
+  <div class="home-menu-heading"><span class="home-menu-brand">IT KS GIRL</span><button type="button" class="home-menu-close" aria-label="Fechar menu">×</button></div>
+  <p class="home-menu-kicker">APRENDA. EXPERIMENTE. CRIE.</p><h2 id="home-menu-title">Por onde vamos começar?</h2>
+  <nav aria-label="Menu principal">
+    <a class="home-menu-feature" href="/IA/">Conversar com a ITKs AI <span aria-hidden="true">↗</span></a>
+    <a href="/IA/#aprender">Programação <small>Trilhas e livros para aprender</small></a>
+    <a href="/IA/#codigos">Códigos <small>Exemplos para seus projetos</small></a>
+    <a href="/IA/#design">Design <small>Inspirações para criar interfaces</small></a>
+    <a href="/IA/#conteudos">Conteúdos <small>Escolha seu próximo estudo</small></a>
+    <a href="/IA/#projetos">Projetos <small>Organize ideias e próximos passos</small></a>
+  </nav>
+  <nav class="home-menu-secondary" aria-label="Sobre a marca"><a href="/KimKs/">Kim Ks</a><a href="/sobre/">Sobre</a><a href="/privacidade/">Privacidade</a></nav>
+</dialog>
+<script>
+(() => {
+ const trigger=document.querySelector('.menu-btn');
+ const menu=document.getElementById('home-menu');
+ let previousOverflow='';
+ trigger.addEventListener('click',()=>{previousOverflow=document.body.style.overflow;menu.showModal();document.body.style.overflow='hidden';trigger.setAttribute('aria-expanded','true');});
+ menu.querySelector('.home-menu-close').addEventListener('click',()=>menu.close());
+ menu.addEventListener('click',event=>{if(event.target===menu){const r=menu.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)menu.close();}});
+ menu.addEventListener('close',()=>{document.body.style.overflow=previousOverflow;trigger.setAttribute('aria-expanded','false');trigger.focus({preventScroll:true});});
+ menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>menu.close()));
+})();
+</script>
 </body>
 </html>
