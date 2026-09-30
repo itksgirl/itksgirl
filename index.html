@@ -169,12 +169,7 @@
     </a>
 
     <div class="header-icons">
-      <a
-        href="/IA/#conteudos"
-        aria-label="Ir para os conteúdos"
-      >
-        <i class="fas fa-search"></i>
-      </a>
+      <button type="button" class="home-search-trigger" aria-label="Pesquisar programação" aria-controls="home-search" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button>
 
       <a
         href="/KimKs/"
@@ -534,6 +529,25 @@
  menu.addEventListener('click',event=>{if(event.target===menu){const r=menu.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)menu.close();}});
  menu.addEventListener('close',()=>{document.body.style.overflow=previousOverflow;trigger.setAttribute('aria-expanded','false');trigger.focus({preventScroll:true});});
  menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>menu.close()));
+})();
+</script>
+<dialog id="home-search" aria-labelledby="home-search-title">
+<button type="button" class="home-menu-close search-close" aria-label="Fechar pesquisa">×</button>
+<p class="home-menu-kicker">EXPLORE A PROGRAMAÇÃO</p><h2 id="home-search-title">O que você quer aprender?</h2>
+<p>Busque linguagens, erros, ferramentas, documentação e ideias de projetos.</p>
+<form id="home-search-form"><label for="home-search-input">Assunto ou pergunta</label><input id="home-search-input" type="search" placeholder="Ex.: como criar um site com Python?" maxlength="1000" required autocomplete="off">
+<div class="search-actions"><button type="submit" value="ai">Perguntar à ITKs AI</button><button type="submit" value="web">Pesquisar na web ↗</button></div></form>
+<p class="search-note">Na IA, sua pergunta será preparada para você enviar. A busca na web abre o Google em outra aba.</p>
+<div class="search-suggestions" aria-label="Sugestões de pesquisa"><button type="button">Aprender Python do zero</button><button type="button">Documentação JavaScript</button><button type="button">Projetos de HTML e CSS</button></div>
+</dialog>
+<script>
+(()=>{const trigger=document.querySelector('.home-search-trigger'),dialog=document.getElementById('home-search'),input=document.getElementById('home-search-input');let overflow='';
+trigger.addEventListener('click',()=>{overflow=document.body.style.overflow;dialog.showModal();document.body.style.overflow='hidden';trigger.setAttribute('aria-expanded','true');input.focus();});
+dialog.querySelector('.search-close').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('close',()=>{document.body.style.overflow=overflow;trigger.setAttribute('aria-expanded','false');trigger.focus({preventScroll:true});});
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+dialog.querySelectorAll('.search-suggestions button').forEach(b=>b.addEventListener('click',()=>{input.value=b.textContent;input.focus();}));
+document.getElementById('home-search-form').addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(!q){input.value='';input.reportValidity();return;}if(e.submitter?.value==='web'){window.open('https://www.google.com/search?q='+encodeURIComponent(q+' programação'),'_blank','noopener,noreferrer');}else{location.assign('/IA/?pergunta='+encodeURIComponent(q)+'#conversas');}});
 })();
 </script>
 </body>

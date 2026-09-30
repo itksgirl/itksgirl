@@ -1577,7 +1577,10 @@ document.addEventListener(
 // =========================================================
 
 atualizarBotaoEnviar();
-carregarSessaoInicial();
+carregarSessaoInicial().then(()=>{
+ const url=new URL(window.location.href);const question=url.searchParams.get('pergunta');
+ if(question?.trim()){workspace.navigate('conversas');userInput.value=question.trim().slice(0,1000);atualizarBotaoEnviar();userInput.focus();url.searchParams.delete('pergunta');url.hash='conversas';history.replaceState(null,'',url.pathname+url.search+url.hash);}
+});
 const retornoOAuth = new URLSearchParams(window.location.hash.slice(1));
 if (retornoOAuth.has("error")) {
   mostrarToast("O login não foi concluído. Tente entrar novamente.", "error");
