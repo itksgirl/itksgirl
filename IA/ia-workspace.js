@@ -20,13 +20,16 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
   const main=document.querySelector('.ai-main');
   const chatSections=[...main.children];
   const panel=el('section','','studio-panel'); panel.hidden=true; panel.tabIndex=-1; panel.setAttribute('aria-label','Área de estudos'); main.append(panel);
+  const menu=document.querySelector('.sidebar-menu');
+  for(const title of ['Design','Conteúdos']){const a=el('a',title,'sidebar-link');menu.append(a);}
   const links=[...document.querySelectorAll('.sidebar-menu .sidebar-link')];
-  const views=['conversas','projetos','codigos','aprender','favoritos'];
+  const views=['conversas','projetos','codigos','aprender','favoritos','design','conteudos'];
   links.forEach((a,i)=>{ a.href='#'+views[i]; a.addEventListener('click',e=>{e.preventDefault(); navigate(views[i]);}); });
   const banner=el('div','','project-context'); banner.hidden=true; document.querySelector('.chat-card').before(banner);
   const refreshBanner=()=>{const p=items.find(x=>x.id===selectedProject);banner.replaceChildren();banner.hidden=!p;if(p){banner.append(el('span','Projeto: '+p.title),button('Desvincular',()=>{selectedProject=null;refreshBanner();}));}};
   function navigate(next) {
     view=views.includes(next)?next:'conversas';
+    if(location.hash!=='#'+view)history.pushState(null,'','#'+view);
     links.forEach((a,i)=>{a.classList.toggle('active',views[i]===view);if(views[i]===view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
     chatSections.forEach(n=>n.hidden=view!=='conversas'); banner.hidden=view!=='conversas'||!selectedProject;
     panel.hidden=view==='conversas'; if(!panel.hidden){render();panel.focus({preventScroll:true});}
@@ -100,7 +103,7 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
     panel.append(el('h2','Livros e referências','studio-section-title'),el('p','Links para autores, editoras e documentação oficial. Alguns livros são pagos e em inglês; os materiais gratuitos estão identificados.'));const books=grid();for(const r of resources){const c=card(r.title,r.description);c.append(el('p',`${r.author} · ${r.topic}`,'studio-meta'),el('p',r.access,'studio-meta'),group(link('Ver fonte',r.url),favButton({type:'resource',url:r.url,description:r.description},r.title)));books.append(c);}searchCards(books,'Buscar livros e referências');
   }
   function renderFavorites(){header('Favoritos','Respostas, códigos e referências que você quer encontrar de novo.');accountNotice();const own=items.filter(x=>x.kind==='favorite');if(!own.length&&!loading)panel.append(el('p','Use ☆ Favoritar nas respostas, códigos e leituras para começar.','studio-empty'));const g=grid();for(const f of own){const c=card(f.title,f.payload.description);if(f.payload.content){const pre=el('pre',f.payload.content);c.append(pre,button('Copiar',()=>copy(f.payload.content)));}if(f.payload.type==='code')c.append(button('Baixar arquivo',()=>downloadFile(f.payload.filename||'codigo.txt',f.payload.content)));if(isSafeURL(f.payload.url))c.append(link('Abrir referência',f.payload.url));if(f.payload.track)c.append(button('Ver trilhas',()=>navigate('aprender')));c.append(button('Remover favorito',()=>remove(f)));g.append(c);}if(own.length)searchCards(g,'Buscar favoritos');}
-  function render(){if(view==='projetos')renderProjects();if(view==='codigos')renderCodes();if(view==='aprender')renderLearn();if(view==='favoritos')renderFavorites();}
+  function render(){if(view==='projetos')renderProjects();if(view==='codigos')renderCodes();if(view==='aprender')renderLearn();if(view==='favoritos')renderFavorites();if(view==='design')renderDesign();if(view==='conteudos')renderContents();}
   async function copy(text){try{await navigator.clipboard.writeText(text);notify('Copiado.','success');}catch{notify('Não foi possível copiar. Selecione o texto ou baixe o arquivo.');}}
   async function downloadStarter(){try{await loadScript('./vendor/fflate.js','fflate');const files={};for(const s of starters.slice(0,3))files[s.filename]=window.fflate.strToU8(s.content);files['README.md']=window.fflate.strToU8('# Primeiro site\n\nAbra esta pasta no VS Code. Abra index.html no navegador.\n\nArquivos: index.html, style.css e script.js. Não requer instalação de pacotes.\n');const data=window.fflate.zipSync(files,{level:6});downloadFile('primeiro-site.zip',data,'application/zip');}catch{notify('Não foi possível gerar o ZIP. Os arquivos individuais continuam disponíveis.');}}
   function decorate(message,text){
@@ -109,6 +112,39 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
     message.querySelector('.message-content')?.append(actions);
     message.querySelectorAll('pre code').forEach((block,i)=>{const language=[...block.classList].find(c=>c.startsWith('language-'))?.slice(9)||'text';const code=block.textContent;const preceding=block.parentElement.previousElementSibling?.textContent||'';const hinted=preceding.match(/(?:^|\s)([\w.-]+\.(?:html|css|js|ts|py|java|json|sql|md|txt|c|cpp|cs))\b/)?.[1];const name=hinted||(language==='java'?((code.match(/public\s+class\s+(\w+)/)?.[1]||'Main')+'.java'):filenameFor(language,i+1));const toolbar=group(el('span',name,'studio-meta'),button('Copiar',()=>copy(code)),button('Baixar',()=>downloadFile(name,code)),button('Salvar código',async e=>{const b=e.currentTarget;b.disabled=true;try{if(await save('snippet',name,{filename:name,language,content:code})){notify('Salvo em Códigos.','success');b.textContent='Salvo';}}finally{b.disabled=false;}}));toolbar.classList.add('code-toolbar');block.parentElement.before(toolbar);});
   }
+
+  function renderDesign(){
+    header('Design','Inspirações para transformar uma ideia visual em um site. Escolha uma direção e prepare seu pedido para a IA.');
+    const g=grid();
+    const ideas=[
+      ['Portfólio editorial','Tipografia marcante, fundo claro e projetos em destaque.','Crie um portfólio editorial responsivo em HTML e CSS, com tipografia legível, fundo pérola, apresentação, projetos e contato. Explique a estrutura dos arquivos.','editorial'],
+      ['Plataforma de estudos','Cards organizados, progresso visível e navegação simples.','Me ajude a projetar uma plataforma de estudos acessível com cards de cursos, progresso e menu responsivo. Comece pelo planejamento e depois HTML e CSS.','study'],
+      ['Página de produto','Uma mensagem principal, detalhes úteis e chamada para ação.','Crie o conceito de uma landing page de produto digital com hierarquia visual clara, benefícios e botão de ação. Evite avaliações fictícias e explique decisões de design.','product'],
+      ['Painel de projetos','Organização visual para tarefas, etapas e prioridades.','Planeje um dashboard de projetos responsivo com tarefas e filtros. Use dados de exemplo identificados e explique como implementar com JavaScript.','dashboard']
+    ];
+    for(const [title,desc,prompt,style] of ideas){const c=card(title,desc);const preview=el('div','','design-preview '+style);preview.setAttribute('aria-hidden','true');preview.append(el('span','IDEIA / ESTUDO'),el('strong',title),el('div','','design-preview-blocks'));c.prepend(preview);c.append(group(button('Criar com a IA',()=>launch(prompt)),favButton({type:'answer',content:prompt},title)));g.append(c);}
+    panel.append(el('p','Estudos visuais originais para inspiração. Os botões preparam uma mensagem no chat; você pode editar antes de enviar.','studio-meta'));
+  }
+  function renderContents(){
+    header('Conteúdos','Escolha o que quer aprender e continue no chat com uma pergunta pronta.');
+    const g=grid();
+    const lessons=[
+      ['Primeiros passos em programação','Entenda variáveis, condições e repetições com pequenos exercícios.','Sou iniciante. Ensine variáveis, condições e repetições com exemplos em Python e um exercício de cada vez.'],
+      ['HTML e CSS na prática','Monte sua primeira página e adapte para o celular.','Quero criar minha primeira página com HTML e CSS. Oriente passo a passo, com arquivos separados e explicações curtas.'],
+      ['JavaScript e interação','Dê vida a botões, formulários e listas.','Ensine eventos e manipulação do DOM criando uma lista de tarefas em JavaScript. Inclua acessibilidade e explique cada etapa.'],
+      ['Git e GitHub','Aprenda a acompanhar alterações e publicar seu trabalho.','Explique Git e GitHub para iniciantes. Mostre um fluxo seguro para revisar alterações, fazer commit e enviar ao repositório, sem apagar arquivos.'],
+      ['Como estudar com IA','Faça perguntas melhores e confira o que aprendeu.','Monte um roteiro de estudo de programação com IA, exercícios e formas de verificar respostas. Pergunte primeiro meu nível e tempo disponível.'],
+      ['Revisar e entender erros','Aprenda a investigar mensagens e testar hipóteses.','Me ensine a depurar um programa. Peça o código e a mensagem de erro antes de sugerir uma correção.']
+    ];
+    for(const [title,desc,prompt] of lessons){const c=card(title,desc);c.append(group(button('Estudar no chat',()=>launch(prompt)),favButton({type:'answer',content:prompt},title)));g.append(c);}
+    panel.append(group(button('Ver trilhas e livros',()=>navigate('aprender')),button('Abrir biblioteca de códigos',()=>navigate('codigos')),button('Explorar design',()=>navigate('design'))));
+  }
+  const openRoute=()=>{const route=location.hash.slice(1);if(views.includes(route))navigate(route);};
+  window.addEventListener('hashchange',openRoute);
+  window.addEventListener('popstate',openRoute);
+  // Defer until the surrounding chat has completed its synchronous setup.
+  queueMicrotask(openRoute);
+
   return {navigate,decorate,setUser(next){account.setUser(next);if(next?.id===user?.id){user=next;return;}version++;user=next;items=[];selectedProject=null;loading=false;loadError=false;pending.clear();refreshBanner();if(view!=='conversas')render();if(user)setTimeout(reload,0);},context(){const p=items.find(x=>x.id===selectedProject);return p?`Projeto: ${p.title}\nObjetivo: ${p.payload.description||''}\nTarefas:\n${(p.payload.tasks||[]).map(t=>`${t.done?'Concluída':'Pendente'}: ${t.text}`).join('\n')}`.slice(0,8000):'';}};
 }
 

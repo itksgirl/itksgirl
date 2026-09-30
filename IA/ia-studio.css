@@ -71,3 +71,7 @@ html[data-chat-font=large] .message-content{font-size:18px}
 html[data-chat-font=large] .message-content p{font-size:18px}
 @media(max-height:560px){.sidebar-header{margin-bottom:8px;min-height:34px}.sidebar-menu{margin-top:8px;gap:0}.sidebar-link{min-height:34px}.conversation-history{margin-top:8px}.sidebar-footer{padding-top:4px}}
 @media(max-height:380px){.sidebar{overflow-y:auto}.conversation-history{flex:none;max-height:80px}}
+.design-preview{min-height:160px;border-radius:12px;padding:20px;margin-bottom:20px;background:#f1e6ec;color:#3f303a;display:flex;flex-direction:column;justify-content:space-between;gap:15px}
+.design-preview span{font-size:9px;letter-spacing:.15em}.design-preview strong{font-size:23px;max-width:210px;line-height:1.2}.design-preview-blocks{height:28px;border-top:2px solid currentColor;border-bottom:1px solid currentColor;opacity:.3}
+.design-preview.study{background:#e5ece6;color:#314c3a}.design-preview.product{background:#292c3b;color:#f4e7db}.design-preview.dashboard{background:#e8e8f4;color:#43416d}
+.sidebar-menu{min-height:120px;max-height:52dvh;overflow-y:auto;flex-shrink:1;overscroll-behavior:contain}
