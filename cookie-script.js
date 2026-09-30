@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const banner = document.getElementById('cookie-banner');
     const aceitarBtn = document.getElementById('aceitar-cookies');
     const semCookiesBtn = document.getElementById('continuar-sem-cookies');
+    if (!banner || !aceitarBtn || !semCookiesBtn) return;
     const COOKIE_NAME = 'user_cookie_consent_itks'; // Nome único para evitar conflitos
 
     // 1. Função para buscar o cookie
@@ -32,9 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // 3. Verifica e mostra o banner se o usuário ainda não consentiu
     if (getCookie(COOKIE_NAME) === null) {
         // Usa setTimeout para garantir que o DOM esteja totalmente carregado e dar um pequeno delay
-        setTimeout(() => {
-            banner.style.display = 'block';
-        }, 500); 
+        banner.style.display = 'block'; 
     }
 
     // 4. Adiciona eventos aos botões
