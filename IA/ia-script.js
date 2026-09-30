@@ -1,5 +1,7 @@
 import { supabase } from "./supabase-config.js";
 import { criarHistorico } from "./ia-history.js";
+import { createWorkspace } from "./ia-workspace.js";
+import { createAttachments } from "./ia-attachments.js";
 
 // =========================================================
 // ELEMENTOS DO CHAT
@@ -126,8 +128,8 @@ const toastContainer = document.getElementById("toast-container");
 
 const LIMITE_PERGUNTA = 4000;
 const LIMITE_MENSAGENS_HISTORICO = 20;
-const LIMITE_TOTAL_HISTORICO = 12000;
-const TEMPO_MAXIMO_REQUISICAO = 60000;
+const LIMITE_TOTAL_HISTORICO = 24000;
+const TEMPO_MAXIMO_REQUISICAO = 120000;
 
 let requisicaoEmAndamento = false;
 let autenticacaoEmAndamento = false;
@@ -135,6 +137,15 @@ let historicoDaConversa = [];
 let usuarioAtual = null;
 let carregandoConversa = false;
 let sessaoCarregada = false;
+let activeController = null;
+const workspace = createWorkspace({ supabase, notify: mostrarToast, openLogin: abrirModalAutenticacao,
+  closeSidebar: fecharSidebar, getConversation: () => memoria.contexto().conversaId,
+  ask: text => { if (requisicaoEmAndamento) { mostrarToast('Aguarde a resposta ou clique em Parar.'); return; } userInput.value = text.slice(0,4000); atualizarBotaoEnviar(); userInput.focus(); }
+});
+const attachments = createAttachments({ form: chatForm, notify: mostrarToast, onChange: () => atualizarBotaoEnviar() });
+const stopButton = document.createElement('button'); stopButton.type='button'; stopButton.className='stop-button'; stopButton.textContent='Parar resposta'; stopButton.hidden=true;
+stopButton.onclick=()=>activeController?.abort();chatForm.append(stopButton);
+const requestStatus=document.createElement('p');requestStatus.className='request-status';requestStatus.setAttribute('role','status');chatForm.append(requestStatus);
 const memoria = criarHistorico({
   supabase,
   lista: document.getElementById("history-list"),
@@ -144,6 +155,9 @@ const memoria = criarHistorico({
 
 async function abrirConversaSalva(id) {
   if (requisicaoEmAndamento || carregandoConversa) return;
+  workspace.navigate("conversas");
+  attachments.clear();
+  document.body.classList.add("chat-active");
   const ctx = memoria.contexto();
   carregandoConversa = true;
   atualizarBotaoEnviar();
@@ -586,7 +600,10 @@ function alternarMenuConta() {
 }
 
 function atualizarInterfaceAutenticacao(user) {
+  const changedAccount = usuarioAtual?.id !== user?.id;
+  if (changedAccount) { activeController?.abort(); attachments.clear(); }
   usuarioAtual = user || null;
+  workspace.setUser(usuarioAtual);
   sessaoCarregada = true;
   if (memoria.trocarUsuario(usuarioAtual?.id || null)) {
     historicoDaConversa = [];
@@ -847,7 +864,7 @@ registerForm?.addEventListener(
 
     try {
       const redirectTo =
-        "https://itks.com.br/AI/?confirmado=1";
+        window.location.origin + window.location.pathname + "?confirmado=1";
 
       const { data, error } =
         await supabase.auth.signUp({
@@ -1088,7 +1105,8 @@ function atualizarBotaoEnviar() {
   sendButton.disabled =
     pergunta.length === 0 ||
     pergunta.length > LIMITE_PERGUNTA ||
-    requisicaoEmAndamento || carregandoConversa || !sessaoCarregada;
+    requisicaoEmAndamento || carregandoConversa || !sessaoCarregada || attachments.busy;
+  attachments.setDisabled(requisicaoEmAndamento);
 
   atualizarContador();
   ajustarAlturaTextarea();
@@ -1105,7 +1123,7 @@ userInput.addEventListener(
     if (
       event.key === "Enter" &&
       !event.shiftKey &&
-      !requisicaoEmAndamento
+      !requisicaoEmAndamento && !event.isComposing
     ) {
       event.preventDefault();
       chatForm.requestSubmit();
@@ -1141,6 +1159,7 @@ function criarHtmlSeguro(texto) {
     },
 
     FORBID_TAGS: [
+      "img",
       "script",
       "style",
       "iframe",
@@ -1230,20 +1249,12 @@ function criarMensagem(nome, texto, tipo) {
     }
   }
 
-  if (!mensagemUsuario) {
-    const avatar = document.createElement("div");
-    avatar.classList.add("message-avatar");
-    avatar.setAttribute("aria-hidden", "true");
-    avatar.textContent = "AI";
-    message.appendChild(avatar);
-  }
+
 
   const content = document.createElement("div");
   content.classList.add("message-content");
 
-  const messageName = document.createElement("span");
-  messageName.classList.add("message-name");
-  messageName.textContent = nome;
+  message.setAttribute("aria-label", mensagemUsuario ? "Sua mensagem" : "Resposta");
 
   const messageBody = document.createElement("div");
   messageBody.classList.add("message-body");
@@ -1275,12 +1286,13 @@ function criarMensagem(nome, texto, tipo) {
     messageBody.appendChild(paragraph);
   }
 
-  content.appendChild(messageName);
+
   content.appendChild(messageBody);
 
   message.appendChild(content);
 
   chatMessages.appendChild(message);
+  if (!mensagemUsuario && tipo !== "loading-message") workspace.decorate(message, textoSeguro);
 
   if (estavaPertoDoFinal) {
     rolarChatParaFinal(true);
@@ -1293,13 +1305,7 @@ function criarMensagem(nome, texto, tipo) {
 // MENSAGEM INICIAL
 // =========================================================
 
-function mostrarMensagemInicial() {
-  criarMensagem(
-    "ITKs AI",
-    "Olá. Sou uma assistente especializada em programação. Envie uma dúvida ou cole um código para começarmos.",
-    "ai-message"
-  );
-}
+function mostrarMensagemInicial() { document.body.classList.remove("chat-active"); }
 
 // =========================================================
 // HISTÓRICO LOCAL
@@ -1356,6 +1362,8 @@ function registrarInteracao(pergunta, resposta) {
 
 function iniciarNovaConversa() {
   if (requisicaoEmAndamento || carregandoConversa) return;
+  workspace.navigate("conversas");
+  attachments.clear();
   memoria.nova();
 
   historicoDaConversa = [];
@@ -1393,71 +1401,19 @@ function mostrarAnalise() {
 // CONSULTA À API
 // =========================================================
 
-async function buscarRespostaNaIA(
-  pergunta,
-  historico
-) {
-  const controller = new AbortController();
-
-  const temporizador = window.setTimeout(
-    () => {
-      controller.abort();
-    },
-    TEMPO_MAXIMO_REQUISICAO
-  );
-
+async function buscarRespostaNaIA(pergunta, historico, anexos, projeto, onText) {
+  const controller = new AbortController(); activeController=controller;
+  const timer=setTimeout(()=>controller.abort(),TEMPO_MAXIMO_REQUISICAO);
   try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-
-      body: JSON.stringify({
-        pergunta,
-        historico
-      }),
-
-      signal: controller.signal,
-      credentials: "same-origin"
-    });
-
-    const contentType =
-      response.headers.get("content-type") || "";
-
-    if (
-      !contentType.includes("application/json")
-    ) {
-      throw new Error(
-        "O servidor retornou uma resposta inválida."
-      );
-    }
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        typeof data?.erro === "string"
-          ? data.erro
-          : "Não foi possível obter uma resposta."
-      );
-    }
-
-    if (
-      typeof data?.resposta !== "string" ||
-      data.resposta.trim().length === 0
-    ) {
-      throw new Error(
-        "A IA retornou uma resposta vazia."
-      );
-    }
-
-    return data.resposta.trim();
-  } finally {
-    window.clearTimeout(temporizador);
-  }
+    const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pergunta,historico,anexos,projeto,stream:true}),signal:controller.signal,credentials:'same-origin'});
+    const type=response.headers.get('content-type')||'';
+    if(type.includes('application/json')){const data=await response.json();if(!response.ok)throw new Error(data.erro||'Erro ao obter resposta.');if(typeof data.resposta!=='string')throw new Error('Resposta inválida.');return data.resposta;}
+    if(!response.ok||!type.includes('application/x-ndjson'))throw new Error('Resposta inválida do servidor.');
+    const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='',text='',final=null;
+    function line(raw){if(!raw.trim())return;const event=JSON.parse(raw);if(event.type==='status')requestStatus.textContent=event.text;if(event.type==='delta'){text+=event.text;onText(text);}if(event.type==='error')throw new Error(event.text);if(event.type==='done')final=event.text;}
+    try{while(true){const {value,done}=await reader.read();buffer+=done?decoder.decode():decoder.decode(value,{stream:true});let idx;while((idx=buffer.indexOf('\n'))>=0){line(buffer.slice(0,idx));buffer=buffer.slice(idx+1);}if(done)break;}if(buffer.trim())line(buffer);}finally{reader.releaseLock();}
+    if(typeof final!=='string'||!final.trim())throw new Error('A resposta foi interrompida. Tente novamente.');return final;
+  } finally {clearTimeout(timer);if(activeController===controller)activeController=null;}
 }
 
 // =========================================================
@@ -1513,13 +1469,18 @@ chatForm.addEventListener(
       return;
     }
 
+    if (attachments.busy) return;
+    document.body.classList.add("chat-active");
+    const files = attachments.snapshot();
+    const projectContext = workspace.context();
     const contextoEnvio = memoria.contexto();
+    stopButton.hidden=false;
     requisicaoEmAndamento = true;
     atualizarBotaoEnviar();
 
     criarMensagem(
       "Você",
-      pergunta,
+      pergunta + (files.length ? "\n\nAnexos: " + files.map(f=>f.name).join(", ") : ""),
       "user-message"
     );
 
@@ -1535,7 +1496,11 @@ chatForm.addEventListener(
       const resposta =
         await buscarRespostaNaIA(
           pergunta,
-          historicoDaConversa
+          historicoDaConversa, files, projectContext, text => {
+            if (!memoria.atual(contextoEnvio)) return;
+            mensagemDeAnalise.querySelector(".message-body").textContent=text;
+            rolarChatParaFinal();
+          }
         );
 
       if (!memoria.atual(contextoEnvio)) return;
@@ -1547,11 +1512,13 @@ chatForm.addEventListener(
         "ai-message"
       );
 
+      attachments.clear();
+      const perguntaSalva = pergunta + (files.length ? "\n\n[Arquivos analisados: " + files.map(f=>f.name).join(", ") + ". O conteúdo dos anexos não é armazenado no histórico; reanexe se necessário.]" : "");
       registrarInteracao(
-        pergunta,
+        perguntaSalva,
         resposta
       );
-      await memoria.salvar(contextoEnvio, pergunta, resposta);
+      await memoria.salvar(contextoEnvio, perguntaSalva, resposta);
     } catch (error) {
       if (!memoria.atual(contextoEnvio)) return;
       mensagemDeAnalise.remove();
@@ -1562,8 +1529,9 @@ chatForm.addEventListener(
 
       const mensagem =
         requisicaoExpirou
-          ? "A resposta demorou mais do que o esperado. Aguarde um pouco e tente novamente."
-          : "Ainda não consegui acessar o serviço da ITKs AI. Tente novamente em alguns instantes.";
+          ? "Resposta interrompida. Você pode reenviar a pergunta."
+          : (error.message || "Não foi possível responder. Tente novamente.");
+      userInput.value = pergunta;
 
       criarMensagem(
         "ITKs AI",
@@ -1575,6 +1543,7 @@ chatForm.addEventListener(
         "Falha ao obter resposta da ITKs AI."
       );
     } finally {
+      stopButton.hidden=true; requestStatus.textContent="";
       requisicaoEmAndamento = false;
       atualizarBotaoEnviar();
     }
