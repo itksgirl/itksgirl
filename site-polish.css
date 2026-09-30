@@ -39,3 +39,13 @@
 .topic-card-link:hover{box-shadow:inset 0 0 0 2px #bba5b3;background-color:#eae5e8}
 .topic-card-link:focus-visible{outline:3px solid #896579;outline-offset:4px}
 @media(prefers-reduced-motion:reduce){.topic-card-link{transition:none}}
+/* Preserve the card layout when the entire card is a link. */
+.topic-card.topic-card-link{display:flex;flex-direction:column;justify-content:flex-start;gap:24px;min-width:0}
+.topic-card-link .topic-tag{align-self:flex-end;flex-shrink:0}
+.topic-card-link h2{margin:0;font-size:clamp(2rem,4.5vw,4.5rem);line-height:1.1;letter-spacing:-.045em;overflow-wrap:anywhere}
+.topic-card-link p{margin:0;line-height:1.6}
+@media(max-width:768px){.topic-card.topic-card-link{gap:20px;min-height:270px}.topic-card-link h2{font-size:clamp(2rem,9vw,3.5rem)}}
+/* Size headings to the card, keeping full words intact. */
+.topic-card.topic-card-link{container-type:inline-size}
+.topic-card-link h2{font-size:clamp(24px,3vw,42px);white-space:nowrap;overflow-wrap:normal;word-break:normal;letter-spacing:-.045em;line-height:1.15}
+@supports(font-size:1cqi){.topic-card-link h2{font-size:clamp(20px,11.5cqi,48px)}}
