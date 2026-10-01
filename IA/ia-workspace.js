@@ -21,7 +21,18 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
   const chatSections=[...main.children];
   const panel=el('section','','studio-panel'); panel.hidden=true; panel.tabIndex=-1; panel.setAttribute('aria-label','Área de estudos'); main.append(panel);
   const menu=document.querySelector('.sidebar-menu');
-  for(const title of ['Design','Conteúdos','Livros']){const a=el('a',title,'sidebar-link');menu.append(a);}
+  const menuIcons={
+    Design:'M14 5l5 5M4 20l4-1 12-12a2.1 2.1 0 0 0-3-3L5 16l-1 4z',
+    'Conteúdos':'M5 3h10l4 4v14H5V3zM14 3v5h5M8 12h8M8 16h6',
+    Livros:'M4 4h5v16H4V4zM9 6h5v14H9M14 5l4-1 4 15-4 1-4-15z'
+  };
+  for(const title of ['Design','Conteúdos','Livros']){
+    const a=el('a','','sidebar-link');
+    const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    icon.setAttribute('class','sidebar-icon');icon.setAttribute('viewBox','0 0 24 24');icon.setAttribute('aria-hidden','true');icon.setAttribute('focusable','false');
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',menuIcons[title]);icon.append(path);
+    a.append(icon,el('span',title));menu.append(a);
+  }
   const links=[...document.querySelectorAll('.sidebar-menu .sidebar-link')];
   const views=['conversas','projetos','codigos','aprender','favoritos','design','conteudos','livros'];
   links.forEach((a,i)=>{ a.href='#'+views[i]; a.addEventListener('click',e=>{e.preventDefault(); navigate(views[i]);}); });
