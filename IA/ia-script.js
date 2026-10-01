@@ -1406,7 +1406,11 @@ async function buscarRespostaNaIA(pergunta, historico, anexos, projeto, onText) 
   const controller = new AbortController(); activeController=controller;
   const timer=setTimeout(()=>controller.abort(),TEMPO_MAXIMO_REQUISICAO);
   try {
-    const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pergunta,historico,anexos,projeto,stream:true}),signal:controller.signal,credentials:'same-origin'});
+    const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
+    const token=sessionData?.session?.access_token;
+    if(sessionError||!token)throw new Error('Sua sessão expirou. Entre novamente para conversar.');
+    if(controller.signal.aborted)throw new Error('Resposta interrompida.');
+    const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({pergunta,historico,anexos,projeto,stream:true}),signal:controller.signal,credentials:'same-origin'});
     const type=response.headers.get('content-type')||'';
     if(type.includes('application/json')){const data=await response.json();if(!response.ok)throw new Error(data.erro||'Erro ao obter resposta.');if(typeof data.resposta!=='string')throw new Error('Resposta inválida.');return data.resposta;}
     if(!response.ok||!type.includes('application/x-ndjson'))throw new Error('Resposta inválida do servidor.');

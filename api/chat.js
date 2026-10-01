@@ -331,11 +331,47 @@ async function moderate(text,signal){
   const r=await fetch('https://api.openai.com/v1/moderations',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${process.env.OPENAI_API_KEY}`},body:JSON.stringify({model:'omni-moderation-latest',input:text}),signal});
   if(!r.ok)throw new Error('Não foi possível verificar o conteúdo.');const data=await r.json();const c=data?.results?.[0]?.categories;if(!c)throw new Error('Verificação indisponível.');return Boolean(c.sexual||c['sexual/minors']||c.sexual_minors);
 }
+
+// Authenticate against this site's Supabase project; never trust decoded JWT claims alone.
+const AUTH_URL='https://klxriiatgxxhmbmmctbw.supabase.co/auth/v1/user';
+const AUTH_PUBLIC_KEY='sb_publishable_6vu0yPFD8pxEP1uzG5-Wzw_NE6XzEri';
+export async function verifyChatUser(authorization){
+  if(typeof authorization!=='string'||authorization.length>8192||!/^Bearer [A-Za-z0-9_.-]+$/.test(authorization))return {status:401};
+  try{
+    const response=await fetch(AUTH_URL,{headers:{apikey:AUTH_PUBLIC_KEY,Authorization:authorization},signal:AbortSignal.timeout(8000),redirect:'error'});
+    if(response.status===401||response.status===403)return {status:401};
+    if(!response.ok)return {status:503};
+    const user=await response.json();
+    if(typeof user.id!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.id)||user.is_anonymous===true)return {status:401};
+    return {status:200,id:user.id};
+  }catch{return {status:503};}
+}
+// Best-effort per-process protection. A distributed firewall rule is still required.
+export function createChatLimiter(now=()=>Date.now()){
+  const entries=new Map();
+  return id=>{
+    const t=now();
+    for(const [key,item] of entries)if(t-item.hourStart>=3600000)entries.delete(key);
+    let item=entries.get(id);
+    if(!item){if(entries.size>=10000)return {allowed:false,retry:60};item={hourStart:t,minuteStart:t,hour:0,minute:0};entries.set(id,item);}
+    if(t-item.minuteStart>=60000){item.minuteStart=t;item.minute=0;}
+    if(item.hour>=100)return {allowed:false,retry:Math.max(1,Math.ceil((item.hourStart+3600000-t)/1000))};
+    if(item.minute>=10)return {allowed:false,retry:Math.max(1,Math.ceil((item.minuteStart+60000-t)/1000))};
+    item.minute++;item.hour++;return {allowed:true};
+  };
+}
+const allowChatRequest=createChatLimiter();
+
 export default async function handler(req,res){
   res.setHeader('Allow','POST');res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
   if(req.method!=='POST')return res.status(405).json({erro:'Método não permitido.'});
   if(!(req.headers['content-type']||'').includes('application/json'))return res.status(415).json({erro:'Envie JSON.'});
   let data;try{data=validate(req.body);}catch(e){return res.status(400).json({erro:e.message});}
+  if(Buffer.byteLength(JSON.stringify(req.body),'utf8')>524288)return res.status(413).json({erro:'Requisição grande demais.'});
+  const identity=await verifyChatUser(req.headers.authorization);
+  if(identity.status!==200)return res.status(identity.status).json({erro:identity.status===401?'Sua sessão expirou. Entre novamente para conversar.':'Não foi possível verificar sua sessão. Tente novamente em instantes.'});
+  const quota=allowChatRequest(identity.id);
+  if(!quota.allowed){res.setHeader('Retry-After',String(quota.retry));return res.status(429).json({erro:'Muitas mensagens em pouco tempo. Aguarde antes de tentar novamente.'});}
   if(!process.env.OPENAI_API_KEY)return res.status(503).json({erro:'Serviço temporariamente indisponível.'});
   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),110000);let opened=false,complete=false;
   const disconnect=()=>{if(!complete)controller.abort();};res.on?.('close',disconnect);
