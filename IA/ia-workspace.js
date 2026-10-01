@@ -21,10 +21,11 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
   const chatSections=[...main.children];
   const panel=el('section','','studio-panel'); panel.hidden=true; panel.tabIndex=-1; panel.setAttribute('aria-label','Área de estudos'); main.append(panel);
   const menu=document.querySelector('.sidebar-menu');
-  for(const title of ['Design','Conteúdos']){const a=el('a',title,'sidebar-link');menu.append(a);}
+  for(const title of ['Design','Conteúdos','Livros']){const a=el('a',title,'sidebar-link');menu.append(a);}
   const links=[...document.querySelectorAll('.sidebar-menu .sidebar-link')];
-  const views=['conversas','projetos','codigos','aprender','favoritos','design','conteudos'];
+  const views=['conversas','projetos','codigos','aprender','favoritos','design','conteudos','livros'];
   links.forEach((a,i)=>{ a.href='#'+views[i]; a.addEventListener('click',e=>{e.preventDefault(); navigate(views[i]);}); });
+  links[3].after(links[7]);
   const banner=el('div','','project-context'); banner.hidden=true; document.querySelector('.chat-card').before(banner);
   const refreshBanner=()=>{const p=items.find(x=>x.id===selectedProject);banner.replaceChildren();banner.hidden=!p;if(p){banner.append(el('span','Projeto: '+p.title),button('Desvincular',()=>{selectedProject=null;refreshBanner();}));}};
   function navigate(next) {
@@ -100,10 +101,24 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
     const own=items.filter(x=>x.kind==='snippet');const g=grid();for(const s of own)g.append(codeCard({...s.payload,title:s.title},s));for(const s of starters)g.append(codeCard(s));searchCards(g,'Buscar por linguagem ou título');
   }
   function renderLearn(){header('Aprender','Escolha uma trilha, pratique com um projeto e marque seu progresso. As leituras são sugestões por objetivo, não um ranking universal.');accountNotice();const g=grid();for(const t of tracks){const c=card(t.title,t.tag);const saved=items.find(x=>x.kind==='progress'&&x.payload.track===t.id);const completed=saved?.payload.completed||[];t.steps.forEach((step,i)=>{const l=el('label','','studio-task');const input=el('input');input.type='checkbox';input.checked=completed.includes(i);input.addEventListener('change',async()=>{if(!requireUser()){input.checked=false;return;}input.disabled=true;const next=input.checked?[...completed,i]:completed.filter(n=>n!==i);if(await save('progress',t.title,{track:t.id,completed:next},saved?.id))render();else{input.checked=completed.includes(i);input.disabled=false;}});l.append(input,el('span',step));c.append(l);});c.append(group(button('Estudar com a IA',()=>launch(t.prompt)),favButton({type:'track',track:t.id},t.title)));g.append(c);}
+    panel.append(button('Abrir biblioteca de livros',()=>navigate('livros'),'studio-button primary'));
     panel.append(el('h2','Livros e referências','studio-section-title'),el('p','Links para autores, editoras e documentação oficial. Alguns livros são pagos e em inglês; os materiais gratuitos estão identificados.'));const books=grid();for(const r of resources){const c=card(r.title,r.description);c.append(el('p',`${r.author} · ${r.topic}`,'studio-meta'),el('p',r.access,'studio-meta'),group(link('Ver fonte',r.url),favButton({type:'resource',url:r.url,description:r.description},r.title)));books.append(c);}searchCards(books,'Buscar livros e referências');
   }
+
+  function renderBooks(){
+    header('Livros','Encontre livros de programação e referências para acompanhar seus estudos.');
+    panel.append(el('p','A leitura acontece nos sites dos autores e editoras. Confira em cada item o idioma e se o acesso é gratuito ou pago.','studio-meta'));
+    const controls=group();controls.style.display='grid';controls.style.gridTemplateColumns='minmax(0,1fr)';const search=el('input','','studio-search');search.style.minWidth='0';search.style.width='100%';search.style.boxSizing='border-box';search.type='search';search.placeholder='Buscar título, autor ou linguagem';search.setAttribute('aria-label',search.placeholder);
+    const label=el('label','Assunto ');const select=el('select','','studio-button');for(const topic of ['Todos os assuntos',...new Set(resources.map(r=>r.topic))]){const opt=el('option',topic);opt.value=topic;select.append(opt);}label.append(select);controls.append(search,label);panel.append(controls);
+    const empty=el('p','Nenhum material encontrado. Tente outro título ou assunto.','studio-empty');empty.hidden=true;empty.setAttribute('role','status');panel.append(empty);
+    const booksTitle=el('h2','Livros','studio-section-title');panel.append(booksTitle);const books=grid();const refsTitle=el('h2','Documentação e cursos','studio-section-title');panel.append(refsTitle);const refs=grid();const entries=[];
+    for(const r of resources){const isBook=!/Documentação|Curso/.test(r.access);const c=card(r.title,r.description);c.append(el('p',r.author+' · '+r.topic,'studio-meta'),el('p',r.access,'studio-meta'),group(link(isBook?'Ver livro':'Ver referência',r.url),favButton({type:'resource',url:r.url,description:r.description},r.title)));(isBook?books:refs).append(c);entries.push({c,r});}
+    const norm=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    const filter=()=>{const q=norm(search.value.trim());for(const {c,r} of entries)c.hidden=!(norm(r.title+' '+r.author+' '+r.topic).includes(q)&&(select.value==='Todos os assuntos'||r.topic===select.value));booksTitle.hidden=books.hidden=![...books.children].some(c=>!c.hidden);refsTitle.hidden=refs.hidden=![...refs.children].some(c=>!c.hidden);empty.hidden=entries.some(e=>!e.c.hidden);};search.addEventListener('input',filter);select.addEventListener('change',filter);
+  }
+
   function renderFavorites(){header('Favoritos','Respostas, códigos e referências que você quer encontrar de novo.');accountNotice();const own=items.filter(x=>x.kind==='favorite');if(!own.length&&!loading)panel.append(el('p','Use ☆ Favoritar nas respostas, códigos e leituras para começar.','studio-empty'));const g=grid();for(const f of own){const c=card(f.title,f.payload.description);if(f.payload.content){const pre=el('pre',f.payload.content);c.append(pre,button('Copiar',()=>copy(f.payload.content)));}if(f.payload.type==='code')c.append(button('Baixar arquivo',()=>downloadFile(f.payload.filename||'codigo.txt',f.payload.content)));if(isSafeURL(f.payload.url))c.append(link('Abrir referência',f.payload.url));if(f.payload.track)c.append(button('Ver trilhas',()=>navigate('aprender')));c.append(button('Remover favorito',()=>remove(f)));g.append(c);}if(own.length)searchCards(g,'Buscar favoritos');}
-  function render(){if(view==='projetos')renderProjects();if(view==='codigos')renderCodes();if(view==='aprender')renderLearn();if(view==='favoritos')renderFavorites();if(view==='design')renderDesign();if(view==='conteudos')renderContents();}
+  function render(){if(view==='projetos')renderProjects();if(view==='codigos')renderCodes();if(view==='aprender')renderLearn();if(view==='favoritos')renderFavorites();if(view==='design')renderDesign();if(view==='conteudos')renderContents();if(view==='livros')renderBooks();}
   async function copy(text){try{await navigator.clipboard.writeText(text);notify('Copiado.','success');}catch{notify('Não foi possível copiar. Selecione o texto ou baixe o arquivo.');}}
   async function downloadStarter(){try{await loadScript('./vendor/fflate.js','fflate');const files={};for(const s of starters.slice(0,3))files[s.filename]=window.fflate.strToU8(s.content);files['README.md']=window.fflate.strToU8('# Primeiro site\n\nAbra esta pasta no VS Code. Abra index.html no navegador.\n\nArquivos: index.html, style.css e script.js. Não requer instalação de pacotes.\n');const data=window.fflate.zipSync(files,{level:6});downloadFile('primeiro-site.zip',data,'application/zip');}catch{notify('Não foi possível gerar o ZIP. Os arquivos individuais continuam disponíveis.');}}
   function decorate(message,text){
@@ -150,3 +165,4 @@ export function createWorkspace({supabase,notify,ask,openLogin,closeSidebar,getC
 
 const scripts=new Map();
 export async function loadScript(src,globalName){if(window[globalName])return window[globalName];if(!scripts.has(src))scripts.set(src,new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=()=>resolve(window[globalName]);s.onerror=()=>{scripts.delete(src);s.remove();reject(new Error('Falha ao carregar recurso.'));};document.head.append(s);}));return scripts.get(src);}
+
