@@ -1,185 +1,113 @@
-<!DOCTYPE html>
-<html lang="pt-br">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-  <title>Kim KS | Skatista Profissional & Street Culture</title>  
-  <meta name="description" content="Portal oficial do skatista Kim KS. Vida, manobras, vivência de rua e o lançamento da marca King of Scrawl.">    
-  <link rel="stylesheet" href="../style.css" />  
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />  
-<link rel="icon" type="image/jpeg" href="/kingofscrawl1.jpeg">
-</head>  
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7893ad">
+  <title>Kim KS | Skatista profissional & King of Scrawl</title>
+  <meta name="description" content="A história de Kim KS, skatista profissional, à frente da King of Scrawl. Vídeos, entrevistas e cultura de rua.">
+  <link rel="icon" type="image/jpeg" href="/kingofscrawl1.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./kimks.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <a class="wordmark" href="#inicio" aria-label="Kim KS, início">KIM KS<span class="brand-dot" aria-hidden="true"></span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">+</span></button>
+    <nav id="main-nav" aria-label="Navegação principal">
+      <a href="#historia">História</a><a href="#videos">Vídeos</a><a href="#materias">Matérias</a><a href="#entrevistas">Entrevistas</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a>
+    </nav>
+    <a class="header-social" href="https://www.instagram.com/kimksofc/" data-instagram>@kimksofc <span aria-hidden="true">↗</span></a>
+  </header>
 
-<body class="kimks-body">    
-  <video class="video-fundo" autoplay muted loop playsinline>  
-    <source src="../agua.mp4" type="video/mp4" />  
-  </video>    
+  <main id="conteudo">
+    <section class="hero section-width" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow hero-tag">Skate. Estilo. Cultura de rua.</p>
+        <h1 id="hero-title">Entre a rua<br>e o <span>mar.</span></h1>
+        <p class="hero-subtitle">KIM KS / KING OF SCRAWL</p>
+        <p class="hero-description">Uma trajetória em movimento.<br>Do skate à criação, uma vivência de rua.</p>
+        <a class="button button-yellow" href="#historia">Conheça a história <span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="hero-photo">
+        <img src="../imagens/kimks.jpg" alt="Kim KS em uma manobra de skate ao ar livre" width="707" height="960" fetchpriority="high">
+        <figcaption><span>O movimento é a essência.</span><span>ARQUIVO KIM KS / 01</span></figcaption>
+      </figure>
+      <div class="hero-bottom"><span>Skatista profissional</span><a href="#king-of-scrawl">À frente da King of Scrawl <span aria-hidden="true">↗</span></a></div>
+    </section>
 
-  <header class="ks-header" role="banner">  
-    <nav class="ks-nav" aria-label="Menu principal">  
-      <a href="#historia">História</a>  
-      <a href="#videos">Vídeos</a>  
-      <a href="#materias">Matérias</a>  
-      <a href="#entrevistas">Entrevistas</a>
-    </nav>  
-    <h1 class="ks-logo">KIM KS</h1>  
-  </header>    
-
-  <main id="main-content" role="main">  
-    <section class="ks-banner">  
-      <div class="ks-banner-text">  
-        <h2>Underground. Skate</h2>  
-        <p>Bem-vindo ao portal oficial de Kim KS, onde a rua encontra o mar.</p>  
-      </div>  
-    </section>  
-
-    <section id="historia" class="ks-section">  
-      <h2>✨ História de Kim KS</h2>  
-      <div class="carrossel-wrapper">  
-        <div class="carrossel-slider">  
-          <div class="carrossel-slide"><a href="o-comeco-de-tudo/"><img src="../imagens/criancaks.jpeg" alt="O Começo de Tudo" /><p>O Começo de Tudo</p></a></div>  
-          <div class="carrossel-slide"><a href="o-primeiro-skate/"><img src="../imagens/primeiroskate.jpeg" alt="Primeiro Skate" /><p>Primeiro Skate</p></a></div>  
-          <div class="carrossel-slide"><a href="relacionamento-com-o-skate/"><img src="../imagens/relacionamentoskt.jpeg" alt="Relacionamento" /><p>Relacionamento</p></a></div>  
-          <div class="carrossel-slide"><a href="churrasquinho/"><img src="../imagens/churrasquinho.jpeg" alt="Churrasquinho" /><p>Churrasquinho</p></a></div>  
-          <div class="carrossel-slide"><a href="fases-da-vida/"><img src="../imagens/riokim.jpeg" alt="Fases da Vida" /><p>Fases da Vida</p></a></div>  
-          <div class="carrossel-slide"><a href="reconhecimento-digital/"><img src="../imagens/skate.jpg" alt="Reconhecimento Digital" /><p>Reconhecimento</p></a></div>  
-          <div class="carrossel-slide"><a href="essencia-do-skate/"><img src="../imagens/kimks.jpg" alt="Essência do Skate" /><p>Essência do Skate</p></a></div>  
-        </div>  
-        <div class="carrossel-indicadores"></div>  
-      </div>  
-    </section>  
-
-    <section id="videos" class="ks-section">  
-      <h2>🎥 Vídeos em Destaque</h2>  
-      <div class="ks-videos">  
-        <div class="ks-video-card">  
-          <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;" src="https://www.youtube.com/embed/UcRtruP19wo" frameborder="0" allowfullscreen></iframe>  
-        </div>  
-        <div class="ks-video-card">  
-          <iframe style="width: 100%; height: 100%; border-radius: 10px; border: none;" src="https://www.youtube.com/embed/-zeJvzhV5tE" frameborder="0" allowfullscreen></iframe>  
-        </div>  
-      </div>  
-    </section>  
-
-    <section id="materias" class="ks-section">  
-      <h2>📄 Matérias Recentes</h2>  
-      <ul class="ks-lista-materias">  
-        <li><a class="materia-link" href="it-ks-girl/" style="border-left: 4px solid var(--green); background: rgba(0,255,157,0.05); padding: 10px; display: block;"><strong style="color: var(--green);">It Ks Girl</strong> — <strong>Conceito e Fundamentação</strong></a></li>  
-        <li><a class="materia-link" href="king-of-scrawl/" style="border-left: 4px solid var(--green); background: rgba(0,255,157,0.05); padding: 10px; display: block;"><strong style="color: var(--green);">[EXCLUSIVO]</strong> — <strong>MANIFESTO KING OF SCRAWL</strong></a></li>  
-        <li><a class="materia-link" href="spain-historia/"><strong>História de Vida</strong> — Spain MC.</a></li>
-        <li><a class="materia-link" href="setup-kim-ks/"><strong>Equipamento</strong> — O Setup de Kim KS.</a></li>  
-        <li><a class="materia-link" href="nova-manobra/"><strong>Skate no Centro</strong> — Kim KS e a estética 90s.</a></li>  
-      </ul>  
-    </section>  
-
-    <section id="galeria" class="ks-section">
-      <h2>📸 Galeria de Artes</h2>
-      <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid var(--green); text-align: center;">
-        <p style="font-family: 'Orbitron'; font-size: 0.9rem; color: #fff; margin-bottom: 20px;">Confira o Sticker Pack Oficial da King Of Scrawl</p>
-        <a href="album-ks/index.html" style="display: block; max-width: 150px; margin: 0 auto; border: 2px solid var(--green); border-radius: 10px; overflow: hidden;">
-          <img src="../kingofscrawl2.jpeg" alt="Acessar Galeria" style="width: 100%; display: block;">
-        </a>
-        
-        <a href="album-ks/index.html" class="btn-apple-2026">VER ÁLBUM COMPLETO</a>
+    <section class="history section-width" id="historia" aria-labelledby="history-title">
+      <div class="section-heading"><div><p class="eyebrow">01 / A trajetória</p><h2 id="history-title">Cada fase.<br>Uma história.</h2></div><p class="section-intro">Um olhar sobre o caminho de Kim KS.<br>Explore as fotos e abra cada capítulo.</p></div>
+      <div class="carousel" role="region" aria-roledescription="carrossel" aria-label="História de Kim KS">
+        <div class="carousel-track" tabindex="0" aria-label="Fotos da história. Use as setas para navegar.">
+          <a class="history-card" href="o-comeco-de-tudo/"><div class="history-image"><img src="../imagens/criancaks.jpeg" alt="Fotografia do arquivo de infância de Kim KS" loading="lazy"></div><div class="history-caption"><span class="chapter">01 / Origens</span><h3>O começo de tudo</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+          <a class="history-card" href="o-primeiro-skate/"><div class="history-image"><img src="../imagens/primeiroskate.jpeg" alt="Registro da história do primeiro skate de Kim KS" loading="lazy"></div><div class="history-caption"><span class="chapter">02 / Primeiros passos</span><h3>O primeiro skate</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+          <a class="history-card" href="relacionamento-com-o-skate/"><div class="history-image"><img src="../imagens/relacionamentoskt.jpeg" alt="Fotografia de Kim KS no arquivo de sua relação com o skate" loading="lazy"></div><div class="history-caption"><span class="chapter">03 / Conexão</span><h3>Uma vida com o skate</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+          <a class="history-card" href="churrasquinho/"><div class="history-image"><img src="../imagens/churrasquinho.jpeg" alt="Registro da história Churrasquinho" loading="lazy"></div><div class="history-caption"><span class="chapter">04 / Memórias</span><h3>Churrasquinho</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+          <a class="history-card" href="fases-da-vida/"><div class="history-image"><img src="../imagens/riokim.jpeg" alt="Registro do arquivo de Kim KS no Rio" loading="lazy"></div><div class="history-caption"><span class="chapter">05 / Caminhos</span><h3>Fases da vida</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+          <a class="history-card" href="reconhecimento-digital/"><div class="history-image"><img src="../imagens/skate.jpg" alt="Skate no arquivo da trajetória de Kim KS" loading="lazy"></div><div class="history-caption"><span class="chapter">06 / Novos espaços</span><h3>Reconhecimento digital</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+          <a class="history-card" href="essencia-do-skate/"><div class="history-image"><img src="../imagens/kimks.jpg" alt="Kim KS saltando de skate" loading="lazy"></div><div class="history-caption"><span class="chapter">07 / Essência</span><h3>O significado do skate</h3><span class="card-arrow" aria-hidden="true">↗</span></div></a>
+        </div>
+        <div class="carousel-controls"><span class="carousel-position" aria-live="off">01 / 07</span><div class="carousel-dots" aria-label="Escolher capítulo"></div><div class="carousel-actions"><button type="button" class="carousel-pause">Pausar</button><button type="button" class="carousel-prev" aria-label="Foto anterior">←</button><button type="button" class="carousel-next" aria-label="Próxima foto">→</button></div></div>
       </div>
     </section>
 
-    <section id="entrevistas" class="ks-section">  
-      <h2>🎙️ Entrevistas Exclusivas</h2>  
-      <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid var(--green); text-align: center;">  
-        <h3 style="font-family: 'Orbitron'; font-size: 1rem; color: var(--green);">EDITION: SPAIN (MC)</h3>  
-        <p style="font-size: 0.9rem; margin: 10px 0; color: #fff;">"O rap é uma ferramenta de resistência."</p>  
-        
-        <a href="spain-rap/" class="btn-apple-2026">LER ENTREVISTA COMPLETA</a>  
-      </div>  
+    <section class="olive-section" id="videos" aria-labelledby="videos-title"><div class="section-width">
+      <div class="section-heading"><div><p class="eyebrow">02 / Em movimento</p><h2 id="videos-title">Vivência em vídeo.</h2></div><p class="section-intro">Skate, rua e a liberdade de seguir<br>o próprio caminho.</p></div>
+      <div class="video-grid">
+        <figure class="video-card"><div class="video-frame"><iframe src="https://www.youtube.com/embed/UcRtruP19wo" title="Kim KS — primeiro vídeo em destaque" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><figcaption><span>01 / Vídeo em destaque</span><a href="https://www.youtube.com/watch?v=UcRtruP19wo" target="_blank" rel="noopener noreferrer">Ver no YouTube ↗</a></figcaption></figure>
+        <figure class="video-card"><div class="video-frame"><iframe src="https://www.youtube.com/embed/-zeJvzhV5tE" title="Kim KS — segundo vídeo em destaque" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><figcaption><span>02 / Vídeo em destaque</span><a href="https://www.youtube.com/watch?v=-zeJvzhV5tE" target="_blank" rel="noopener noreferrer">Ver no YouTube ↗</a></figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="section-width editorial" id="materias" aria-labelledby="articles-title">
+      <div class="section-heading"><div><p class="eyebrow">03 / Diário de rua</p><h2 id="articles-title">Ideias que<br>ganham forma.</h2></div><p class="section-intro">Histórias, equipamentos e referências.<br>O universo de quem vive a cultura.</p></div>
+      <div class="article-list">
+        <a href="it-ks-girl/"><span class="article-type">Conceito</span><h3>It Ks Girl — conceito e fundamentação</h3><span aria-hidden="true">↗</span></a>
+        <a href="king-of-scrawl/"><span class="article-type">Manifesto / Exclusivo</span><h3>King of Scrawl: identidade de rua</h3><span aria-hidden="true">↗</span></a>
+        <a href="spain-historia/"><span class="article-type">História de vida</span><h3>Spain MC</h3><span aria-hidden="true">↗</span></a>
+        <a href="setup-kim-ks/"><span class="article-type">Equipamento</span><h3>O setup de Kim KS</h3><span aria-hidden="true">↗</span></a>
+        <a href="nova-manobra/"><span class="article-type">Skate no centro</span><h3>Kim KS e a estética 90s</h3><span aria-hidden="true">↗</span></a>
+      </div>
     </section>
 
-    <style>
-      .btn-apple-2026 {
-        display: inline-block !important;
-        margin-top: 20px !important;
-        padding: 12px 30px !important;
-        background: rgba(255, 255, 255, 0.05) !important;
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        border: 1px solid rgba(0, 255, 157, 0.5) !important;
-        border-radius: 12px !important;
-        color: #00ff9d !important;
-        font-family: 'Orbitron', sans-serif !important;
-        font-size: 10px !important;
-        font-weight: 700 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-      }
-
-      .btn-apple-2026:hover {
-        background: rgba(0, 255, 157, 0.1) !important;
-        border-color: #00ff9d !important;
-        box-shadow: 0 0 20px rgba(0, 255, 157, 0.4) !important;
-        transform: translateY(-3px) !important;
-      }
-    </style>
-    <section class="ks-section">  
-      <h2 style="font-size: 1.2rem; letter-spacing: 2px;">📚 MATÉRIAS ANTERIORES</h2>  
-      <div style="display: grid; gap: 12px; margin-top: 20px;">  
-        <a href="spain-rap/" style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,255,157,0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--green); text-decoration: none;">  
-          <span style="color: #fff; font-weight: 600; font-size: 0.9rem;">Entrevista: Spain - Vivência e Rap</span>  
-          <span style="color: var(--green); font-size: 0.7rem; font-family: 'Orbitron', sans-serif;">DEZ 2025</span>  
-        </a>  
-        <a href="setup-kim-ks/" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border-left: 4px solid #777; text-decoration: none;">  
-          <span style="color: #fff; font-weight: 600; font-size: 0.9rem;">Setup: Peças e Performance</span>  
-          <span style="color: #888; font-size: 0.7rem; font-family: 'Orbitron', sans-serif;">JAN 2026</span>  
-        </a>  
-        <a href="nova-manobra/" style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border-left: 4px solid #777; text-decoration: none;">  
-          <span style="color: #fff; font-weight: 600; font-size: 0.9rem;">Kim Ks: A Estética 90s da King Of Scrawl</span>  
-          <span style="color: #888; font-size: 0.7rem; font-family: 'Orbitron', sans-serif;">DEZ 2025</span>  
-        </a>  
-      </div>  
+    <section class="brand-section section-width" id="king-of-scrawl" aria-labelledby="brand-title">
+      <div class="brand-copy"><p class="eyebrow">04 / Moda & expressão</p><h2 id="brand-title">King of<br><span>Scrawl.</span></h2><p>A marca de moda de Kim KS.<br>Uma expressão da cultura de rua, do skate e de uma identidade própria.</p><div class="brand-links"><a class="button button-yellow" href="king-of-scrawl/">Leia o manifesto <span aria-hidden="true">↗</span></a><a class="text-link" href="album-ks/index.html">Explore a galeria de artes ↗</a></div></div>
+      <a class="brand-art" href="album-ks/index.html" id="galeria"><img src="../kingofscrawl2.jpeg" alt="Arte oficial King of Scrawl — abrir o álbum de stickers" loading="lazy"><span>STICKER PACK OFICIAL <span aria-hidden="true">↗</span></span></a>
     </section>
 
-  </main>    
+    <section class="section-width interview" id="entrevistas" aria-labelledby="interview-title"><p class="eyebrow">05 / Conversas que ficam</p><div class="interview-grid"><h2 id="interview-title">Vozes da<br>mesma rua.</h2><div class="interview-copy"><p class="interview-edition">ENTREVISTA / SPAIN MC</p><blockquote>“O rap é uma ferramenta de resistência.”</blockquote><a class="button button-outline" href="spain-rap/">Leia a entrevista completa <span aria-hidden="true">↗</span></a></div></div>
+      <details class="archive"><summary>Matérias anteriores <span aria-hidden="true">+</span></summary><a href="spain-rap/"><span>Spain — vivência e rap</span><time datetime="2025-12">DEZ 2025</time></a><a href="setup-kim-ks/"><span>Setup: peças e performance</span><time datetime="2026-01">JAN 2026</time></a><a href="nova-manobra/"><span>Kim KS: a estética 90s da King of Scrawl</span><time datetime="2025-12">DEZ 2025</time></a></details>
+    </section>
 
-  <footer class="ks-footer">  
-    <p>Portal Kim KS - Todos os direitos reservados &copy; 2025 Lifestyle | Desenvolvido por It Ks Girl</p>  
-  </footer>    
+    <section class="about olive-section" id="sobre"><div class="section-width about-grid"><div><p class="eyebrow">06 / Sobre Kim KS</p><h2>Uma vida<br>em movimento.</h2></div><div class="about-copy"><p>Kim KS é skatista profissional e está à frente da <strong>King of Scrawl</strong>, sua marca de moda.</p><p>Este espaço reúne sua história, registros de skate, vídeos, matérias e entrevistas. Um arquivo vivo da relação entre rua, mar e criação.</p><a class="text-link" href="essencia-do-skate/">Conheça a essência do skate para Kim ↗</a></div></div></section>
+  </main>
 
-  <script>  
-    (function () {  
-      const slider = document.querySelector(".carrossel-slider");  
-      const slides = document.querySelectorAll(".carrossel-slide");  
-      const indicadores = document.querySelector(".carrossel-indicadores");  
-      if(!slider || slides.length === 0) return;
-      const totalSlides = slides.length;  
-      let index = 0;  
-      let intervalId = null;  
-  
-      function criarIndicadores() {  
-        if(!indicadores) return;  
-        indicadores.innerHTML = '';  
-        slides.forEach((_, i) => {  
-          const dot = document.createElement("button");  
-          dot.className = "dot";  
-          if (i === 0) dot.classList.add("active");  
-          dot.addEventListener("click", () => { index = i; atualizarCarrossel(); reiniciarInterval(); });  
-          indicadores.appendChild(dot);  
-        });  
-      }  
-  
-      function atualizarCarrossel() {  
-        slider.style.transform = `translateX(-${index * 100}%)`;  
-        const dots = indicadores.querySelectorAll(".dot");  
-        dots.forEach(d => d.classList.remove("active"));  
-        if (dots[index]) dots[index].classList.add("active");  
-      }  
-  
-      function passarSequencial() { index = (index + 1) % totalSlides; atualizarCarrossel(); }  
-      function reiniciarInterval() { if (intervalId) clearInterval(intervalId); intervalId = setInterval(passarSequencial, 6000); }  
-  
-      criarIndicadores(); atualizarCarrossel(); reiniciarInterval();  
-    })();  
-  </script>  
-</body>  
+  <footer id="contato" class="site-footer section-width"><div class="footer-top"><div><p class="eyebrow">Contato / Projetos / Conversas</p><h2>Vamos conversar.</h2></div><div class="contact-links"><a href="mailto:kingofscrawl@gmail.com">kingofscrawl@gmail.com ↗</a><a href="https://www.instagram.com/kimksofc/" target="_blank" rel="noopener noreferrer">@kimksofc ↗</a></div></div><div class="footer-bottom"><a class="wordmark" href="#inicio">KIM KS<span class="brand-dot" aria-hidden="true"></span></a><p>© 2026 Kim KS · King of Scrawl</p><nav aria-label="Rodapé"><a href="#sobre">Sobre</a><button type="button" id="privacy-open">Privacidade</button><a href="#inicio">Voltar ao topo ↑</a></nav></div></footer>
+  <dialog id="privacy-dialog" aria-labelledby="privacy-title"><button type="button" id="privacy-close">Fechar ×</button><p class="eyebrow">KIM KS / KING OF SCRAWL</p><h2 id="privacy-title">Privacidade</h2><p>Este portal apresenta a trajetória de Kim KS e conteúdos da King of Scrawl. Esta página não solicita cadastro nem possui formulário de pagamento.</p><p>Os vídeos incorporados são fornecidos pelo YouTube, e a tipografia é carregada do Google Fonts. Ao carregar esses serviços, seus fornecedores podem receber informações técnicas, como endereço IP e navegador, conforme suas próprias políticas. Links para Instagram e outros sites levam a serviços externos.</p><p>Ao entrar em contato por e-mail, as informações que você enviar serão usadas para atender à sua solicitação. Evite enviar dados sensíveis desnecessários.</p><p>Para dúvidas sobre privacidade ou pedidos relacionados aos dados enviados no contato: <a href="mailto:kingofscrawl@gmail.com">kingofscrawl@gmail.com</a>.</p></dialog>
+
+  <script>
+  (()=>{
+    const menu=document.querySelector('.menu-toggle'),nav=document.getElementById('main-nav');
+    menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('is-open',open);});
+    nav.addEventListener('click',event=>{if(event.target.closest('a')){menu.setAttribute('aria-expanded','false');nav.classList.remove('is-open');}});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&nav.classList.contains('is-open')){menu.setAttribute('aria-expanded','false');nav.classList.remove('is-open');menu.focus();}});
+    const privacy=document.getElementById('privacy-dialog');document.getElementById('privacy-open').onclick=()=>privacy.showModal();document.getElementById('privacy-close').onclick=()=>privacy.close();
+    const track=document.querySelector('.carousel-track'),cards=[...track.children],dots=document.querySelector('.carousel-dots'),pause=document.querySelector('.carousel-pause'),reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    let index=0,paused=reduced.matches,hover=false,timer;
+    function update(){document.querySelector('.carousel-position').textContent=String(index+1).padStart(2,'0')+' / 07';[...dots.children].forEach((dot,i)=>{dot.setAttribute('aria-current',String(i===index));});pause.textContent=paused?'Reproduzir':'Pausar';pause.setAttribute('aria-label',paused?'Reproduzir carrossel automaticamente':'Pausar carrossel automático');}
+    function go(next){index=(next+cards.length)%cards.length;track.scrollTo({left:cards[index].offsetLeft-cards[0].offsetLeft,behavior:reduced.matches?'instant':'smooth'});update();}
+    function restart(){clearInterval(timer);timer=setInterval(()=>{if(!paused&&!hover&&!document.hidden&&!track.closest('.carousel').contains(document.activeElement))go(index+1);},6500);}
+    cards.forEach((card,i)=>{const dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label','Capítulo '+(i+1)+': '+card.querySelector('h3').textContent);dot.onclick=()=>{go(i);restart();};dots.append(dot);});
+    document.querySelector('.carousel-prev').onclick=()=>{go(index-1);restart();};document.querySelector('.carousel-next').onclick=()=>{go(index+1);restart();};pause.onclick=()=>{paused=!paused;update();restart();};
+    track.addEventListener('pointerenter',()=>hover=true);track.addEventListener('pointerleave',()=>hover=false);
+    track.addEventListener('keydown',event=>{if(event.target!==track)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();go(index+(event.key==='ArrowRight'?1:-1));restart();}});
+    let scrollTimer;track.addEventListener('scroll',()=>{clearTimeout(scrollTimer);scrollTimer=setTimeout(()=>{index=cards.reduce((best,card,i)=>Math.abs(card.offsetLeft-cards[0].offsetLeft-track.scrollLeft)<Math.abs(cards[best].offsetLeft-cards[0].offsetLeft-track.scrollLeft)?i:best,0);update();},160);});
+    reduced.addEventListener('change',()=>{paused=reduced.matches;update();});update();restart();
+  })();
+  </script>
+</body>
 </html>
