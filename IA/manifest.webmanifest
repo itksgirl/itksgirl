@@ -1,0 +1,36 @@
+{
+  "id": "/IA/",
+  "name": "ITKs AI",
+  "short_name": "ITKs AI",
+  "description": "Assistente de programação e estudos da IT KS GIRL.",
+  "lang": "pt-BR",
+  "start_url": "/IA/",
+  "scope": "/IA/",
+  "display": "standalone",
+  "background_color": "#faf8fa",
+  "theme_color": "#f7f4f4",
+  "icons": [
+    {
+      "src": "/IA/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/privacidade/peixe5.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Conversar",
+      "url": "/IA/#conversas"
+    },
+    {
+      "name": "Livros",
+      "url": "/IA/#livros"
+    }
+  ]
+}

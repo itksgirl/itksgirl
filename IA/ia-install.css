@@ -1,0 +1,5 @@
+.ai-install-button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:36px;margin:0 0 8px;padding:7px 10px;border:1px solid #ded5da;border-radius:10px;background:transparent;color:inherit;font:inherit;font-size:12px;cursor:pointer}
+.ai-install-button:hover{background:#fff}.ai-install-button[hidden]{display:none}
+.ai-install-button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7}
+.ai-install-dialog{box-sizing:border-box;width:min(480px,calc(100% - 28px));max-height:85dvh;overflow:auto;padding:24px;border:1px solid #ddd;border-radius:18px;background:#faf8fa;color:#252125;font:14px/1.6 system-ui}
+.ai-install-dialog::backdrop{background:#0006}.ai-install-dialog h2{margin-top:0}.ai-install-dialog button{margin:8px 8px 0 0;padding:9px 14px;border:1px solid #ddd;border-radius:10px;background:white;color:#252125;cursor:pointer}.ai-install-dialog .install-confirm{background:#252125;color:white}
