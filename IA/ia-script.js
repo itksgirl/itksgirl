@@ -1,6 +1,7 @@
 import { supabase } from "./supabase-config.js";
 import { criarHistorico } from "./ia-history.js";
 import { createWorkspace } from "./ia-workspace.js";
+import { createTrial } from "./ia-trial.js";
 import { createAttachments } from "./ia-attachments.js";
 
 // =========================================================
@@ -142,6 +143,7 @@ const workspace = createWorkspace({ supabase, notify: mostrarToast, openLogin: a
   closeSidebar: fecharSidebar, getConversation: () => memoria.contexto().conversaId,
   ask: text => { if (requisicaoEmAndamento) { mostrarToast('Aguarde a resposta ou clique em Parar.'); return; } userInput.value = text.slice(0,4000); atualizarBotaoEnviar(); userInput.focus(); }
 });
+const trial = createTrial({supabase,form:chatForm,openLogin:abrirModalAutenticacao});
 const attachments = createAttachments({ form: chatForm, notify: mostrarToast, onChange: () => atualizarBotaoEnviar() });
 const stopButton = document.createElement('button'); stopButton.type='button'; stopButton.className='stop-button'; stopButton.textContent='Parar resposta'; stopButton.hidden=true;
 stopButton.onclick=()=>activeController?.abort();chatForm.append(stopButton);
@@ -600,6 +602,8 @@ function alternarMenuConta() {
 }
 
 function atualizarInterfaceAutenticacao(user) {
+  trial.sessionChanged(user);
+  if(user?.is_anonymous)user=null;
   const changedAccount = usuarioAtual?.id !== user?.id;
   if (changedAccount) { activeController?.abort(); attachments.clear(); }
   usuarioAtual = user || null;
@@ -1104,7 +1108,7 @@ function atualizarBotaoEnviar() {
   const pergunta = userInput.value.trim();
 
   sendButton.disabled =
-    pergunta.length === 0 ||
+    (pergunta.length === 0 && attachments.count === 0) ||
     pergunta.length > LIMITE_PERGUNTA ||
     requisicaoEmAndamento || carregandoConversa || !sessaoCarregada || attachments.busy;
   attachments.setDisabled(requisicaoEmAndamento);
@@ -1406,13 +1410,12 @@ async function buscarRespostaNaIA(pergunta, historico, anexos, projeto, onText) 
   const controller = new AbortController(); activeController=controller;
   const timer=setTimeout(()=>controller.abort(),TEMPO_MAXIMO_REQUISICAO);
   try {
-    const {data:sessionData,error:sessionError}=await supabase.auth.getSession();
-    const token=sessionData?.session?.access_token;
-    if(sessionError||!token)throw new Error('Sua sessão expirou. Entre novamente para conversar.');
+    const token=await trial.token();
     if(controller.signal.aborted)throw new Error('Resposta interrompida.');
     const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+token},body:JSON.stringify({pergunta,historico,anexos,projeto,stream:true}),signal:controller.signal,credentials:'same-origin'});
+    trial.readResponse(response);
     const type=response.headers.get('content-type')||'';
-    if(type.includes('application/json')){const data=await response.json();if(!response.ok)throw new Error(data.erro||'Erro ao obter resposta.');if(typeof data.resposta!=='string')throw new Error('Resposta inválida.');return data.resposta;}
+    if(type.includes('application/json')){const data=await response.json();if(!response.ok){if(data.loginRequired)abrirModalAutenticacao();throw new Error(data.erro||'Erro ao obter resposta.');}if(typeof data.resposta!=='string')throw new Error('Resposta inválida.');return data.resposta;}
     if(!response.ok||!type.includes('application/x-ndjson'))throw new Error('Resposta inválida do servidor.');
     const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='',text='',final=null;
     function line(raw){if(!raw.trim())return;const event=JSON.parse(raw);if(event.type==='status')requestStatus.textContent=event.text;if(event.type==='delta'){text+=event.text;onText(text);}if(event.type==='error')throw new Error(event.text);if(event.type==='done')final=event.text;}
@@ -1457,7 +1460,7 @@ chatForm.addEventListener(
     if (requisicaoEmAndamento || carregandoConversa || !sessaoCarregada) return;
 
     const pergunta =
-      userInput.value.trim();
+      userInput.value.trim() || (attachments.count ? "Analise os anexos e explique o que você observa, com foco em programação e estudos." : "");
 
     if (!pergunta) return;
 
@@ -1474,7 +1477,7 @@ chatForm.addEventListener(
       return;
     }
 
-    if (attachments.busy) return;
+    if (attachments.busy || !trial.canSend()) return;
     document.body.classList.add("chat-active");
     const files = attachments.snapshot();
     const projectContext = workspace.context();
